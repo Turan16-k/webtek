@@ -1,0 +1,292 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İlgi Alanlarım – TV Dizileri (API)</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- ===================== NAVBAR ===================== -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html"><i class="bi bi-person-badge-fill me-2"></i>A.T. Özcan</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navMenu">
+                <ul class="navbar-nav ms-auto align-items-lg-center gap-1">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Hakkımda</a></li>
+                    <li class="nav-item"><a class="nav-link" href="cv.html">Özgeçmiş</a></li>
+                    <li class="nav-item"><a class="nav-link" href="sehrim.html">Şehrim</a></li>
+                    <li class="nav-item"><a class="nav-link" href="takimimiz.html">Takımımız</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="ilgi-alanlari.html">İlgi Alanlarım</a></li>
+                    <li class="nav-item"><a class="nav-link" href="iletisim.html">İletişim</a></li>
+                    <li class="nav-item"><a class="nav-link btn-login-nav" href="login.html">Giriş Yap</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===================== HERO ===================== -->
+    <section class="api-hero">
+        <div class="container">
+            <p style="color:var(--accent); font-weight:600; letter-spacing:2px; margin-bottom:8px;">İLGİ ALANLARIM</p>
+            <h1 class="fw-bold display-4"><i class="bi bi-tv me-3"></i>Dizi Takibi</h1>
+            <p class="lead mt-3 opacity-85">
+                Boş vakitlerimde dizi izlemeyi seviyorum. Burada bir dizi arayabilirsiniz — TVMaze API'sinden geliyor.
+            </p>
+            <span class="badge bg-warning text-dark px-4 py-2 mt-2 fs-6">
+                <i class="bi bi-lightning-charge me-2"></i>TVMaze API — ücretsiz, kayıt gerektirmez
+            </span>
+        </div>
+    </section>
+
+    <!-- ===================== ARAMA ===================== -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="card p-4 shadow-sm">
+                        <h4 class="fw-bold text-center mb-4"><i class="bi bi-search me-2"></i>Dizi Ara</h4>
+                        <div class="input-group input-group-lg">
+                            <input type="text" id="searchInput" class="form-control"
+                                placeholder="Dizi adı girin... (örn: Breaking Bad, Friends, Game of Thrones)"
+                                aria-label="Dizi Ara">
+                            <button class="btn btn-primary px-4" id="searchBtn" onclick="searchShows()">
+                                <i class="bi bi-search me-2"></i>Ara
+                            </button>
+                        </div>
+                        <div class="mt-3 d-flex flex-wrap gap-2 justify-content-center">
+                            <span class="text-muted small me-2">Hızlı Aramalar:</span>
+                            <button class="btn btn-sm btn-outline-secondary"
+                                onclick="quickSearch('Breaking Bad')">Breaking Bad</button>
+                            <button class="btn btn-sm btn-outline-secondary"
+                                onclick="quickSearch('Game of Thrones')">Game of Thrones</button>
+                            <button class="btn btn-sm btn-outline-secondary"
+                                onclick="quickSearch('Friends')">Friends</button>
+                            <button class="btn btn-sm btn-outline-secondary"
+                                onclick="quickSearch('Sherlock')">Sherlock(Babadır)</button>
+                            <button class="btn btn-sm btn-outline-secondary" onclick="quickSearch('The Office')">The
+                                Office</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== SONUÇLAR ===================== -->
+    <section class="py-5">
+        <div class="container">
+
+            <!-- Yükleniyor -->
+            <div id="loadingSpinner" class="text-center py-5" style="display:none;">
+                <div class="spinner-border text-primary" style="width:3.5rem;height:3.5rem;" role="status">
+                    <span class="visually-hidden">Yükleniyor...</span>
+                </div>
+                <p class="mt-3 text-muted">API'den veriler çekiliyor...</p>
+            </div>
+
+            <!-- Hata mesajı -->
+            <div id="errorBox" class="alert alert-danger text-center" style="display:none;">
+                <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                <span id="errorMsg">Bir hata oluştu.</span>
+            </div>
+
+            <!-- Boş durum -->
+            <div id="emptyState" class="text-center py-5 text-muted">
+                <i class="bi bi-tv display-1 opacity-25"></i>
+                <p class="mt-4 fs-5">Bir dizi adı girerek arama yapın.</p>
+                <p class="small">TVMaze API'si ücretsizdir ve kayıt gerektirmez.</p>
+            </div>
+
+            <!-- Sonuç başlığı -->
+            <div id="resultsHeader" style="display:none;" class="mb-4">
+                <h3 class="fw-bold">
+                    <span id="resultsTitle"></span>
+                    <small class="text-muted fs-6 ms-3" id="resultsCount"></small>
+                </h3>
+                <hr>
+            </div>
+
+            <!-- Sonuç kartları -->
+            <div class="row gy-4" id="resultsContainer"></div>
+
+        </div>
+    </section>
+
+    <!-- ===================== API AÇIKLAMASI ===================== -->
+    <section class="py-4 bg-light">
+        <div class="container">
+            <div class="card p-4 border-0 shadow-sm">
+                <h5 class="fw-bold text-primary"><i class="bi bi-info-circle me-2"></i>API Hakkında</h5>
+                <div class="row mt-3">
+                    <div class="col-md-4">
+                        <p class="mb-1"><strong>API Adı:</strong> TVMaze REST API</p>
+                        <p class="mb-1"><strong>URL:</strong> <code>api.tvmaze.com</code></p>
+                    </div>
+                    <div class="col-md-4">
+                        <p class="mb-1"><strong>Endpoint:</strong> <code>/search/shows?q=</code></p>
+                        <p class="mb-1"><strong>Yöntem:</strong> GET (ücretsiz, anahtar yok)</p>
+                    </div>
+                    <div class="col-md-4">
+                        <p class="mb-1"><strong>Format:</strong> JSON</p>
+                        <p class="mb-1"><strong>Sınır:</strong> Yok (herkese açık)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== FOOTER ===================== -->
+    <footer>
+        <div class="container">
+            <div class="row gy-4">
+                <div class="col-md-4">
+                    <h5><i class="bi bi-person-badge-fill me-2"></i>A.T. Özcan</h5>
+                    <p>Sakarya Üniversitesi<br>Bilgisayar Mühendisliği Bölümü</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Sayfalar</h5>
+                    <a href="index.html">Hakkımda</a>
+                    <a href="cv.html">Özgeçmiş</a>
+                    <a href="ilgi-alanlari.html">İlgi Alanlarım</a>
+                    <a href="iletisim.html">İletişim</a>
+                </div>
+                <div class="col-md-4">
+                    <h5>İletişim</h5>
+                    <p><i class="bi bi-envelope me-2"></i>abdurrahmanturanozcan9191@gmail.com</p>
+                    <p><i class="bi bi-geo-alt me-2"></i>Sakarya, Türkiye</p>
+                </div>
+            </div>
+            <hr>
+            <p class="copyright">© 2025 Abdurrahman Turan Özcan · Web Teknolojileri Dersi Projesi</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Enter tuşu ile arama
+        document.getElementById('searchInput').addEventListener('keydown', function (e) {
+            if (e.key === 'Enter') searchShows();
+        });
+
+        function quickSearch(term) {
+            document.getElementById('searchInput').value = term;
+            searchShows();
+        }
+
+        async function searchShows() {
+            const query = document.getElementById('searchInput').value.trim();
+            if (!query) {
+                alert('Lütfen bir dizi adı girin.');
+                return;
+            }
+
+            // UI Reset
+            document.getElementById('loadingSpinner').style.display = 'block';
+            document.getElementById('errorBox').style.display = 'none';
+            document.getElementById('emptyState').style.display = 'none';
+            document.getElementById('resultsHeader').style.display = 'none';
+            document.getElementById('resultsContainer').innerHTML = '';
+
+            try {
+                const url = `https://api.tvmaze.com/search/shows?q=${encodeURIComponent(query)}`;
+                const response = await fetch(url);
+
+                if (!response.ok) throw new Error(`HTTP Hatası: ${response.status}`);
+
+                const data = await response.json();
+                renderResults(data, query);
+
+            } catch (err) {
+                document.getElementById('errorMsg').textContent = `Hata: ${err.message}. İnternet bağlantınızı kontrol edin.`;
+                document.getElementById('errorBox').style.display = 'block';
+                console.error('API Hatası:', err);
+            } finally {
+                document.getElementById('loadingSpinner').style.display = 'none';
+            }
+        }
+
+        function renderResults(data, query) {
+            const container = document.getElementById('resultsContainer');
+            const header = document.getElementById('resultsHeader');
+            const titleEl = document.getElementById('resultsTitle');
+            const countEl = document.getElementById('resultsCount');
+
+            if (!data || data.length === 0) {
+                document.getElementById('emptyState').style.display = 'block';
+                document.getElementById('emptyState').innerHTML =
+                    `<i class="bi bi-search display-1 opacity-25"></i>
+                 <p class="mt-4 fs-5">"<strong>${query}</strong>" için sonuç bulunamadı.</p>
+                 <p class="small">Farklı bir arama terimi deneyin.</p>`;
+                return;
+            }
+
+            titleEl.textContent = `"${query}" Arama Sonuçları`;
+            countEl.textContent = `${data.length} sonuç bulundu`;
+            header.style.display = 'block';
+
+            container.innerHTML = data.map(item => {
+                const show = item.show;
+                const img = show.image ? show.image.medium : null;
+                const rating = show.rating && show.rating.average ? show.rating.average : null;
+                const genres = show.genres && show.genres.length ? show.genres.slice(0, 3) : [];
+                const summary = show.summary ? show.summary.replace(/<[^>]*>/g, '').substring(0, 160) + '...' : 'Açıklama mevcut değil.';
+                const year = show.premiered ? show.premiered.substring(0, 4) : '?';
+                const status = show.status || 'Bilinmiyor';
+                const network = show.network ? show.network.name : (show.webChannel ? show.webChannel.name : 'Bilinmiyor');
+
+                const statusBadge = status === 'Running'
+                    ? `<span class="badge bg-success">Devam Ediyor</span>`
+                    : status === 'Ended'
+                        ? `<span class="badge bg-secondary">Sona Erdi</span>`
+                        : `<span class="badge bg-warning text-dark">${status}</span>`;
+
+                const ratingHtml = rating
+                    ? `<span class="rating-badge"><i class="bi bi-star-fill me-1"></i>${rating}/10</span>`
+                    : `<span class="badge bg-secondary">Puan Yok</span>`;
+
+                const genreHtml = genres.map(g => `<span class="genre-tag">${g}</span>`).join('');
+
+                const imgHtml = img
+                    ? `<img src="${img}" alt="${show.name}" loading="lazy">`
+                    : `<div class="no-image"><i class="bi bi-tv"></i></div>`;
+
+                return `
+            <div class="col-sm-6 col-md-4 col-lg-3">
+                <div class="card show-card h-100">
+                    ${imgHtml}
+                    <div class="card-body d-flex flex-column">
+                        <h6 class="card-title fw-bold mb-1">${show.name}</h6>
+                        <div class="d-flex flex-wrap gap-2 align-items-center mb-2">
+                            ${ratingHtml}
+                            ${statusBadge}
+                        </div>
+                        <div class="mb-2">${genreHtml}</div>
+                        <p class="text-muted small flex-grow-1">${summary}</p>
+                        <div class="border-top pt-2 mt-2">
+                            <small class="text-muted">
+                                <i class="bi bi-calendar3 me-1"></i>${year}
+                                &nbsp;|&nbsp;
+                                <i class="bi bi-broadcast me-1"></i>${network}
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>`;
+            }).join('');
+        }
+
+        // Sayfa yüklendiğinde varsayılan arama
+        window.addEventListener('DOMContentLoaded', () => quickSearch('Breaking Bad'));
+    </script>
+</body>
+
+</html>
