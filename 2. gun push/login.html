@@ -1,0 +1,130 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giriş Yap – Abdurrahman Turan Özcan</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- ===================== LOGİN SAYFASI ===================== -->
+    <div class="login-page">
+        <div class="login-card">
+
+            <!-- Logo / Başlık -->
+            <div class="login-logo">
+                <div class="logo-icon">
+                    <i class="bi bi-person-lock"></i>
+                </div>
+                <h3 class="fw-bold text-dark">Giriş Yap</h3>
+                <p class="text-muted small">Öğrenci numaranız ile giriş yapın</p>
+            </div>
+
+            <!-- Hata Mesajı (PHP'den gelen) -->
+            <?php if (isset($_GET['hata'])): ?>
+            <div class="alert alert-danger mb-4">
+                <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                <?php
+                $hata = htmlspecialchars($_GET['hata']);
+                if ($hata === 'bos') echo 'E-posta veya şifre boş bırakılamaz.';
+                elseif ($hata === 'yanlis') echo 'E-posta veya şifre hatalı. Lütfen tekrar deneyin.';
+                else echo 'Bir hata oluştu. Lütfen tekrar deneyin.';
+            ?>
+            </div>
+            <?php endif; ?>
+
+            <!-- Login formu için statik hata gösterimi (PHP olmadan) -->
+            <div id="loginAlert" class="alert alert-danger mb-3" style="display:none;">
+                <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                <span id="loginAlertMsg"></span>
+            </div>
+
+            <!-- Form -->
+            <form action="php/login.php" method="POST" id="loginForm" novalidate>
+
+                <!-- E-posta -->
+                <div class="mb-4">
+                    <label for="loginEmail" class="form-label fw-semibold">
+                        <i class="bi bi-envelope me-2 text-primary"></i>E-Posta (Öğrenci No)
+                    </label>
+                    <input type="email" class="form-control form-control-lg" id="loginEmail" name="email"
+                        placeholder="b251210043@sakarya.edu.tr" autocomplete="email" required>
+                    <div id="emailError" class="text-danger small mt-1" style="display:none;"></div>
+                    <div class="form-text">Format: <code>b251210043@sakarya.edu.tr</code></div>
+                </div>
+
+                <!-- Şifre -->
+                <div class="mb-4">
+                    <label for="loginPass" class="form-label fw-semibold">
+                        <i class="bi bi-lock me-2 text-primary"></i>Şifre (Öğrenci No)
+                    </label>
+                    <div class="input-group">
+                        <input type="password" class="form-control form-control-lg" id="loginPass" name="password"
+                            placeholder="Öğrenci numaranız" autocomplete="current-password" required>
+                        <button class="btn btn-outline-secondary" type="button" id="togglePass"
+                            title="Şifreyi göster/gizle">
+                            <i class="bi bi-eye" id="eyeIcon"></i>
+                        </button>
+                    </div>
+                    <div id="passError" class="text-danger small mt-1" style="display:none;"></div>
+                    <div class="form-text">Format: <code>B251210043</code></div>
+                </div>
+
+                <!-- Beni Hatırla -->
+                <div class="mb-4">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="rememberMe" name="remember">
+                        <label class="form-check-label" for="rememberMe">Beni hatırla</label>
+                    </div>
+                </div>
+
+                <!-- Giriş Yap Butonu -->
+                <button type="submit" class="btn btn-primary btn-lg w-100 fw-semibold" onclick="return validateLogin()">
+                    <i class="bi bi-box-arrow-in-right me-2"></i>Giriş Yap
+                </button>
+
+            </form>
+
+            <hr class="my-4">
+
+            <!-- Demo Bilgisi -->
+            <div class="alert alert-info small mb-0">
+                <i class="bi bi-info-circle me-2"></i>
+                <strong>Demo Bilgileri:</strong><br>
+                E-posta: <code>b251210043@sakarya.edu.tr</code><br>
+                Şifre: <code>B251210043</code>
+            </div>
+
+            <!-- Ana Sayfaya Dön -->
+            <div class="text-center mt-4">
+                <a href="index.html" class="text-muted text-decoration-none">
+                    <i class="bi bi-arrow-left me-1"></i>Ana Sayfaya Dön
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        // Şifre göster/gizle
+        document.getElementById('togglePass').addEventListener('click', function () {
+            const input = document.getElementById('loginPass');
+            const icon = document.getElementById('eyeIcon');
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.replace('bi-eye', 'bi-eye-slash');
+            } else {
+                input.type = 'password';
+                icon.classList.replace('bi-eye-slash', 'bi-eye');
+            }
+        });
+    </script>
+</body>
+
+</html>
