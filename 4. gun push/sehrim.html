@@ -1,0 +1,220 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Şehrim</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html"><i class="bi bi-person-badge-fill me-2"></i>Portfolyo</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navMenu">
+                <ul class="navbar-nav ms-auto align-items-lg-center gap-1">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Hakkımda</a></li>
+                    <li class="nav-item"><a class="nav-link" href="cv.html">Özgeçmiş</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="sehrim.html">Şehrim</a></li>
+                    <li class="nav-item"><a class="nav-link" href="takimimiz.html">Takımımız</a></li>
+                    <li class="nav-item"><a class="nav-link" href="ilgi-alanlari.html">İlgi Alanlarım</a></li>
+                    <li class="nav-item"><a class="nav-link" href="iletisim.html">İletişim</a></li>
+                    <li class="nav-item"><a class="nav-link btn-login-nav" href="login.html">Giriş Yap</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-palette-fill"></i> Tema
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end shadow border-0" style="background:var(--glass-bg); backdrop-filter:blur(10px);">
+                            <li><a class="dropdown-item" href="#" onclick="setTheme('')" style="color:var(--text)"><i class="bi bi-moon-fill me-2"></i>Koyu</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="setTheme('light')" style="color:var(--text)"><i class="bi bi-sun-fill me-2"></i>Açık</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="setTheme('colorful')" style="color:var(--text)"><i class="bi bi-rainbow me-2"></i>Renkli</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero-section text-center">
+        <div class="container">
+            <i class="bi bi-geo-alt-fill fs-1 mb-3" style="color:var(--accent);"></i>
+            <h1 class="display-5 fw-bold">Tokat</h1>
+            <p class="lead opacity-90 mt-2">
+                Karadeniz'in incisi, tarihi dokusu ve doğal güzellikleriyle büyüleyen eşsiz şehir Tokat.
+            </p>
+        </div>
+    </section>
+
+    <!-- SLIDER (en az 4 resim) -->
+    <section class="py-4 bg-dark">
+        <div class="container">
+            <div id="cityCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#cityCarousel" data-bs-slide-to="0" class="active"></button>
+                    <button type="button" data-bs-target="#cityCarousel" data-bs-slide-to="1"></button>
+                    <button type="button" data-bs-target="#cityCarousel" data-bs-slide-to="2"></button>
+                    <button type="button" data-bs-target="#cityCarousel" data-bs-slide-to="3"></button>
+                </div>
+                <div class="carousel-inner rounded-4 overflow-hidden">
+                    <div class="carousel-item active">
+                        <img src="https://picsum.photos/1200/480?random=10" class="d-block w-100" alt="Şehir Görseli 1">
+                        <div class="carousel-caption">
+                            <h5>Tokat Kalesi</h5>
+                            <p>Tarihi dokusuyla şehrin kalbinde yükselen görkemli yapı.</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://picsum.photos/1200/480?random=11" class="d-block w-100" alt="Şehir Görseli 2">
+                        <div class="carousel-caption">
+                            <h5>Ballıca Mağarası</h5>
+                            <p>Doğanın binlerce yılda şekillendirdiği eşsiz bir doğa harikası.</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://picsum.photos/1200/480?random=12" class="d-block w-100" alt="Şehir Görseli 3">
+                        <div class="carousel-caption">
+                            <h5>Taşhan</h5>
+                            <p>Osmanlı mimarisinin en güzel örneklerinden biri olan tarihi ticaret merkezi.</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://picsum.photos/1200/480?random=13" class="d-block w-100" alt="Şehir Görseli 4">
+                        <div class="carousel-caption">
+                            <h5>Kaz Gölü</h5>
+                            <p>Göçmen kuşların uğrak noktası olan huzur dolu doğal güzellik.</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#cityCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon"></span>
+                    <span class="visually-hidden">Önceki</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#cityCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon"></span>
+                    <span class="visually-hidden">Sonraki</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ŞEHİR İSTATİSTİKLERİ -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="section-title text-center">Tokat Hakkında</h2>
+            <div class="row gy-4 text-center">
+                <div class="col-6 col-md-3">
+                    <div class="city-stat">
+                        <div class="stat-number">600K+</div>
+                        <div>Nüfus</div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="city-stat">
+                        <div class="stat-number">12</div>
+                        <div>İlçe</div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="city-stat">
+                        <div class="stat-number">100+</div>
+                        <div>Tarihi Eser</div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="city-stat">
+                        <div class="stat-number">500K</div>
+                        <div>Yıllık Turist</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GEZİLECEK YERLER -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title text-center">Gezilecek Yerler</h2>
+            <div class="row gy-4">
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100">
+                        <img src="https://picsum.photos/600/350?random=20" class="card-img-top" alt="Tokat Kalesi"
+                            style="height:220px; object-fit:cover;">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold">Tokat Kalesi</h5>
+                            <p class="card-text text-muted">
+                                Şehre hakim bir tepede yer alan, tarihi dokusu ve muazzam manzarasıyla Tokat'ın simgelerinden biridir.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100">
+                        <img src="https://picsum.photos/600/350?random=21" class="card-img-top" alt="Ballıca Mağarası"
+                            style="height:220px; object-fit:cover;">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold">Ballıca Mağarası</h5>
+                            <p class="card-text text-muted">
+                                Sarkıt ve dikitleriyle bilinen, dünyanın en büyük ve en görkemli mağaralarından biridir.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100">
+                        <img src="https://picsum.photos/600/350?random=22" class="card-img-top" alt="Taşhan"
+                            style="height:220px; object-fit:cover;">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold">Taşhan</h5>
+                            <p class="card-text text-muted">
+                                Anadolu'nun en büyük şehir hanlarından biri olan ve Osmanlı mimarisinin izlerini taşıyan tarihi bir yapıdır.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="row gy-4">
+                <div class="col-md-4">
+                    <h5><i class="bi bi-person-badge-fill me-2"></i>Portfolyo</h5>
+                    <p>Abdurrahman Turan Özcan<br>Bilgisayar Mühendisliği Öğrencisi</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Sayfalar</h5>
+                    <a href="index.html">Hakkımda</a>
+                    <a href="cv.html">Özgeçmiş</a>
+                    <a href="sehrim.html">Şehrim</a>
+                    <a href="iletisim.html">İletişim</a>
+                </div>
+                <div class="col-md-4">
+                    <h5>İletişim</h5>
+                    <p><i class="bi bi-envelope me-2"></i>abdurrahmanturanozcan9191@gmail.com</p>
+                    <p><i class="bi bi-geo-alt me-2"></i>Tokat, Türkiye</p>
+                </div>
+            </div>
+            <hr>
+            <p class="copyright">&copy; 2026 Abdurrahman Turan Özcan &middot; Web Teknolojileri Dersi Projesi</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
