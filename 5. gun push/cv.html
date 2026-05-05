@@ -1,0 +1,286 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Özgeçmiş</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html"><i class="bi bi-person-badge-fill me-2"></i>Portfolyo</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navMenu">
+                <ul class="navbar-nav ms-auto align-items-lg-center gap-1">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Hakkımda</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="cv.html">Özgeçmiş</a></li>
+                    <li class="nav-item"><a class="nav-link" href="projeler.html">Projelerim</a></li>
+                    <li class="nav-item"><a class="nav-link" href="sehrim.html">Şehrim</a></li>
+                    <li class="nav-item"><a class="nav-link" href="takimimiz.html">Takımımız</a></li>
+                    <li class="nav-item"><a class="nav-link" href="ilgi-alanlari.html">İlgi Alanlarım</a></li>
+                    <li class="nav-item"><a class="nav-link" href="iletisim.html">İletişim</a></li>
+                    <li class="nav-item"><a class="nav-link btn-login-nav" href="login.html">Giriş Yap</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-palette-fill"></i> Tema
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end shadow border-0" style="background:var(--glass-bg); backdrop-filter:blur(10px);">
+                            <li><a class="dropdown-item" href="#" onclick="setTheme('')" style="color:var(--text)"><i class="bi bi-moon-fill me-2"></i>Koyu</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="setTheme('light')" style="color:var(--text)"><i class="bi bi-sun-fill me-2"></i>Açık</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="setTheme('colorful')" style="color:var(--text)"><i class="bi bi-rainbow me-2"></i>Renkli</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div style="margin-top:56px;"></div>
+
+    <!-- CV Header (semantic <header> zorunlu) -->
+    <header class="hero-section py-5 text-white">
+        <div class="container">
+            <div class="row align-items-center gy-3">
+                <div class="col-md-2 text-center">
+                    <img src="images/profile_portrait.png" alt="Profil"
+                        class="rounded-circle border border-4"
+                        style="border-color:var(--accent) !important; width:110px; height:110px; object-fit:cover;">
+                </div>
+                <div class="col-md-10">
+                    <h1 class="fw-bold mb-1">Abdurrahman Turan Özcan</h1>
+                    <p class="lead mb-2">Bilgisayar Mühendisliği &middot; B251210043</p>
+                    <div class="d-flex flex-wrap gap-3">
+                        <span><i class="bi bi-envelope me-1"></i>abdurrahmanturanozcan9191@gmail.com</span>
+                        <span><i class="bi bi-geo-alt me-1"></i>Tokat, Türkiye</span>
+                        <span><i class="bi bi-github me-1"></i>github.com/abdurrahman</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ANA İÇERİK -->
+    <main class="py-5">
+        <div class="container">
+            <div class="row gy-4">
+
+                <!-- SOL: Eğitim, Deneyim -->
+                <div class="col-lg-8">
+
+                    <!-- EĞİTİM -->
+                    <section id="egitim" aria-label="Eğitim Bilgileri">
+                        <h2 class="section-title"><i class="bi bi-mortarboard me-2"></i>Eğitim</h2>
+                        <div class="timeline">
+
+                            <article class="timeline-item card p-4 mb-4">
+                                <div class="d-flex justify-content-between flex-wrap">
+                                    <div>
+                                        <h5 class="fw-bold text-primary mb-1">Üniversite Eğitimi</h5>
+                                        <p class="mb-1 text-muted">Bilgisayar Mühendisliği &middot; Lisans</p>
+                                    </div>
+                                    <span class="badge bg-primary align-self-start px-3 py-2">2025 – Devam</span>
+                                </div>
+                                <hr class="my-3">
+                                <p class="mb-0">
+                                    Bilgisayar Bilimleri ve Yazılım Mühendisliği alanında kapsamlı eğitim almaktayım.
+                                </p>
+                            </article>
+
+                            <article class="timeline-item card p-4 mb-4">
+                                <div class="d-flex justify-content-between flex-wrap">
+                                    <div>
+                                        <h5 class="fw-bold text-primary mb-1">Gemlik Anadolu Lisesi</h5>
+                                        <p class="mb-1 text-muted">Lise Eğitimi</p>
+                                    </div>
+                                    <span class="badge bg-success align-self-start px-3 py-2">Mezun</span>
+                                </div>
+                                <hr class="my-3">
+                                <p class="mb-0">
+                                    Sayısal alanda eğitim görerek temel bilimler ve matematik becerilerimi geliştirdim.
+                                </p>
+                            </article>
+
+                            <article class="timeline-item card p-4 mb-4">
+                                <div class="d-flex justify-content-between flex-wrap">
+                                    <div>
+                                        <h5 class="fw-bold text-primary mb-1">Lale Kemal Kılıç Ortaokulu</h5>
+                                        <p class="mb-1 text-muted">Ortaokul</p>
+                                    </div>
+                                    <span class="badge bg-info align-self-start px-3 py-2">Mezun</span>
+                                </div>
+                                <hr class="my-3">
+                                <p class="mb-0">
+                                    Temel eğitim ve sosyal gelişim sürecimi tamamladım.
+                                </p>
+                            </article>
+
+                            <article class="timeline-item card p-4">
+                                <div class="d-flex justify-content-between flex-wrap">
+                                    <div>
+                                        <h5 class="fw-bold text-primary mb-1">11 Eylül İlkokulu</h5>
+                                        <p class="mb-1 text-muted">İlkokul</p>
+                                    </div>
+                                    <span class="badge bg-warning text-dark align-self-start px-3 py-2">Mezun</span>
+                                </div>
+                                <hr class="my-3">
+                                <p class="mb-0">
+                                    İlkokul eğitim hayatımı tamamladığım okulum.
+                                </p>
+                            </article>
+
+                        </div>
+                    </section>
+
+                    <!-- DENEYİM -->
+                    <section id="deneyim" class="mt-5" aria-label="İş Deneyimi">
+                        <h2 class="section-title"><i class="bi bi-briefcase me-2"></i>Deneyim</h2>
+                        <div class="timeline">
+
+                            <article class="timeline-item card p-4 mb-4">
+                                <div class="d-flex justify-content-between flex-wrap">
+                                    <div>
+                                        <h5 class="fw-bold text-primary mb-1">Kişisel Projeler</h5>
+                                        <p class="mb-1 text-muted">Freelance / Kendi çalışmalarım</p>
+                                    </div>
+                                    <span class="badge bg-info align-self-start px-3 py-2">20XX – Devam</span>
+                                </div>
+                                <hr class="my-3">
+                                <p class="mb-0">
+                                    Kişisel projeleriniz hakkında kısa bilgi. Kullandığınız teknolojiler,
+                                    yaptığınız çalışmalar vb.
+                                </p>
+                            </article>
+
+                            <article class="timeline-item card p-4">
+                                <div class="d-flex justify-content-between flex-wrap">
+                                    <div>
+                                        <h5 class="fw-bold text-primary mb-1">[Kulüp / Kurum Adı]</h5>
+                                        <p class="mb-1 text-muted">Üye / Gönüllü</p>
+                                    </div>
+                                    <span class="badge bg-secondary align-self-start px-3 py-2">20XX – Devam</span>
+                                </div>
+                                <hr class="my-3">
+                                <p class="mb-0">
+                                    Bu deneyimle ilgili kısa bir açıklama buraya gelecek.
+                                </p>
+                            </article>
+
+                        </div>
+                    </section>
+
+                </div>
+
+                <!-- SAĞ: Beceriler, Diller, Araçlar -->
+                <div class="col-lg-4">
+
+                    <!-- BECERİLER -->
+                    <aside id="beceriler" aria-label="Teknik Beceriler">
+                        <div class="card p-4 mb-4">
+                            <h5 class="fw-bold text-primary mb-4">
+                                <i class="bi bi-code-slash me-2"></i>Teknik Beceriler
+                            </h5>
+                            <div class="skill-label"><span>HTML5 / CSS3</span><span>85%</span></div>
+                            <div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div>
+
+                            <div class="skill-label"><span>JavaScript</span><span>75%</span></div>
+                            <div class="skill-bar"><div class="skill-fill" style="width:75%"></div></div>
+
+                            <div class="skill-label"><span>Python</span><span>70%</span></div>
+                            <div class="skill-bar"><div class="skill-fill" style="width:70%"></div></div>
+
+                            <div class="skill-label"><span>PHP</span><span>60%</span></div>
+                            <div class="skill-bar"><div class="skill-fill" style="width:60%"></div></div>
+
+                            <div class="skill-label"><span>Bootstrap 5</span><span>80%</span></div>
+                            <div class="skill-bar"><div class="skill-fill" style="width:80%"></div></div>
+
+                            <div class="skill-label"><span>Git / GitHub</span><span>75%</span></div>
+                            <div class="skill-bar"><div class="skill-fill" style="width:75%"></div></div>
+                        </div>
+                    </aside>
+
+                    <!-- DİLLER -->
+                    <aside id="diller" aria-label="Yabancı Diller">
+                        <div class="card p-4 mb-4">
+                            <h5 class="fw-bold text-primary mb-4">
+                                <i class="bi bi-translate me-2"></i>Diller
+                            </h5>
+                            <div class="d-flex justify-content-between mb-1">
+                                <span>Türkçe</span><span class="text-muted">Anadil</span>
+                            </div>
+                            <div class="skill-bar mb-3"><div class="skill-fill" style="width:100%"></div></div>
+                            <div class="d-flex justify-content-between mb-1">
+                                <span>İngilizce</span><span class="text-muted">B2 Orta</span>
+                            </div>
+                            <div class="skill-bar"><div class="skill-fill" style="width:70%"></div></div>
+                        </div>
+                    </aside>
+
+                    <!-- ARAÇLAR -->
+                    <aside id="araclar" aria-label="Kullanılan Araçlar">
+                        <div class="card p-4">
+                            <h5 class="fw-bold text-primary mb-4">
+                                <i class="bi bi-tools me-2"></i>Araçlar
+                            </h5>
+                            <div class="d-flex flex-wrap gap-2">
+                                <span class="badge bg-dark px-3 py-2">VS Code</span>
+                                <span class="badge bg-dark px-3 py-2">Git / GitHub</span>
+                                <span class="badge bg-dark px-3 py-2">Bootstrap 5</span>
+                                <span class="badge bg-dark px-3 py-2">Node.js</span>
+                                <span class="badge bg-dark px-3 py-2">Linux</span>
+                            </div>
+                        </div>
+                    </aside>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="row gy-4">
+                <div class="col-md-4">
+                    <h5><i class="bi bi-person-badge-fill me-2"></i>Portfolyo</h5>
+                    <p>Abdurrahman Turan Özcan<br>Bilgisayar Mühendisliği Öğrencisi</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Sayfalar</h5>
+                    <a href="index.html">Hakkımda</a>
+                    <a href="cv.html">Özgeçmiş</a>
+                    <a href="sehrim.html">Şehrim</a>
+                    <a href="iletisim.html">İletişim</a>
+                </div>
+                <div class="col-md-4">
+                    <h5>İletişim</h5>
+                    <p><i class="bi bi-envelope me-2"></i>abdurrahmanturanozcan9191@gmail.com</p>
+                    <p><i class="bi bi-geo-alt me-2"></i>Tokat, Türkiye</p>
+                </div>
+            </div>
+            <hr>
+            <p class="copyright">&copy; 2026 Abdurrahman Turan Özcan &middot; Web Teknolojileri Dersi Projesi</p>
+        </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <button id="backToTop" class="back-to-top" aria-label="Yukarı çık">
+        <i class="bi bi-arrow-up"></i>
+    </button>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
+
+
