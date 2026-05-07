@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İletişim</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Vue 3 CDN (framework validasyonu için) -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html"><i class="bi bi-person-badge-fill me-2"></i>Portfolyo</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navMenu">
+                <ul class="navbar-nav ms-auto align-items-lg-center gap-1">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Hakkımda</a></li>
+                    <li class="nav-item"><a class="nav-link" href="cv.html">Özgeçmiş</a></li>
+                    <li class="nav-item"><a class="nav-link" href="sehrim.html">Şehrim</a></li>
+                    <li class="nav-item"><a class="nav-link" href="takimimiz.html">Takımımız</a></li>
+                    <li class="nav-item"><a class="nav-link" href="ilgi-alanlari.html">İlgi Alanlarım</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="iletisim.html">İletişim</a></li>
+                    <li class="nav-item"><a class="nav-link btn-login-nav" href="login.html">Giriş Yap</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-palette-fill"></i> Tema
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end shadow border-0" style="background:var(--glass-bg); backdrop-filter:blur(10px);">
+                            <li><a class="dropdown-item" href="#" onclick="setTheme('')" style="color:var(--text)"><i class="bi bi-moon-fill me-2"></i>Koyu</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="setTheme('light')" style="color:var(--text)"><i class="bi bi-sun-fill me-2"></i>Açık</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="setTheme('colorful')" style="color:var(--text)"><i class="bi bi-rainbow me-2"></i>Renkli</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="contact-hero">
+        <div class="container">
+            <i class="bi bi-envelope-heart-fill fs-1 mb-3" style="color:var(--accent);"></i>
+            <h1 class="display-5 fw-bold">İletişim</h1>
+            <p class="lead opacity-90">Benimle iletişime geçmek için aşağıdaki formu doldurun.</p>
+        </div>
+    </section>
+
+    <!-- FORM -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="card p-4 p-md-5">
+
+                        <form id="contactForm" action="php/form-islem.php" method="POST">
+
+                            <!-- Ad Soyad -->
+                            <div class="mb-3">
+                                <label for="fieldName" class="form-label fw-semibold">Ad Soyad *</label>
+                                <input type="text" id="fieldName" name="name" class="form-control"
+                                    placeholder="Adınızı ve soyadınızı girin">
+                            </div>
+
+                            <!-- E-posta -->
+                            <div class="mb-3">
+                                <label for="fieldEmail" class="form-label fw-semibold">E-posta *</label>
+                                <input type="email" id="fieldEmail" name="email" class="form-control"
+                                    placeholder="ornek@eposta.com">
+                            </div>
+
+                            <!-- Telefon -->
+                            <div class="mb-3">
+                                <label for="fieldPhone" class="form-label fw-semibold">Telefon *</label>
+                                <input type="tel" id="fieldPhone" name="phone" class="form-control"
+                                    placeholder="05XXXXXXXXX">
+                            </div>
+
+                            <!-- Doğum Tarihi -->
+                            <div class="mb-3">
+                                <label for="fieldBirthdate" class="form-label fw-semibold">Doğum Tarihi *</label>
+                                <input type="date" id="fieldBirthdate" name="birthdate" class="form-control">
+                            </div>
+
+                            <!-- Cinsiyet (radio) -->
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold">Cinsiyet *</label>
+                                <div class="d-flex gap-4">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="gender"
+                                            id="genderM" value="erkek">
+                                        <label class="form-check-label" for="genderM">Erkek</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="gender"
+                                            id="genderF" value="kadin">
+                                        <label class="form-check-label" for="genderF">Kadın</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="gender"
+                                            id="genderO" value="diger">
+                                        <label class="form-check-label" for="genderO">Diğer</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Eğitim Düzeyi (select) -->
+                            <div class="mb-3">
+                                <label for="fieldEducation" class="form-label fw-semibold">Eğitim Düzeyi *</label>
+                                <select id="fieldEducation" name="education" class="form-select">
+                                    <option value="">-- Seçiniz --</option>
+                                    <option value="ilkokul">İlkokul</option>
+                                    <option value="ortaokul">Ortaokul</option>
+                                    <option value="lise">Lise</option>
+                                    <option value="lisans">Lisans</option>
+                                    <option value="yukseklisans">Yüksek Lisans</option>
+                                    <option value="doktora">Doktora</option>
+                                </select>
+                            </div>
+
+                            <!-- İlgi Alanları (checkbox) -->
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold">İlgi Alanları * (En az 1 seçin)</label>
+                                <div class="row">
+                                    <div class="col-6 col-md-4">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox"
+                                                name="interests[]" id="int1" value="teknoloji">
+                                            <label class="form-check-label" for="int1">Teknoloji</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-md-4">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox"
+                                                name="interests[]" id="int2" value="spor">
+                                            <label class="form-check-label" for="int2">Spor</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-md-4">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox"
+                                                name="interests[]" id="int3" value="muzik">
+                                            <label class="form-check-label" for="int3">Müzik</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-md-4">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox"
+                                                name="interests[]" id="int4" value="sanat">
+                                            <label class="form-check-label" for="int4">Sanat</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-md-4">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox"
+                                                name="interests[]" id="int5" value="kitap">
+                                            <label class="form-check-label" for="int5">Kitap</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-md-4">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox"
+                                                name="interests[]" id="int6" value="seyahat">
+                                            <label class="form-check-label" for="int6">Seyahat</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Konu -->
+                            <div class="mb-3">
+                                <label for="fieldSubject" class="form-label fw-semibold">Konu *</label>
+                                <input type="text" id="fieldSubject" name="subject" class="form-control"
+                                    placeholder="Mesajınızın konusu">
+                            </div>
+
+                            <!-- Mesaj -->
+                            <div class="mb-4">
+                                <label for="fieldMessage" class="form-label fw-semibold">Mesaj *</label>
+                                <textarea id="fieldMessage" name="message" class="form-control" rows="5"
+                                    placeholder="Mesajınızı buraya yazın (en az 20 karakter)..."></textarea>
+                            </div>
+
+                            <!-- HATA / BAŞARI KUTULARI -->
+                            <div id="jsErrorBox" class="alert alert-danger" style="display:none;">
+                                <strong><i class="bi bi-exclamation-triangle me-2"></i>Lütfen hataları düzeltin:</strong>
+                                <ul id="jsErrorList" class="mb-0 mt-2"></ul>
+                            </div>
+                            <div id="vueErrorBox" class="alert alert-warning" style="display:none;">
+                                <strong><i class="bi bi-exclamation-circle me-2"></i>Vue.js doğrulama hatası:</strong>
+                                <ul id="vueErrorList" class="mb-0 mt-2"></ul>
+                            </div>
+                            <div id="jsSuccessBox" class="alert alert-success" style="display:none;">
+                                <i class="bi bi-check-circle me-2"></i>
+                                Form geçerli! Gönderiliyor...
+                            </div>
+
+                            <!-- BUTONLAR -->
+                            <div class="d-flex flex-wrap gap-3 mt-2">
+                                <button type="button" class="btn btn-primary px-4"
+                                    onclick="validateWithJS()">
+                                    <i class="bi bi-shield-check me-2"></i>JS ile Doğrula
+                                </button>
+                                <button type="button" class="btn btn-success px-4"
+                                    onclick="validateWithVue()">
+                                    <i class="bi bi-shield-lock me-2"></i>Vue.js ile Doğrula
+                                </button>
+                                <button type="submit" class="btn btn-warning fw-semibold px-4">
+                                    <i class="bi bi-send me-2"></i>Gönder
+                                </button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="row gy-4">
+                <div class="col-md-4">
+                    <h5><i class="bi bi-person-badge-fill me-2"></i>Portfolyo</h5>
+                    <p>Ad Soyad<br>Bilgisayar Mühendisliği Öğrencisi</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Sayfalar</h5>
+                    <a href="index.html">Hakkımda</a>
+                    <a href="cv.html">Özgeçmiş</a>
+                    <a href="sehrim.html">Şehrim</a>
+                    <a href="iletisim.html">İletişim</a>
+                </div>
+                <div class="col-md-4">
+                    <h5>İletişim</h5>
+                    <p><i class="bi bi-envelope me-2"></i>ornek.mail@gmail.com</p>
+                    <p><i class="bi bi-geo-alt me-2"></i>Örnek Şehir, Türkiye</p>
+                </div>
+            </div>
+            <hr>
+            <p class="copyright">&copy; 2026 Ad Soyad &middot; Web Teknolojileri Dersi Projesi</p>
+        </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <button id="backToTop" class="back-to-top" aria-label="Yukarı çık">
+        <i class="bi bi-arrow-up"></i>
+    </button>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        /* Vue.js ile form doğrulama */
+        function validateWithVue() {
+            const { createApp, ref } = Vue;
+
+            const errors = [];
+
+            const name = document.getElementById('fieldName').value.trim();
+            const email = document.getElementById('fieldEmail').value.trim();
+            const phone = document.getElementById('fieldPhone').value.replace(/[\s\-\(\)]/g, '');
+            const subject = document.getElementById('fieldSubject').value.trim();
+            const message = document.getElementById('fieldMessage').value.trim();
+            const birthdate = document.getElementById('fieldBirthdate').value;
+            const genderChecked = document.querySelector('input[name="gender"]:checked');
+            const education = document.getElementById('fieldEducation').value;
+            const interests = document.querySelectorAll('input[name="interests[]"]:checked');
+
+            if (!name || name.length < 3) errors.push('Ad Soyad en az 3 karakter olmalıdır.');
+            if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) errors.push('Geçerli bir e-posta adresi giriniz.');
+            if (!phone || !/^\d{10,11}$/.test(phone)) errors.push('Telefon 10-11 rakamdan oluşmalıdır.');
+            if (!subject) errors.push('Konu boş bırakılamaz.');
+            if (!message || message.length < 20) errors.push('Mesaj en az 20 karakter olmalıdır.');
+            if (!genderChecked) errors.push('Cinsiyet seçiniz.');
+            if (!education) errors.push('Eğitim düzeyi seçiniz.');
+            if (interests.length === 0) errors.push('En az bir ilgi alanı seçiniz.');
+            if (!birthdate) errors.push('Doğum tarihi giriniz.');
+
+            const box = document.getElementById('vueErrorBox');
+            const list = document.getElementById('vueErrorList');
+            const jsSuccess = document.getElementById('jsSuccessBox');
+
+            if (errors.length > 0) {
+                list.innerHTML = errors.map(e => `<li>${e}</li>`).join('');
+                box.style.display = 'block';
+                if (jsSuccess) jsSuccess.style.display = 'none';
+                box.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            } else {
+                box.style.display = 'none';
+                if (jsSuccess) {
+                    jsSuccess.innerHTML = '<i class="bi bi-check-circle me-2"></i>Vue.js: Form geçerli!';
+                    jsSuccess.style.display = 'block';
+                    jsSuccess.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
