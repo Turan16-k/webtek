@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projelerim</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html"><i class="bi bi-person-badge-fill me-2"></i>Alex Developer</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu"
+                aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navMenu">
+                <ul class="navbar-nav ms-auto align-items-lg-center gap-1">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Hakkımda</a></li>
+                    <li class="nav-item"><a class="nav-link" href="cv.html">Özgeçmiş</a></li>
+                    <li class="nav-item"><a class="nav-link" href="projeler.html">Projelerim</a></li>
+                    <li class="nav-item"><a class="nav-link" href="sehrim.html">Şehrim</a></li>
+                    <li class="nav-item"><a class="nav-link" href="takimimiz.html">Takımımız</a></li>
+                    <li class="nav-item"><a class="nav-link" href="ilgi-alanlari.html">İlgi Alanlarım</a></li>
+                    <li class="nav-item"><a class="nav-link" href="iletisim.html">İletişim</a></li>
+                    <li class="nav-item"><a class="nav-link btn-login-nav" href="login.html">Giriş Yap</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="projects-hero">
+        <div class="container">
+            <i class="bi bi-braces-asterisk fs-1 mb-3" style="color:var(--accent);"></i>
+            <h1 class="display-5 fw-bold">Projelerim</h1>
+            <p class="lead opacity-90 mt-2">
+                Geliştirdiğim web ve yazılım projelerinin kısa bir özeti.
+            </p>
+            <div class="mt-4 d-flex justify-content-center gap-3 flex-wrap">
+                <a href="#" class="btn btn-outline-light rounded-pill px-4">
+                    <i class="bi bi-github me-2"></i>GitHub'da Gör
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJELER -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="section-title text-center">Web Projeleri</h2>
+            <div class="row gy-4">
+
+                <!-- Proje 1 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="project-card card">
+                        <div class="card-icon">
+                            <i class="bi bi-laptop"></i>
+                        </div>
+                        <div class="card-body p-4">
+                            <h5 class="fw-bold mb-2">Kişisel Portfolyo Sitesi</h5>
+                            <p class="text-muted small mb-3">
+                                Responsive tasarım anlayışıyla Bootstrap 5 kullanılarak sıfırdan geliştirilmiş
+                                kişisel tanıtım ve özgeçmiş web sitesi.
+                            </p>
+                            <div class="mb-3">
+                                <span class="tech-badge">HTML5</span>
+                                <span class="tech-badge">CSS3</span>
+                                <span class="tech-badge">Bootstrap 5</span>
+                                <span class="tech-badge">JavaScript</span>
+                                <span class="tech-badge">PHP</span>
+                            </div>
+                            <div class="d-flex gap-2">
+                                <a href="#" class="btn btn-sm btn-dark rounded-pill">
+                                    <i class="bi bi-github me-1"></i>Kod
+                                </a>
+                                <a href="#" class="btn btn-sm btn-primary rounded-pill">
+                                    <i class="bi bi-box-arrow-up-right me-1"></i>Canlı
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Proje 2 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="project-card card">
+                        <div class="card-icon" style="background:linear-gradient(135deg,#1b0033,#4a0080);">
+                            <i class="bi bi-film"></i>
+                        </div>
+                        <div class="card-body p-4">
+                            <h5 class="fw-bold mb-2">Dizi Keşif Uygulaması</h5>
+                            <p class="text-muted small mb-3">
+                                TVMaze API entegrasyonu ile popüler dizilerin listelendiği,
+                                arama ve filtreleme özellikli web uygulaması.
+                            </p>
+                            <div class="mb-3">
+                                <span class="tech-badge">HTML5</span>
+                                <span class="tech-badge">JavaScript</span>
+                                <span class="tech-badge">TVMaze API</span>
+                                <span class="tech-badge">Bootstrap 5</span>
+                            </div>
+                            <div class="d-flex gap-2">
+                                <a href="#" class="btn btn-sm btn-dark rounded-pill">
+                                    <i class="bi bi-github me-1"></i>Kod
+                                </a>
+                                <a href="ilgi-alanlari.html" class="btn btn-sm btn-primary rounded-pill">
+                                    <i class="bi bi-box-arrow-up-right me-1"></i>Demo
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Proje 3 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="project-card card">
+                        <div class="card-icon" style="background:linear-gradient(135deg,#1a237e,#0d47a1);">
+                            <i class="bi bi-list-check"></i>
+                        </div>
+                        <div class="card-body p-4">
+                            <h5 class="fw-bold mb-2">Görev Yöneticisi</h5>
+                            <p class="text-muted small mb-3">
+                                LocalStorage ile verilerin saklandığı, sürükle-bırak özellikli
+                                basit ve kullanışlı yapılacaklar listesi uygulaması.
+                            </p>
+                            <div class="mb-3">
+                                <span class="tech-badge">HTML5</span>
+                                <span class="tech-badge">CSS3</span>
+                                <span class="tech-badge">JavaScript</span>
+                                <span class="tech-badge">LocalStorage</span>
+                            </div>
+                            <div class="d-flex gap-2">
+                                <a href="#" class="btn btn-sm btn-dark rounded-pill">
+                                    <i class="bi bi-github me-1"></i>Kod
+                                </a>
+                                <a href="#" class="btn btn-sm btn-primary rounded-pill">
+                                    <i class="bi bi-box-arrow-up-right me-1"></i>Demo
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Proje 4 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="project-card card">
+                        <div class="card-icon" style="background:linear-gradient(135deg,#004d40,#00695c);">
+                            <i class="bi bi-envelope-paper"></i>
+                        </div>
+                        <div class="card-body p-4">
+                            <h5 class="fw-bold mb-2">İletişim Formu & PHP Backend</h5>
+                            <p class="text-muted small mb-3">
+                                Tam doğrulama içeren, PHP sunucu tarafında işlenen
+                                çok adımlı iletişim formu uygulaması.
+                            </p>
+                            <div class="mb-3">
+                                <span class="tech-badge">HTML5</span>
+                                <span class="tech-badge">JavaScript</span>
+                                <span class="tech-badge">Vue.js</span>
+                                <span class="tech-badge">PHP</span>
+                            </div>
+                            <div class="d-flex gap-2">
+                                <a href="#" class="btn btn-sm btn-dark rounded-pill">
+                                    <i class="bi bi-github me-1"></i>Kod
+                                </a>
+                                <a href="iletisim.html" class="btn btn-sm btn-primary rounded-pill">
+                                    <i class="bi bi-box-arrow-up-right me-1"></i>Demo
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Proje 5 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="project-card card">
+                        <div class="card-icon" style="background:linear-gradient(135deg,#bf360c,#e64a19);">
+                            <i class="bi bi-calculator"></i>
+                        </div>
+                        <div class="card-body p-4">
+                            <h5 class="fw-bold mb-2">Hesap Makinesi</h5>
+                            <p class="text-muted small mb-3">
+                                Temel ve bilimsel işlemleri destekleyen, klavye girişi ile
+                                çalışan minimalist hesap makinesi uygulaması.
+                            </p>
+                            <div class="mb-3">
+                                <span class="tech-badge">HTML5</span>
+                                <span class="tech-badge">CSS3</span>
+                                <span class="tech-badge">JavaScript</span>
+                            </div>
+                            <div class="d-flex gap-2">
+                                <a href="#" class="btn btn-sm btn-dark rounded-pill">
+                                    <i class="bi bi-github me-1"></i>Kod
+                                </a>
+                                <a href="#" class="btn btn-sm btn-primary rounded-pill">
+                                    <i class="bi bi-box-arrow-up-right me-1"></i>Demo
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Proje 6 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="project-card card">
+                        <div class="card-icon" style="background:linear-gradient(135deg,#37474f,#546e7a);">
+                            <i class="bi bi-shield-lock"></i>
+                        </div>
+                        <div class="card-body p-4">
+                            <h5 class="fw-bold mb-2">Güvenli Giriş Sistemi</h5>
+                            <p class="text-muted small mb-3">
+                                PHP tabanlı kimlik doğrulama, JavaScript form doğrulama
+                                ve session yönetimini bir arada kullanan giriş sistemi.
+                            </p>
+                            <div class="mb-3">
+                                <span class="tech-badge">HTML5</span>
+                                <span class="tech-badge">JavaScript</span>
+                                <span class="tech-badge">PHP</span>
+                                <span class="tech-badge">Session</span>
+                            </div>
+                            <div class="d-flex gap-2">
+                                <a href="#" class="btn btn-sm btn-dark rounded-pill">
+                                    <i class="bi bi-github me-1"></i>Kod
+                                </a>
+                                <a href="login.html" class="btn btn-sm btn-primary rounded-pill">
+                                    <i class="bi bi-box-arrow-up-right me-1"></i>Demo
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="row gy-4">
+                <div class="col-md-4">
+                    <h5><i class="bi bi-person-badge-fill me-2"></i>Alex Developer</h5>
+                    <p>Teknoloji Üniversitesi<br>Bilgisayar Mühendisliği<br>2025-2026 Bahar Dönemi</p>
+                    <div class="social-links mt-3">
+                        <a href="#" target="_blank"><i class="bi bi-github"></i></a>
+                        <a href="#" target="_blank"><i class="bi bi-linkedin"></i></a>
+                        <a href="mailto:alex.dev@ornek.com"><i class="bi bi-envelope"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <h5>Hızlı Erişim</h5>
+                    <a href="index.html"><i class="bi bi-chevron-right me-1"></i>Hakkımda</a>
+                    <a href="cv.html"><i class="bi bi-chevron-right me-1"></i>Özgeçmiş</a>
+                    <a href="projeler.html"><i class="bi bi-chevron-right me-1"></i>Projelerim</a>
+                    <a href="sehrim.html"><i class="bi bi-chevron-right me-1"></i>Şehrim</a>
+                    <a href="takimimiz.html"><i class="bi bi-chevron-right me-1"></i>Takımımız</a>
+                    <a href="ilgi-alanlari.html"><i class="bi bi-chevron-right me-1"></i>İlgi Alanlarım</a>
+                    <a href="iletisim.html"><i class="bi bi-chevron-right me-1"></i>İletişim</a>
+                </div>
+                <div class="col-md-4">
+                    <h5>İletişim Bilgileri</h5>
+                    <p><i class="bi bi-envelope me-2 text-accent"></i>alex.dev@ornek.com</p>
+                    <p><i class="bi bi-geo-alt me-2 text-accent"></i>İstanbul, Türkiye</p>
+                    <p><i class="bi bi-building me-2 text-accent"></i>Teknoloji Üniversitesi</p>
+                </div>
+            </div>
+            <hr>
+            <p class="copyright">&copy; 2026 Alex Developer &middot; Modern Web Geliştirme Portfolyosu</p>
+        </div>
+    </footer>
+
+    <button id="scrollTopBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Yukarı Çık">
+        <i class="bi bi-arrow-up-short"></i>
+    </button>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
