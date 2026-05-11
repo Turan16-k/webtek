@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İlgi Alanlarım | TVMaze</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html"><i class="bi bi-person-badge-fill me-2"></i>Portfolyo</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navMenu">
+                <ul class="navbar-nav ms-auto align-items-lg-center gap-1">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Hakkımda</a></li>
+                    <li class="nav-item"><a class="nav-link" href="cv.html">Özgeçmiş</a></li>
+                    <li class="nav-item"><a class="nav-link" href="projeler.html">Projelerim</a></li>
+                    <li class="nav-item"><a class="nav-link" href="sehrim.html">Şehrim</a></li>
+                    <li class="nav-item"><a class="nav-link" href="takimimiz.html">Takımımız</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="ilgi-alanlari.html">İlgi Alanlarım</a></li>
+                    <li class="nav-item"><a class="nav-link" href="iletisim.html">İletişim</a></li>
+                    <li class="nav-item"><a class="nav-link btn-login-nav" href="login.html">Giriş Yap</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-palette-fill"></i> Tema
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end shadow border-0" style="background:var(--glass-bg); backdrop-filter:blur(10px);">
+                            <li><a class="dropdown-item" href="#" onclick="setTheme('')" style="color:var(--text)"><i class="bi bi-moon-fill me-2"></i>Koyu</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="setTheme('light')" style="color:var(--text)"><i class="bi bi-sun-fill me-2"></i>Açık</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="setTheme('colorful')" style="color:var(--text)"><i class="bi bi-rainbow me-2"></i>Renkli</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="api-hero">
+        <div class="container">
+            <i class="bi bi-controller fs-1 mb-3" style="color:var(--accent);"></i>
+            <h1 class="display-5 fw-bold">İlgi Alanlarım</h1>
+            <p class="lead opacity-90 mt-2">Satranç temalı en iyi diziler – TVMaze API ile canlı veri</p>
+
+            <div class="d-flex flex-wrap justify-content-center gap-3 mt-4">
+                <div class="input-group" style="max-width:340px;">
+                    <input type="text" id="searchInput" class="form-control"
+                        placeholder="Dizi ara... (örn: chess, game)" value="chess"
+                        style="border-radius:30px 0 0 30px;">
+                    <button class="btn btn-warning fw-semibold" onclick="searchShows()" style="border-radius:0 30px 30px 0;">
+                        <i class="bi bi-search me-1"></i>Ara
+                    </button>
+                </div>
+                <button id="loadBtn" class="btn btn-outline-light fw-semibold px-4" onclick="loadDefault()">
+                    <i class="bi bi-stars me-2"></i>Varsayılan
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- YÜKLENİYOR -->
+    <div id="loadingSpinner" class="text-center py-5" style="display:none;">
+        <div class="spinner-border" style="width:3rem;height:3rem;color:var(--accent);"></div>
+        <p class="mt-3" style="color:var(--text-light);">TVMaze'den veriler çekiliyor...</p>
+    </div>
+
+    <!-- SONUÇ BİLGİSİ -->
+    <div id="resultInfo" class="text-center py-2" style="display:none;">
+        <span id="resultText" style="color:var(--text-light); font-size:0.9rem;"></span>
+    </div>
+
+    <!-- DİZİLER -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="section-title text-center reveal" id="apiSectionTitle">Satranç Temalı Diziler</h2>
+            <div id="dataContainer" class="row gy-4">
+                <div class="col-12 text-center py-5" style="color:var(--text-light);">
+                    <i class="bi bi-cloud-download fs-1 opacity-50"></i>
+                    <p class="mt-3">Sayfa yüklenirken veriler çekiliyor...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="row gy-4">
+                <div class="col-md-4">
+                    <h5><i class="bi bi-person-badge-fill me-2"></i>Abdurrahman Turan Özcan</h5>
+                    <p>Sakarya Üniversitesi<br>Bilgisayar Mühendisliği Öğrencisi</p>
+                    <div class="social-links mt-3">
+                        <a href="#" target="_blank"><i class="bi bi-github"></i></a>
+                        <a href="#" target="_blank"><i class="bi bi-linkedin"></i></a>
+                        <a href="mailto:abdurrahmanturanozcan9191@gmail.com"><i class="bi bi-envelope"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <h5>Hızlı Erişim</h5>
+                    <a href="index.html"><i class="bi bi-chevron-right me-1"></i>Hakkımda</a>
+                    <a href="cv.html"><i class="bi bi-chevron-right me-1"></i>Özgeçmiş</a>
+                    <a href="projeler.html"><i class="bi bi-chevron-right me-1"></i>Projelerim</a>
+                    <a href="sehrim.html"><i class="bi bi-chevron-right me-1"></i>Şehrim</a>
+                    <a href="iletisim.html"><i class="bi bi-chevron-right me-1"></i>İletişim</a>
+                </div>
+                <div class="col-md-4">
+                    <h5>İletişim</h5>
+                    <p><i class="bi bi-envelope me-2 text-accent"></i>abdurrahmanturanozcan9191@gmail.com</p>
+                    <p><i class="bi bi-geo-alt me-2 text-accent"></i>Sakarya, Türkiye</p>
+                    <p><i class="bi bi-globe me-2 text-accent"></i>TVMaze API ile güçlendirildi</p>
+                </div>
+            </div>
+            <hr>
+            <p class="copyright">&copy; 2026 Abdurrahman Turan Özcan &middot; Web Teknolojileri Dersi Projesi</p>
+        </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <button id="backToTop" class="back-to-top" aria-label="Yukarı çık">
+        <i class="bi bi-arrow-up"></i>
+    </button>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        function stripHtml(html) {
+            const tmp = document.createElement('div');
+            tmp.innerHTML = html || '';
+            return tmp.textContent || tmp.innerText || '';
+        }
+
+        function renderShows(shows, title) {
+            const container = document.getElementById('dataContainer');
+            const sectionTitle = document.getElementById('apiSectionTitle');
+            const resultInfo = document.getElementById('resultInfo');
+            const resultText = document.getElementById('resultText');
+
+            if (title) sectionTitle.textContent = title;
+
+            if (!shows || shows.length === 0) {
+                container.innerHTML = `
+                    <div class="col-12 text-center py-5">
+                        <i class="bi bi-search fs-1" style="color:var(--accent);opacity:0.5;"></i>
+                        <p class="mt-3" style="color:var(--text-light);">Sonuç bulunamadı.</p>
+                    </div>`;
+                resultInfo.style.display = 'none';
+                return;
+            }
+
+            resultText.textContent = shows.length + ' dizi bulundu';
+            resultInfo.style.display = 'block';
+            container.innerHTML = '';
+
+            shows.forEach((item, i) => {
+                const show = item.show || item;
+                const image = show.image ? show.image.medium : null;
+                const summary = show.summary ? stripHtml(show.summary).substring(0, 120) + '...' : 'Açıklama bulunmuyor.';
+                const rating = show.rating && show.rating.average ? show.rating.average : null;
+                const year = show.premiered ? show.premiered.substring(0, 4) : null;
+                const genres = (show.genres || []).slice(0, 2);
+                const status = show.status || '';
+
+                const statusBadgeClass = status === 'Running' ? 'bg-success' : status === 'Ended' ? 'bg-secondary' : 'bg-warning text-dark';
+                const statusLabel = status === 'Running' ? 'Devam Ediyor' : status === 'Ended' ? 'Bitti' : status;
+
+                container.innerHTML += `
+                    <div class="col-sm-6 col-lg-4 col-xl-3 reveal" style="transition-delay:${(i % 4) * 0.1}s">
+                        <div class="card h-100 show-card">
+                            ${image
+                                ? `<img src="${image}" class="card-img-top" alt="${show.name}">`
+                                : `<div class="no-image"><i class="bi bi-film"></i></div>`}
+                            <div class="card-body d-flex flex-column p-3">
+                                <div class="d-flex justify-content-between align-items-start mb-2 gap-1 flex-wrap">
+                                    ${rating ? `<span class="rating-badge"><i class="bi bi-star-fill me-1"></i>${rating}</span>` : ''}
+                                    ${year ? `<span class="badge bg-secondary">${year}</span>` : ''}
+                                    ${statusLabel ? `<span class="badge ${statusBadgeClass} ms-auto">${statusLabel}</span>` : ''}
+                                </div>
+                                <h6 class="fw-bold mb-1" style="color:#fff;">${show.name}</h6>
+                                <div class="mb-2">
+                                    ${genres.map(g => `<span class="genre-tag">${g}</span>`).join('')}
+                                </div>
+                                <p class="small mb-3 flex-grow-1" style="color:var(--text-light); line-height:1.6;">${summary}</p>
+                                <a href="${show.url}" target="_blank" rel="noopener"
+                                    class="btn btn-accent btn-sm mt-auto"
+                                    style="padding:0.4rem 1rem; font-size:0.85rem;">
+                                    <i class="bi bi-box-arrow-up-right me-1"></i>TVMaze'de İncele
+                                </a>
+                            </div>
+                        </div>
+                    </div>`;
+            });
+
+            // Reveal animasyonunu tetikle
+            document.querySelectorAll('#dataContainer .reveal').forEach(el => {
+                setTimeout(() => el.classList.add('visible'), 50);
+            });
+        }
+
+        function fetchAndRender(url, sectionTitle) {
+            const spinner = document.getElementById('loadingSpinner');
+            spinner.style.display = 'block';
+            document.getElementById('loadBtn').disabled = true;
+
+            fetch(url)
+                .then(res => {
+                    if (!res.ok) throw new Error('HTTP ' + res.status);
+                    return res.json();
+                })
+                .then(data => {
+                    renderShows(data, sectionTitle);
+                    showToast('<i class="bi bi-check-circle me-2"></i>Veriler yüklendi!', 'success');
+                })
+                .catch(() => {
+                    document.getElementById('dataContainer').innerHTML = `
+                        <div class="col-12 text-center py-4">
+                            <i class="bi bi-wifi-off fs-1" style="color:var(--danger);"></i>
+                            <p class="mt-3" style="color:var(--text-light);">Bağlantı hatası. İnternet bağlantınızı kontrol edin.</p>
+                            <button class="btn btn-accent mt-2" onclick="loadDefault()">Tekrar Dene</button>
+                        </div>`;
+                    showToast('<i class="bi bi-x-circle me-2"></i>Bağlantı hatası!', 'error');
+                })
+                .finally(() => {
+                    spinner.style.display = 'none';
+                    document.getElementById('loadBtn').disabled = false;
+                });
+        }
+
+        function loadDefault() {
+            document.getElementById('searchInput').value = 'chess';
+            fetchAndRender('https://api.tvmaze.com/search/shows?q=chess', 'Satranç Temalı Diziler');
+        }
+
+        function searchShows() {
+            const q = document.getElementById('searchInput').value.trim();
+            if (!q) return;
+            fetchAndRender(
+                `https://api.tvmaze.com/search/shows?q=${encodeURIComponent(q)}`,
+                '"' + q + '" Sonuçları'
+            );
+        }
+
+        document.getElementById('searchInput').addEventListener('keydown', function (e) {
+            if (e.key === 'Enter') searchShows();
+        });
+
+        window.addEventListener('load', loadDefault);
+    </script>
+</body>
+
+</html>
