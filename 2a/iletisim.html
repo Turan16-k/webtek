@@ -1,0 +1,461 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İletişim – Abdurrahman Turan Özcan</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- ===================== NAVBAR ===================== -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html"><i class="bi bi-person-badge-fill me-2"></i>A.T. Özcan</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navMenu">
+                <ul class="navbar-nav ms-auto align-items-lg-center gap-1">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Hakkımda</a></li>
+                    <li class="nav-item"><a class="nav-link" href="cv.html">Özgeçmiş</a></li>
+                    <li class="nav-item"><a class="nav-link" href="sehrim.html">Şehrim</a></li>
+                    <li class="nav-item"><a class="nav-link" href="takimimiz.html">Takımımız</a></li>
+                    <li class="nav-item"><a class="nav-link" href="ilgi-alanlari.html">İlgi Alanlarım</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="iletisim.html">İletişim</a></li>
+                    <li class="nav-item"><a class="nav-link btn-login-nav" href="login.html">Giriş Yap</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===================== HERO ===================== -->
+    <section class="contact-hero">
+        <div class="container">
+            <p style="color:var(--accent); font-weight:600; letter-spacing:2px; margin-bottom:8px;">İLETİŞİM</p>
+            <h1 class="fw-bold display-4"><i class="bi bi-envelope-open me-3"></i>Ulaşın</h1>
+            <p class="lead mt-3 opacity-85">Formu doldurun, mail atın ya da direkt yazın — Naipte varsa görmek illa
+                bakarım.</p>
+        </div>
+    </section>
+
+    <!-- ===================== İÇERİK ===================== -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row gy-5">
+
+                <!-- SOL: İletişim Bilgileri -->
+                <div class="col-lg-4">
+                    <h3 class="section-title">Bilgiler</h3>
+                    <div class="d-flex flex-column gap-4">
+                        <div class="card p-4 border-0 shadow-sm">
+                            <div class="d-flex align-items-start gap-3">
+                                <span class="fs-3 text-primary"><i class="bi bi-envelope-fill"></i></span>
+                                <div>
+                                    <h6 class="fw-bold mb-1">E-Posta</h6>
+                                    <a href="mailto:abdurrahmanturanozcan9191@gmail.com"
+                                        class="text-muted text-decoration-none">
+                                        abdurrahmanturanozcan9191@gmail.com
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card p-4 border-0 shadow-sm">
+                            <div class="d-flex align-items-start gap-3">
+                                <span class="fs-3 text-primary"><i class="bi bi-geo-alt-fill"></i></span>
+                                <div>
+                                    <h6 class="fw-bold mb-1">Konum</h6>
+                                    <p class="text-muted mb-0">Sakarya Üniversitesi<br>Sakarya, Türkiye</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card p-4 border-0 shadow-sm">
+                            <div class="d-flex align-items-start gap-3">
+                                <span class="fs-3 text-primary"><i class="bi bi-github"></i></span>
+                                <div>
+                                    <h6 class="fw-bold mb-1">GitHub</h6>
+                                    <a href="https://github.com" target="_blank"
+                                        class="text-muted text-decoration-none">
+                                        github.com/Turan16-k
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SAĞ: Form -->
+                <div class="col-lg-8">
+                    <h3 class="section-title">İletişim Formu</h3>
+
+                    <!-- Vue.js App Wrapper -->
+                    <div id="contactApp">
+                        <form method="POST" action="php/contact.php" id="contactForm" novalidate>
+
+                            <!-- Satır 1: Ad Soyad + E-posta -->
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="fieldName" class="form-label fw-semibold">Ad Soyad <span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="fieldName" name="name"
+                                        v-model="form.name" placeholder="Adınız Soyadınız" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="fieldEmail" class="form-label fw-semibold">E-Posta <span
+                                            class="text-danger">*</span></label>
+                                    <input type="email" class="form-control" id="fieldEmail" name="email"
+                                        v-model="form.email" placeholder="ornek@email.com" required>
+                                </div>
+                            </div>
+
+                            <!-- Satır 2: Telefon + Konu -->
+                            <div class="row g-3 mt-1">
+                                <div class="col-md-6">
+                                    <label for="fieldPhone" class="form-label fw-semibold">Telefon <span
+                                            class="text-danger">*</span></label>
+                                    <input type="tel" class="form-control" id="fieldPhone" name="phone"
+                                        v-model="form.phone" placeholder="05XX XXX XX XX" required>
+                                    <div class="form-text">Sadece rakam giriniz (10-11 hane).</div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="fieldSubject" class="form-label fw-semibold">Konu <span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="fieldSubject" name="subject"
+                                        v-model="form.subject" placeholder="Mesaj konusu" required>
+                                </div>
+                            </div>
+
+                            <!-- Satır 3: Cinsiyet (Radio) -->
+                            <div class="mt-3">
+                                <label class="form-label fw-semibold">Cinsiyet <span
+                                        class="text-danger">*</span></label>
+                                <div class="d-flex flex-wrap gap-4">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="gender" id="genderMale"
+                                            value="Erkek" v-model="form.gender">
+                                        <label class="form-check-label" for="genderMale">Erkek</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="gender" id="genderFemale"
+                                            value="Kadın" v-model="form.gender">
+                                        <label class="form-check-label" for="genderFemale">Kadın</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="gender" id="genderOther"
+                                            value="Belirtmek İstemiyorum" v-model="form.gender">
+                                        <label class="form-check-label" for="genderOther">Belirtmek İstemiyorum</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Satır 4: Eğitim (Select) + Doğum Tarihi -->
+                            <div class="row g-3 mt-1">
+                                <div class="col-md-6">
+                                    <label for="fieldEducation" class="form-label fw-semibold">Eğitim Düzeyi <span
+                                            class="text-danger">*</span></label>
+                                    <select class="form-select" id="fieldEducation" name="education"
+                                        v-model="form.education" required>
+                                        <option value="">-- Seçiniz --</option>
+                                        <option value="ilkokul">İlköğretim</option>
+                                        <option value="lise">Lise</option>
+                                        <option value="onlisans">Ön Lisans</option>
+                                        <option value="lisans">Lisans</option>
+                                        <option value="yukseklisans">Yüksek Lisans</option>
+                                        <option value="doktora">Doktora</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="fieldBirthdate" class="form-label fw-semibold">Doğum Tarihi <span
+                                            class="text-danger">*</span></label>
+                                    <input type="date" class="form-control" id="fieldBirthdate" name="birthdate"
+                                        v-model="form.birthdate" required>
+                                </div>
+                            </div>
+
+                            <!-- Satır 5: İlgi Alanları (Checkbox) -->
+                            <div class="mt-3">
+                                <label class="form-label fw-semibold">İlgi Alanları <span
+                                        class="text-danger">*</span></label>
+                                <div class="row">
+                                    <div class="col-6 col-md-4">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="interests[]"
+                                                id="intWeb" value="Web Geliştirme" v-model="form.interests">
+                                            <label class="form-check-label" for="intWeb">Web Geliştirme</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-md-4">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="interests[]"
+                                                id="intAI" value="Yapay Zeka" v-model="form.interests">
+                                            <label class="form-check-label" for="intAI">Yapay Zeka</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-md-4">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="interests[]"
+                                                id="intMobile" value="Mobil Uygulama" v-model="form.interests">
+                                            <label class="form-check-label" for="intMobile">Mobil Uygulama</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-md-4 mt-2">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="interests[]"
+                                                id="intSec" value="Siber Güvenlik" v-model="form.interests">
+                                            <label class="form-check-label" for="intSec">Siber Güvenlik</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-md-4 mt-2">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="interests[]"
+                                                id="intGame" value="Oyun Geliştirme" v-model="form.interests">
+                                            <label class="form-check-label" for="intGame">Oyun Geliştirme</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-md-4 mt-2">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="interests[]"
+                                                id="intData" value="Veri Bilimi" v-model="form.interests">
+                                            <label class="form-check-label" for="intData">Veri Bilimi</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Satır 6: Mesaj -->
+                            <div class="mt-3">
+                                <label for="fieldMessage" class="form-label fw-semibold">Mesaj <span
+                                        class="text-danger">*</span></label>
+                                <textarea class="form-control" id="fieldMessage" name="message" rows="5"
+                                    v-model="form.message" placeholder="Mesajınızı buraya yazın (en az 20 karakter)..."
+                                    required></textarea>
+                            </div>
+
+                            <!-- Satır 7: Dosya Yükleme -->
+                            <div class="mt-3">
+                                <label for="fieldFile" class="form-label fw-semibold">Dosya Ekle <span
+                                        class="text-muted small">(isteğe bağlı)</span></label>
+                                <input class="form-control" type="file" id="fieldFile" name="file_upload">
+                                <div class="form-text">PDF, Word veya görsel dosyaları ekleyebilirsiniz. (Maks. 5MB)
+                                </div>
+                            </div>
+
+                            <!-- Satır 8: İzinler (Checkbox) -->
+                            <div class="mt-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="fieldKvkk" name="kvkk" value="1"
+                                        v-model="form.kvkk">
+                                    <label class="form-check-label" for="fieldKvkk">
+                                        KVKK kapsamında kişisel verilerimin işlenmesini kabul ediyorum. <span
+                                            class="text-danger">*</span>
+                                    </label>
+                                </div>
+                                <div class="form-check mt-2">
+                                    <input class="form-check-input" type="checkbox" id="fieldNewsletter"
+                                        name="newsletter" value="1" v-model="form.newsletter">
+                                    <label class="form-check-label" for="fieldNewsletter">
+                                        Bilgilendirme e-postalarını almak istiyorum.
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- ===================== VALİDASYON BÖLÜMÜ ===================== -->
+                            <div class="validation-section mt-4">
+                                <h6 class="fw-bold mb-3"><i class="bi bi-shield-check me-2 text-primary"></i>Form
+                                    Doğrulama</h6>
+                                <div class="d-flex flex-wrap gap-3">
+                                    <!-- Vanilla JS Butonu -->
+                                    <button type="button" class="btn btn-warning fw-semibold px-4"
+                                        onclick="validateWithJS()">
+                                        <i class="bi bi-braces me-2"></i>JavaScript ile Kontrol Et
+                                    </button>
+
+                                    <!-- Vue.js Butonu -->
+                                    <button type="button" class="btn btn-info text-white fw-semibold px-4"
+                                        @click="validateVue">
+                                        <i class="bi bi-lightning me-2"></i>Vue.js ile Kontrol Et
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Vanilla JS Hata Kutusu -->
+                            <div id="jsErrorBox" class="alert alert-warning mt-3" style="display:none;">
+                                <strong><i class="bi bi-exclamation-triangle me-2"></i>JavaScript Doğrulama
+                                    Hataları:</strong>
+                                <ul id="jsErrorList" class="mt-2 mb-0"></ul>
+                            </div>
+
+                            <!-- Vanilla JS Başarı Kutusu -->
+                            <div id="jsSuccessBox" class="alert alert-success mt-3" style="display:none;">
+                                <i class="bi bi-check-circle-fill me-2"></i>
+                                <strong>JavaScript doğrulaması başarılı!</strong> Form gönderilebilir.
+                            </div>
+
+                            <!-- Vue.js Hata Kutusu -->
+                            <div v-if="vueErrors.length > 0" class="alert alert-danger mt-3">
+                                <strong><i class="bi bi-lightning-charge me-2"></i>Vue.js Doğrulama Hataları:</strong>
+                                <ul class="mt-2 mb-0">
+                                    <li v-for="err in vueErrors" :key="err">{{ err }}</li>
+                                </ul>
+                            </div>
+
+                            <!-- Vue.js Başarı -->
+                            <div v-if="vueSuccess" class="alert alert-success mt-3">
+                                <i class="bi bi-check-circle-fill me-2"></i>
+                                <strong>Vue.js doğrulaması başarılı!</strong> Form gönderilebilir.
+                            </div>
+
+                            <!-- Gönder Butonu (PHP'ye gönderir) -->
+                            <div class="mt-4">
+                                <button type="submit" class="btn btn-primary btn-lg w-100 fw-semibold">
+                                    <i class="bi bi-send-fill me-2"></i>Formu Gönder (PHP)
+                                </button>
+                                <p class="text-muted text-center small mt-2">
+                                    Gönder butonuna tıkladığınızda veriler PHP sayfasına iletilecektir.
+                                </p>
+                            </div>
+
+                        </form>
+                    </div>
+                    <!-- /contactApp -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== FOOTER ===================== -->
+    <footer>
+        <div class="container">
+            <div class="row gy-4">
+                <div class="col-md-4">
+                    <h5><i class="bi bi-person-badge-fill me-2"></i>A.T. Özcan</h5>
+                    <p>Sakarya Üniversitesi<br>Bilgisayar Mühendisliği Bölümü</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Sayfalar</h5>
+                    <a href="index.html">Hakkımda</a>
+                    <a href="cv.html">Özgeçmiş</a>
+                    <a href="sehrim.html">Şehrim</a>
+                    <a href="takimimiz.html">Takımımız</a>
+                    <a href="ilgi-alanlari.html">İlgi Alanlarım</a>
+                    <a href="iletisim.html">İletişim</a>
+                </div>
+                <div class="col-md-4">
+                    <h5>İletişim</h5>
+                    <p><i class="bi bi-envelope me-2"></i>abdurrahmanturanozcan9191@gmail.com</p>
+                    <p><i class="bi bi-geo-alt me-2"></i>Sakarya, Türkiye</p>
+                </div>
+            </div>
+            <hr>
+            <p class="copyright">© 2026 Abdurrahman Turan Özcan · Web Teknolojileri Dersi Projesi</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Vue 3 CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.prod.js"></script>
+    <!-- Vanilla JS Validation -->
+    <script src="js/main.js"></script>
+    <!-- Vue.js App -->
+    <script>
+        const { createApp } = Vue;
+
+        createApp({
+            data() {
+                return {
+                    form: {
+                        name: '',
+                        email: '',
+                        phone: '',
+                        subject: '',
+                        message: '',
+                        gender: '',
+                        education: '',
+                        interests: [],
+                        birthdate: '',
+                        kvkk: false,
+                        newsletter: false
+                    },
+                    vueErrors: [],
+                    vueSuccess: false
+                };
+            },
+            methods: {
+                validateVue() {
+                    this.vueErrors = [];
+                    this.vueSuccess = false;
+
+                    // Ad Soyad
+                    if (!this.form.name.trim()) {
+                        this.vueErrors.push('Ad Soyad boş bırakılamaz.');
+                    } else if (this.form.name.trim().length < 3) {
+                        this.vueErrors.push('Ad Soyad en az 3 karakter olmalıdır.');
+                    }
+
+                    // E-posta
+                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    if (!this.form.email.trim()) {
+                        this.vueErrors.push('E-posta adresi boş bırakılamaz.');
+                    } else if (!emailRegex.test(this.form.email.trim())) {
+                        this.vueErrors.push('Geçerli bir e-posta adresi giriniz. (örn: isim@domain.com)');
+                    }
+
+                    // Telefon
+                    const phoneClean = this.form.phone.replace(/[\s\-\(\)]/g, '');
+                    if (!phoneClean) {
+                        this.vueErrors.push('Telefon numarası boş bırakılamaz.');
+                    } else if (!/^\d{10,11}$/.test(phoneClean)) {
+                        this.vueErrors.push('Telefon numarası sadece rakamlardan oluşmalı ve 10-11 haneli olmalıdır.');
+                    }
+
+                    // Konu
+                    if (!this.form.subject.trim()) {
+                        this.vueErrors.push('Konu boş bırakılamaz.');
+                    }
+
+                    // Mesaj
+                    if (!this.form.message.trim()) {
+                        this.vueErrors.push('Mesaj boş bırakılamaz.');
+                    } else if (this.form.message.trim().length < 20) {
+                        this.vueErrors.push('Mesaj en az 20 karakter olmalıdır.');
+                    }
+
+                    // Cinsiyet
+                    if (!this.form.gender) {
+                        this.vueErrors.push('Cinsiyet seçiniz.');
+                    }
+
+                    // Eğitim
+                    if (!this.form.education) {
+                        this.vueErrors.push('Eğitim düzeyi seçiniz.');
+                    }
+
+                    // Doğum Tarihi
+                    if (!this.form.birthdate) {
+                        this.vueErrors.push('Doğum tarihi giriniz.');
+                    }
+
+                    // İlgi Alanları
+                    if (this.form.interests.length === 0) {
+                        this.vueErrors.push('En az bir ilgi alanı seçiniz.');
+                    }
+
+                    // KVKK
+                    if (!this.form.kvkk) {
+                        this.vueErrors.push('KVKK onay kutusunu işaretlemeniz zorunludur.');
+                    }
+
+                    if (this.vueErrors.length === 0) {
+                        this.vueSuccess = true;
+                    }
+                }
+            }
+        }).mount('#contactApp');
+    </script>
+</body>
+
+</html>
