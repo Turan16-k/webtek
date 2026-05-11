@@ -1,0 +1,346 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projelerim | Alex Developer</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <style>
+        .project-hero {
+            background: linear-gradient(135deg, var(--dark), var(--primary));
+            color: #fff;
+            padding: 120px 0 80px;
+            margin-top: 56px;
+            text-align: center;
+        }
+        .project-card {
+            border: none;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: all 0.4s ease;
+            overflow: hidden;
+            background: #fff;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        .project-img-wrapper {
+            position: relative;
+            overflow: hidden;
+            height: 220px;
+        }
+        .project-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .project-card:hover .project-img-wrapper img {
+            transform: scale(1.05);
+        }
+        .project-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(13, 59, 110, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .project-card:hover .project-overlay {
+            opacity: 1;
+        }
+        .tech-badge {
+            background: rgba(26, 115, 232, 0.1);
+            color: var(--secondary);
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 20px;
+            margin-right: 5px;
+            margin-bottom: 5px;
+            display: inline-block;
+        }
+        .project-body {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .project-footer {
+            padding: 0 25px 25px;
+            background: transparent;
+            border-top: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html"><i class="bi bi-person-badge-fill me-2"></i>Portfolyo</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu"
+                aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navMenu">
+                <ul class="navbar-nav ms-auto align-items-lg-center gap-1">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Hakkımda</a></li>
+                    <li class="nav-item"><a class="nav-link" href="cv.html">Özgeçmiş</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="projeler.html">Projelerim</a></li>
+                    <li class="nav-item"><a class="nav-link" href="sehrim.html">Şehrim</a></li>
+                    <li class="nav-item"><a class="nav-link" href="takimimiz.html">Takımımız</a></li>
+                    <li class="nav-item"><a class="nav-link" href="ilgi-alanlari.html">İlgi Alanlarım</a></li>
+                    <li class="nav-item"><a class="nav-link" href="iletisim.html">İletişim</a></li>
+                    <li class="nav-item"><a class="nav-link btn-login-nav" href="login.html">Giriş Yap</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-palette-fill"></i> Tema
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end shadow border-0" style="background:var(--glass-bg); backdrop-filter:blur(10px);">
+                            <li><a class="dropdown-item" href="#" onclick="setTheme('')" style="color:var(--text)"><i class="bi bi-moon-fill me-2"></i>Koyu</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="setTheme('light')" style="color:var(--text)"><i class="bi bi-sun-fill me-2"></i>Açık</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="setTheme('colorful')" style="color:var(--text)"><i class="bi bi-rainbow me-2"></i>Renkli</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="project-hero">
+        <div class="container">
+            <h1 class="display-4 fw-bold mb-3">Projelerim</h1>
+            <p class="lead opacity-75 mx-auto" style="max-width: 600px;">
+                Geliştirdiğim modern web uygulamaları, açık kaynak katkılarım ve kişisel deneylerim. Kod kalitesi ve kullanıcı deneyimi odaklı çalışmalarım.
+            </p>
+        </div>
+    </section>
+
+    <!-- PROJELER -->
+    <section class="py-5 bg-light">
+        <div class="container py-4">
+            <div class="row gy-4">
+                
+                <!-- Proje 1 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="project-card">
+                        <div class="project-img-wrapper">
+                            <img src="images/ecommerce_ui.png" alt="E-Ticaret Platformu">
+                            <div class="project-overlay">
+                                <a href="#" class="btn btn-light rounded-pill px-4 fw-bold">Canlı Önizleme <i class="bi bi-box-arrow-up-right ms-2"></i></a>
+                            </div>
+                        </div>
+                        <div class="project-body">
+                            <h5 class="fw-bold fs-4 mb-2">Modern E-Ticaret Platformu</h5>
+                            <p class="text-muted mb-4">Gerçek zamanlı stok takibi, gelişmiş sepet yönetimi ve güvenli ödeme entegrasyonuna sahip tam kapsamlı bir e-ticaret çözümü.</p>
+                            <div class="mt-auto">
+                                <span class="tech-badge">React</span>
+                                <span class="tech-badge">Node.js</span>
+                                <span class="tech-badge">MongoDB</span>
+                                <span class="tech-badge">Stripe API</span>
+                            </div>
+                        </div>
+                        <div class="project-footer">
+                            <a href="#" class="text-decoration-none fw-semibold text-primary"><i class="bi bi-github me-1"></i> Kaynak Kodu İncele</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Proje 2 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="project-card">
+                        <div class="project-img-wrapper">
+                            <img src="images/dashboard_ui.png" alt="Veri Analiz Dashboard">
+                            <div class="project-overlay">
+                                <a href="#" class="btn btn-light rounded-pill px-4 fw-bold">Canlı Önizleme <i class="bi bi-box-arrow-up-right ms-2"></i></a>
+                            </div>
+                        </div>
+                        <div class="project-body">
+                            <h5 class="fw-bold fs-4 mb-2">Finansal Veri Analizi</h5>
+                            <p class="text-muted mb-4">Büyük veri setlerini görselleştirmek ve analiz etmek için tasarlanmış interaktif dashboard. Dinamik grafikler ve rapor dışa aktarma özellikleri içerir.</p>
+                            <div class="mt-auto">
+                                <span class="tech-badge">Vue.js</span>
+                                <span class="tech-badge">Python</span>
+                                <span class="tech-badge">Chart.js</span>
+                                <span class="tech-badge">Tailwind CSS</span>
+                            </div>
+                        </div>
+                        <div class="project-footer">
+                            <a href="#" class="text-decoration-none fw-semibold text-primary"><i class="bi bi-github me-1"></i> Kaynak Kodu İncele</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Proje 3 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="project-card">
+                        <div class="project-img-wrapper">
+                            <img src="images/task_ui.png" alt="Task Yönetimi">
+                            <div class="project-overlay">
+                                <a href="#" class="btn btn-light rounded-pill px-4 fw-bold">Canlı Önizleme <i class="bi bi-box-arrow-up-right ms-2"></i></a>
+                            </div>
+                        </div>
+                        <div class="project-body">
+                            <h5 class="fw-bold fs-4 mb-2">Agile Görev Yöneticisi</h5>
+                            <p class="text-muted mb-4">Takımların projelerini yönetmelerini, görev atamalarını yapmalarını ve ilerlemeyi Kanban panosu üzerinde takip etmelerini sağlayan sistem.</p>
+                            <div class="mt-auto">
+                                <span class="tech-badge">Next.js</span>
+                                <span class="tech-badge">TypeScript</span>
+                                <span class="tech-badge">Prisma</span>
+                                <span class="tech-badge">PostgreSQL</span>
+                            </div>
+                        </div>
+                        <div class="project-footer">
+                            <a href="#" class="text-decoration-none fw-semibold text-primary"><i class="bi bi-github me-1"></i> Kaynak Kodu İncele</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Proje 4 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="project-card">
+                        <div class="project-img-wrapper">
+                            <img src="images/social_ui.png" alt="Sosyal Ağ Uygulaması">
+                            <div class="project-overlay">
+                                <a href="#" class="btn btn-light rounded-pill px-4 fw-bold">Canlı Önizleme <i class="bi bi-box-arrow-up-right ms-2"></i></a>
+                            </div>
+                        </div>
+                        <div class="project-body">
+                            <h5 class="fw-bold fs-4 mb-2">Geliştirici Sosyal Ağı</h5>
+                            <p class="text-muted mb-4">Yazılımcıların kod parçacıkları paylaşıp tartışabildiği, mikro servis mimarisi ile tasarlanmış niş bir topluluk platformu.</p>
+                            <div class="mt-auto">
+                                <span class="tech-badge">Angular</span>
+                                <span class="tech-badge">Spring Boot</span>
+                                <span class="tech-badge">Docker</span>
+                                <span class="tech-badge">Redis</span>
+                            </div>
+                        </div>
+                        <div class="project-footer">
+                            <a href="#" class="text-decoration-none fw-semibold text-primary"><i class="bi bi-github me-1"></i> Kaynak Kodu İncele</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Proje 5 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="project-card">
+                        <div class="project-img-wrapper">
+                            <img src="images/mobile_ui.png" alt="Mobil Uyumlu Tasarım">
+                            <div class="project-overlay">
+                                <a href="#" class="btn btn-light rounded-pill px-4 fw-bold">Canlı Önizleme <i class="bi bi-box-arrow-up-right ms-2"></i></a>
+                            </div>
+                        </div>
+                        <div class="project-body">
+                            <h5 class="fw-bold fs-4 mb-2">Mobil Uygulama Arayüzü</h5>
+                            <p class="text-muted mb-4">React Native kullanılarak geliştirilmiş, akıcı animasyonlara ve üst düzey kullanıcı deneyimine sahip e-öğrenme platformu arayüzü.</p>
+                            <div class="mt-auto">
+                                <span class="tech-badge">React Native</span>
+                                <span class="tech-badge">Redux</span>
+                                <span class="tech-badge">Firebase</span>
+                            </div>
+                        </div>
+                        <div class="project-footer">
+                            <a href="#" class="text-decoration-none fw-semibold text-primary"><i class="bi bi-github me-1"></i> Kaynak Kodu İncele</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Proje 6 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="project-card">
+                        <div class="project-img-wrapper">
+                            <img src="images/coding_desk.png" alt="API Tasarımı">
+                            <div class="project-overlay">
+                                <a href="#" class="btn btn-light rounded-pill px-4 fw-bold">Canlı Önizleme <i class="bi bi-box-arrow-up-right ms-2"></i></a>
+                            </div>
+                        </div>
+                        <div class="project-body">
+                            <h5 class="fw-bold fs-4 mb-2">RESTful API Servisi</h5>
+                            <p class="text-muted mb-4">Üçüncü parti entegrasyonlar için tasarlanmış, yüksek performanslı, JWT tabanlı kimlik doğrulamasına sahip güvenlik odaklı API.</p>
+                            <div class="mt-auto">
+                                <span class="tech-badge">Express.js</span>
+                                <span class="tech-badge">GraphQL</span>
+                                <span class="tech-badge">Jest</span>
+                                <span class="tech-badge">Swagger</span>
+                            </div>
+                        </div>
+                        <div class="project-footer">
+                            <a href="#" class="text-decoration-none fw-semibold text-primary"><i class="bi bi-github me-1"></i> Kaynak Kodu İncele</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- GITHUB BANNER -->
+    <section class="py-5">
+        <div class="container text-center py-5">
+            <h2 class="mb-4">Daha Fazla Proje Görmek İster Misiniz?</h2>
+            <p class="lead text-muted mb-4">Açık kaynak projelerim ve diğer tüm repolarım GitHub profilimde incelenebilir.</p>
+            <a href="#" class="btn btn-dark btn-lg px-5 rounded-pill shadow-sm">
+                <i class="bi bi-github me-2"></i> GitHub Profilime Git
+            </a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="row gy-4">
+                <div class="col-md-4">
+                    <h5><i class="bi bi-person-badge-fill me-2"></i>Alex Developer</h5>
+                    <p>Teknoloji Üniversitesi<br>Bilgisayar Mühendisliği<br>2025-2026 Bahar Dönemi</p>
+                    <div class="social-links mt-3">
+                        <a href="#" target="_blank"><i class="bi bi-github"></i></a>
+                        <a href="#" target="_blank"><i class="bi bi-linkedin"></i></a>
+                        <a href="mailto:alex.dev@ornek.com"><i class="bi bi-envelope"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <h5>Hızlı Erişim</h5>
+                    <a href="index.html"><i class="bi bi-chevron-right me-1"></i>Hakkımda</a>
+                    <a href="cv.html"><i class="bi bi-chevron-right me-1"></i>Özgeçmiş</a>
+                    <a href="projeler.html"><i class="bi bi-chevron-right me-1"></i>Projelerim</a>
+                    <a href="sehrim.html"><i class="bi bi-chevron-right me-1"></i>Şehrim</a>
+                    <a href="takimimiz.html"><i class="bi bi-chevron-right me-1"></i>Takımımız</a>
+                    <a href="ilgi-alanlari.html"><i class="bi bi-chevron-right me-1"></i>İlgi Alanlarım</a>
+                    <a href="iletisim.html"><i class="bi bi-chevron-right me-1"></i>İletişim</a>
+                </div>
+                <div class="col-md-4">
+                    <h5>İletişim Bilgileri</h5>
+                    <p><i class="bi bi-envelope me-2 text-accent"></i>alex.dev@ornek.com</p>
+                    <p><i class="bi bi-geo-alt me-2 text-accent"></i>İstanbul, Türkiye</p>
+                    <p><i class="bi bi-building me-2 text-accent"></i>Teknoloji Üniversitesi</p>
+                </div>
+            </div>
+            <hr>
+            <p class="copyright">&copy; 2026 Alex Developer &middot; Modern Web Geliştirme Portfolyosu</p>
+        </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <button id="backToTop" class="back-to-top" aria-label="Yukarı çık">
+        <i class="bi bi-arrow-up"></i>
+    </button>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
+
+

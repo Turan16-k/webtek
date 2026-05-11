@@ -1,0 +1,239 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Takımımız</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html"><i class="bi bi-person-badge-fill me-2"></i>Portfolyo</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navMenu">
+                <ul class="navbar-nav ms-auto align-items-lg-center gap-1">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Hakkımda</a></li>
+                    <li class="nav-item"><a class="nav-link" href="cv.html">Özgeçmiş</a></li>
+                    <li class="nav-item"><a class="nav-link" href="sehrim.html">Şehrim</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="takimimiz.html">Takımımız</a></li>
+                    <li class="nav-item"><a class="nav-link" href="ilgi-alanlari.html">İlgi Alanlarım</a></li>
+                    <li class="nav-item"><a class="nav-link" href="iletisim.html">İletişim</a></li>
+                    <li class="nav-item"><a class="nav-link btn-login-nav" href="login.html">Giriş Yap</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-palette-fill"></i> Tema
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end shadow border-0" style="background:var(--glass-bg); backdrop-filter:blur(10px);">
+                            <li><a class="dropdown-item" href="#" onclick="setTheme('')" style="color:var(--text)"><i class="bi bi-moon-fill me-2"></i>Koyu</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="setTheme('light')" style="color:var(--text)"><i class="bi bi-sun-fill me-2"></i>Açık</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="setTheme('colorful')" style="color:var(--text)"><i class="bi bi-rainbow me-2"></i>Renkli</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="team-hero">
+        <div class="container">
+            <img src="images/team_logo.png" alt="Takım Logosu" class="team-logo">
+            <h1 class="fw-bold display-5 text-white">Galatasaray</h1>
+            <p class="lead mt-2" style="color:rgba(255,255,255,0.9);">
+                Futbol &middot; İstanbul &middot; Est. 1905
+            </p>
+            <div class="d-flex justify-content-center gap-3 flex-wrap mt-4">
+                <span class="badge bg-warning text-dark fs-6 px-4 py-2">
+                    <i class="bi bi-trophy-fill me-2"></i>24 Kez Şampiyon
+                </span>
+                <span class="badge bg-light text-dark fs-6 px-4 py-2">
+                    <i class="bi bi-star-fill me-2"></i>UEFA Kupası Şampiyonu
+                </span>
+            </div>
+        </div>
+    </section>
+
+    <!-- TAKIM HAKKINDA -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row gy-4 align-items-center">
+                <div class="col-lg-7">
+                    <h2 class="section-title">Takımım Hakkında</h2>
+                    <p>
+                        Takımınızı neden desteklediğinizi anlatan kişisel bir paragraf buraya gelecek.
+                        Aile bağlantısı, çocukluktan beri tutma, ya da yaşadığınız şehrin takımı olması
+                        gibi nedenleri paylaşabilirsiniz.
+                    </p>
+                    <p>
+                        Takımın tarihi veya unutulmaz anlarından bahsedebilirsiniz. Önemli şampiyonluklar,
+                        efsane maçlar, ya da kişisel olarak izlediğiniz anlar.
+                    </p>
+
+                    <div class="row g-3 mt-3">
+                        <div class="col-6">
+                            <div class="card p-3 text-center bg-light border-0">
+                                <i class="bi bi-calendar3 fs-3 text-primary"></i>
+                                <div class="fw-bold mt-2">Kuruluş</div>
+                                <div class="text-muted">1905</div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="card p-3 text-center bg-light border-0">
+                                <i class="bi bi-building fs-3 text-primary"></i>
+                                <div class="fw-bold mt-2">Saha / Salon</div>
+                                <div class="text-muted">RAMS Park</div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="card p-3 text-center bg-light border-0">
+                                <i class="bi bi-people fs-3 text-primary"></i>
+                                <div class="fw-bold mt-2">Kapasite</div>
+                                <div class="text-muted">🏆 Kişi</div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="card p-3 text-center bg-light border-0">
+                                <i class="bi bi-palette fs-3 text-primary"></i>
+                                <div class="fw-bold mt-2">Renkler</div>
+                                <div class="text-muted">Sarı – Kırmızı</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-5">
+                    <img src="images/stadium_atmosphere.png" alt="Takım Görseli"
+                        class="img-fluid rounded-4 shadow">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BAŞARILAR -->
+    <section class="py-5" style="background:#1a1a2e; color:#fff;">
+        <div class="container">
+            <h2 class="section-title text-center" style="color:var(--accent);">Önemli Başarılar</h2>
+            <div class="row gy-4 text-center">
+                <div class="col-6 col-md-3">
+                    <div style="background:linear-gradient(135deg,#1a237e,#0d47a1);border-radius:14px;padding:25px 15px;">
+                        <div style="font-size:2.4rem;font-weight:800;color:var(--accent);">🏆</div>
+                        <div>UEFA Kupası</div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div style="background:linear-gradient(135deg,#1a237e,#0d47a1);border-radius:14px;padding:25px 15px;">
+                        <div style="font-size:2.4rem;font-weight:800;color:var(--accent);">🏆</div>
+                        <div>Süper Kupa</div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div style="background:linear-gradient(135deg,#1a237e,#0d47a1);border-radius:14px;padding:25px 15px;">
+                        <div style="font-size:2.4rem;font-weight:800;color:var(--accent);">🏆</div>
+                        <div>24. Şampiyonluk</div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div style="background:linear-gradient(135deg,#1a237e,#0d47a1);border-radius:14px;padding:25px 15px;">
+                        <div style="font-size:2.4rem;font-weight:800;color:var(--accent);">🏆</div>
+                        <div>18 Türkiye Kupası</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EFSANE OYUNCULAR / İSİMLER -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title text-center">Öne Çıkan İsimler</h2>
+            <div class="row gy-4">
+
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="card player-card text-center p-3">
+                        <img src="images/player_1.png" alt="Oyuncu 1"
+                            class="rounded-circle mx-auto mb-3"
+                            style="width:90px;height:90px;object-fit:cover;border:3px solid var(--primary);">
+                        <h6 class="fw-bold mb-1">Metin Oktay</h6>
+                        <span class="badge bg-primary px-3 py-1">Efsane</span>
+                        <p class="text-muted small mt-2 mb-0">Galatasaray efsanesi.</p>
+                    </div>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="card player-card text-center p-3">
+                        <img src="images/player_2.png" alt="Oyuncu 2"
+                            class="rounded-circle mx-auto mb-3"
+                            style="width:90px;height:90px;object-fit:cover;border:3px solid var(--primary);">
+                        <h6 class="fw-bold mb-1">Gheorghe Hagi</h6>
+                        <span class="badge bg-primary px-3 py-1">Efsane</span>
+                        <p class="text-muted small mt-2 mb-0">Galatasaray efsanesi.</p>
+                    </div>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="card player-card text-center p-3">
+                        <img src="images/player_3.png" alt="Oyuncu 3"
+                            class="rounded-circle mx-auto mb-3"
+                            style="width:90px;height:90px;object-fit:cover;border:3px solid var(--primary);">
+                        <h6 class="fw-bold mb-1">Fernando Muslera</h6>
+                        <span class="badge bg-primary px-3 py-1">Efsane</span>
+                        <p class="text-muted small mt-2 mb-0">Galatasaray efsanesi.</p>
+                    </div>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="card player-card text-center p-3">
+                        <img src="images/player_4.png" alt="Oyuncu 4"
+                            class="rounded-circle mx-auto mb-3"
+                            style="width:90px;height:90px;object-fit:cover;border:3px solid var(--primary);">
+                        <h6 class="fw-bold mb-1">Mauro Icardi</h6>
+                        <span class="badge bg-primary px-3 py-1">Efsane</span>
+                        <p class="text-muted small mt-2 mb-0">Galatasaray efsanesi.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="row gy-4">
+                <div class="col-md-4">
+                    <h5><i class="bi bi-person-badge-fill me-2"></i>Portfolyo</h5>
+                    <p>Sakarya Üniversitesi<br>Bilgisayar Mühendisliği Öğrencisi</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Sayfalar</h5>
+                    <a href="index.html">Hakkımda</a>
+                    <a href="cv.html">Özgeçmiş</a>
+                    <a href="sehrim.html">Şehrim</a>
+                    <a href="iletisim.html">İletişim</a>
+                </div>
+                <div class="col-md-4">
+                    <h5>İletişim</h5>
+                    <p><i class="bi bi-envelope me-2"></i>abdurrahmanturanozcan9191@gmail.com</p>
+                    <p><i class="bi bi-geo-alt me-2"></i>İstanbul, Türkiye</p>
+                </div>
+            </div>
+            <hr>
+            <p class="copyright">&copy; 2026 [Abdurrahman Turan Özcan] &middot; Web Teknolojileri Dersi Projesi</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
+
+
