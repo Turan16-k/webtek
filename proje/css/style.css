@@ -1,0 +1,596 @@
+/* ============================================================
+   style.css – Projenin Ana Stil Dosyası
+   Öğrenci: Abdurrahman Turan Özcan | B251210043
+   Ders: Web Teknolojileri – 2025/2026 Bahar Dönemi
+
+   Tüm stil kuralları bu tek dosyada toplanıyor.
+   Derste öğrendik ki stiller ayrı .css dosyasında tutulmalı,
+   HTML içine yazılmamalı — hem okunabilirlik hem de bakım kolaylığı için.
+   Bootstrap 5 zaten bir çok şeyi hazır veriyor ama kendi özelleştirmelerimiz
+   burada tanımlanıyor.
+   ============================================================ */
+
+
+/* ==============================
+   CSS DEĞİŞKENLERİ (:root)
+
+   CSS'te değişken tanımlamak için :root seçicisi kullanılıyor.
+   :root → tüm HTML belgesinin en üst elemanı anlamına gelir.
+   -- ile başlayan isimler CSS custom property (özel özellik) oluyor.
+   Kullanırken var(--değişken-adı) yazıyoruz.
+   Avantajı: rengi bir yerde değiştirince her yerde güncelleniyor.
+   ============================== */
+:root {
+    --primary:     #0d3b6e;   /* koyu lacivert — ana renk */
+    --secondary:   #1a73e8;   /* açık mavi — ikincil renk */
+    --accent:      #f4a61a;   /* altın sarısı — vurgu rengi */
+    --light:       #f8f9fa;   /* açık gri arka plan */
+    --dark:        #1c1c2e;   /* çok koyu — footer arka planı için */
+    --success:     #198754;   /* yeşil — başarı mesajları için */
+    --danger:      #dc3545;   /* kırmızı — hata mesajları için */
+    --card-shadow: 0 4px 20px rgba(0,0,0,0.10);  /* kart gölgesi: x y blur renk(opaklık) */
+}
+
+/* Tüm elementlerin box-sizing'ini border-box yapıyorum.
+   border-box: padding ve border, element genişliğine dahil edilir.
+   content-box (varsayılan): padding eklenince element büyür — hesap karışır.
+   *::before ve *::after → pseudo-elementlere de uygulanıyor. */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* Tüm sayfa için genel font ve renk ayarları */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* font-family'de virgülle sıralama var: tarayıcı ilkini bulamazsa sıradakini dener */
+    color: #333;         /* koyu gri — siyahtan daha yumuşak görünüyor */
+    background: #fff;
+    line-height: 1.6;    /* satır yüksekliği — okunabilirlik için önemli */
+}
+
+
+/* ==============================
+   NAVBAR (Üst Gezinti Çubuğu)
+
+   fixed-top sınıfı Bootstrap'tan geliyor ve position:fixed yapıyor.
+   Bu sayede sayfa kaydırıldığında navbar hep üstte kalıyor.
+   !important → Bootstrap'ın kendi kurallarını ezmek için zorunlu oldu.
+   ============================== */
+.navbar {
+    background: var(--primary) !important;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);  /* hafif gölge */
+}
+
+.navbar-brand {
+    font-weight: 700;      /* bold yazı */
+    font-size: 1.3rem;
+    color: #fff !important;
+}
+
+/* Navbar link stilleri — rgba ile opaklık ayarlıyorum */
+.navbar-nav .nav-link {
+    color: rgba(255,255,255,0.85) !important;  /* %85 beyaz */
+    font-weight: 500;
+    transition: color 0.25s;   /* renk değişimi 0.25 saniyede gerçekleşiyor — animasyon */
+    padding: 0.5rem 1rem;
+}
+
+/* hover ve active linklerin rengi accent (altın sarısı) oluyor */
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link.active {
+    color: var(--accent) !important;
+}
+
+/* "Giriş Yap" butonu diğer linklerden farklı görünüyor — kenarlıklı tasarım */
+.btn-login-nav {
+    border: 1.5px solid rgba(255,255,255,0.6);
+    border-radius: 20px;        /* oval görünüm için */
+    color: #fff !important;
+    padding: 0.3rem 1.2rem !important;
+    transition: all 0.25s;      /* tüm özelliklerin animasyonu */
+}
+
+/* Üzerine gelince arka plan rengi değişiyor */
+.btn-login-nav:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff !important;
+}
+
+
+/* ==============================
+   BÖLÜM BAŞLIKLARI (.section-title)
+
+   ::after pseudo-element ile altına dekoratif bir çizgi ekliyorum.
+   position: relative → parent, position: absolute → child ilişkisi.
+   Bunu öğrenmek biraz zaman aldı ama CSS'in güçlü özelliklerinden biri.
+   ============================== */
+.section-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary);
+    position: relative;        /* ::after için referans noktası */
+    padding-bottom: 14px;      /* altta boşluk — çizgiye yer açmak için */
+    margin-bottom: 40px;
+}
+
+/* Başlığın hemen altına altın sarısı yatay çizgi ekliyorum */
+.section-title::after {
+    content: '';               /* içerik yok ama display için zorunlu */
+    position: absolute;        /* parent'ın (section-title) içinde konumlanıyor */
+    bottom: 0;
+    left: 0;
+    width: 55px;
+    height: 4px;
+    background: var(--accent);
+    border-radius: 2px;
+}
+
+/* text-center ile kullanıldığında çizgiyi de ortalıyorum */
+.section-title.text-center::after {
+    left: 50%;
+    transform: translateX(-50%);   /* kendi genişliğinin yarısı kadar sola kaydır */
+}
+
+
+/* ==============================
+   HERO BÖLÜMÜ (Ana Sayfa Üst Kısmı)
+
+   linear-gradient ile iki renk arasında geçiş yapıyorum.
+   135deg → 135 derece açıyla köşeden köşeye geçiş.
+   margin-top: 56px → fixed navbar'ın arkasına girmemesi için.
+   ============================== */
+.hero-section {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    color: #fff;
+    padding: 110px 0 80px;
+    margin-top: 56px;  /* navbar yüksekliği kadar üstten boşluk */
+}
+
+.hero-section h1 { font-size: 2.8rem; font-weight: 700; }
+.hero-section .lead { font-size: 1.2rem; opacity: 0.9; }
+
+/* Profil fotoğrafı — yuvarlak, kenarlıklı */
+.profile-photo {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;        /* tam yuvarlak yapmak için */
+    object-fit: cover;         /* resim alanı dolduruyor, orantı bozulmuyor */
+    border: 5px solid var(--accent);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+}
+
+
+/* ==============================
+   KARTLAR (.card)
+
+   Bootstrap'ın .card sınıfı var ama üzerine eklemeler yapıyorum.
+   transition ile hover animasyonu ekliyorum.
+   overflow: hidden → köşe yuvarlama için taşan içeriği kesiyor.
+   ============================== */
+.card {
+    border: none;
+    border-radius: 14px;
+    box-shadow: var(--card-shadow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+}
+
+/* Üzerine gelince kart hafifçe yukarı kalkıyor — güzel bir etki */
+.card:hover {
+    transform: translateY(-5px);           /* 5px yukarı kayıyor */
+    box-shadow: 0 12px 35px rgba(0,0,0,0.15);  /* gölge daha belirgin */
+}
+
+
+/* ==============================
+   ÖZGEÇMİŞ SAYFASI – ZAMAN ÇİZELGESİ (Timeline)
+
+   Sol kenarda dikey bir çizgi ve her madde için nokta koyuyorum.
+   ::before ile iki ayrı dekoratif element ekledim:
+     .timeline::before      → dikey çizgi
+     .timeline-item::before → her maddenin noktası
+   ============================== */
+.timeline {
+    position: relative;
+    padding-left: 35px;   /* noktalar için sol boşluk */
+}
+
+/* Dikey gradient çizgi */
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 12px;
+    top: 8px;
+    bottom: 8px;
+    width: 3px;
+    background: linear-gradient(to bottom, var(--secondary), var(--accent));
+    border-radius: 2px;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 35px;
+}
+
+/* Her timeline maddesinin başındaki yuvarlak nokta */
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -27px;           /* timeline'ın çizgisi üzerine konumlandırma */
+    top: 6px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;    /* yuvarlak */
+    background: var(--primary);
+    border: 3px solid var(--accent);
+}
+
+.timeline-item:last-child { margin-bottom: 0; }
+
+
+/* --- BECERİ ÇUBUKLARI ---
+   İki div üst üste: dış div arka plan, iç div doldurulan kısım.
+   İç div'in genişliği HTML'de style ile yüzde olarak veriliyor. */
+.skill-label {
+    display: flex;
+    justify-content: space-between;   /* isim solda, yüzde sağda */
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.skill-bar {
+    height: 10px;
+    border-radius: 5px;
+    background: #e9ecef;    /* gri arka plan */
+    margin-bottom: 18px;
+    overflow: hidden;        /* dolgu çubuğunun taşmasını engeller */
+}
+
+/* Gerçek dolgu kısmı — gradient renkli */
+.skill-fill {
+    height: 100%;
+    border-radius: 5px;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    transition: width 1.2s ease;   /* sayfa açılışında animasyonla dolacak şekilde */
+}
+
+
+/* ==============================
+   ŞEHRİM SAYFASI – CAROUSEL (Resim Slider)
+
+   Bootstrap Carousel zaten JavaScript ile çalışıyor,
+   burada sadece görsel stilleri ayarlıyorum.
+   object-fit: cover → resimlerin boyutu farklı olsa da eşit yükseklikte görünüyor.
+   filter: brightness → resmi biraz kararttım ki altyazı daha okunaklı olsun.
+   ============================== */
+.carousel-item img {
+    height: 480px;
+    object-fit: cover;
+    filter: brightness(0.85);   /* %85 parlaklık → biraz karartma */
+}
+
+/* Resim üzerindeki başlık kutusu */
+.carousel-caption {
+    background: rgba(0,0,0,0.55);   /* yarı saydam siyah arka plan */
+    border-radius: 12px;
+    padding: 14px 20px;
+    bottom: 30px;
+}
+
+.carousel-caption h5 { font-size: 1.4rem; font-weight: 700; }
+
+/* Slider'ın ileri/geri ok ikonları için arka plan */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: var(--primary);
+    border-radius: 50%;
+    padding: 20px;
+}
+
+/* Şehir istatistik kutuları */
+.city-stat {
+    text-align: center;
+    padding: 30px 20px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: #fff;
+}
+
+.city-stat .stat-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--accent);
+}
+
+
+/* ==============================
+   TAKIMIMIZ SAYFASI
+
+   .team-hero hero bölümünün bu sayfaya özel versiyonu.
+   (Galatasaray renkleri takimimiz.html içinde inline yazıldı)
+   ============================== */
+.team-hero {
+    background: linear-gradient(135deg, #1a237e, #0d47a1);
+    color: #fff;
+    padding: 100px 0 70px;
+    margin-top: 56px;
+    text-align: center;
+}
+
+.team-logo {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid var(--accent);
+    margin-bottom: 20px;
+}
+
+/* Oyuncu kartları — hover'da yukarı kalkıyor */
+.player-card {
+    transition: transform 0.3s;
+}
+
+.player-card:hover { transform: translateY(-6px); }
+
+
+/* ==============================
+   İLGİ ALANLARI SAYFASI (API SAYFASI)
+
+   TVMaze API'sinden gelen dizi kartları için stiller.
+   .show-card → dizi resim kartı
+   .no-image  → API'den resim gelmediğinde gösterilen yer tutucu
+   ============================== */
+.api-hero {
+    background: linear-gradient(135deg, #1b0033, #4a0080);
+    color: #fff;
+    padding: 100px 0 70px;
+    margin-top: 56px;
+    text-align: center;
+}
+
+/* API'den gelen dizi kapak resimleri */
+.show-card img {
+    height: 280px;
+    object-fit: cover;
+    border-radius: 14px 14px 0 0;   /* sadece üst köşeler yuvarlak */
+    width: 100%;
+}
+
+/* Resim yoksa gösterilen gradient kutu */
+.show-card .no-image {
+    height: 280px;
+    background: linear-gradient(135deg, #2c2c54, #474787);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+    border-radius: 14px 14px 0 0;
+    color: rgba(255,255,255,0.3);
+}
+
+/* Dizi puanı rozetleri */
+.rating-badge {
+    background: var(--accent);
+    color: #fff;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+}
+
+/* Tür etiketleri (Dram, Komedi vs.) */
+.genre-tag {
+    background: #e3f2fd;
+    color: #1565c0;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    display: inline-block;
+    margin: 2px;
+}
+
+/* Loading spinner — başlangıçta gizli, JS ile gösteriliyor */
+#loadingSpinner { display: none; }
+
+
+/* ==============================
+   İLETİŞİM SAYFASI
+
+   Form elemanlarına odaklanıldığında (click) çerçeve rengi değişiyor.
+   :focus → elemana tıklandığında / tab ile gelindiğinde uygulanan stil.
+   box-shadow ile hafif mavi parıltı ekliyorum.
+   ============================== */
+.contact-hero {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: #fff;
+    padding: 100px 0 70px;
+    margin-top: 56px;
+    text-align: center;
+}
+
+/* Tüm form alanları için odak (focus) stili */
+.form-control:focus,
+.form-select:focus,
+.form-check-input:focus {
+    border-color: var(--secondary);
+    box-shadow: 0 0 0 0.2rem rgba(26,115,232,0.2);
+}
+
+/* Doğrulama butonlarının bulunduğu gri kutu */
+.validation-section {
+    background: #f8f9fa;
+    border-radius: 14px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+
+/* ==============================
+   GİRİŞ SAYFASI (Login)
+
+   Tam ekran ortalanmış kart tasarımı.
+   min-height: 100vh → görüntü alanının tüm yüksekliği
+   vh = viewport height (ekran yüksekliği birimi)
+   display: flex + align-items + justify-content ile hem dikey hem yatay ortalama.
+   ============================== */
+.login-page {
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    display: flex;
+    align-items: center;       /* dikey ortalama */
+    justify-content: center;   /* yatay ortalama */
+    padding: 20px;
+}
+
+/* Beyaz giriş kartı */
+.login-card {
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    padding: 45px 40px;
+    width: 100%;
+    max-width: 440px;   /* çok geniş ekranlarda sınır */
+}
+
+/* Üstteki ikonlu alan */
+.login-logo {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* İkon çemberi */
+.login-logo .logo-icon {
+    width: 80px;
+    height: 80px;
+    background: var(--primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 15px;    /* 0 auto → yatay ortalama */
+    font-size: 2rem;
+    color: #fff;
+}
+
+
+/* ==============================
+   PHP SONUÇ SAYFASI TABLOSU
+
+   contact.php ve success.php'deki tablo için stil.
+   th (başlık hücresi) koyu, td (veri hücresi) açık gri.
+   word-break: break-all → uzun URL veya metin taşmasını engeller.
+   ============================== */
+.result-table th {
+    background: var(--primary);
+    color: #fff;
+    white-space: nowrap;    /* başlık metni tek satırda kalsın */
+    width: 200px;
+}
+
+.result-table td {
+    background: #f8f9fa;
+    word-break: break-all;  /* çok uzun kelimeler varsa satır atlasın */
+}
+
+
+/* ==============================
+   ALT BİLGİ (Footer)
+
+   Koyu arka plan, açık gri metin.
+   hover'da link rengi accent (altın sarısı) oluyor.
+   ============================== */
+footer {
+    background: var(--dark);
+    color: #aaa;
+    padding: 50px 0 20px;
+}
+
+footer h5 { color: #fff; font-weight: 600; margin-bottom: 18px; }
+
+footer a {
+    color: #aaa;
+    text-decoration: none;
+    transition: color 0.25s;
+    display: block;          /* her link kendi satırında */
+    margin-bottom: 8px;
+}
+
+footer a:hover { color: var(--accent); }
+
+footer hr { border-color: #444; margin: 30px 0 20px; }
+
+footer .copyright { text-align: center; font-size: 0.9rem; }
+
+/* Sosyal medya ikonları — küçük daire şeklinde */
+footer .social-links a {
+    display: inline-block;
+    width: 36px;
+    height: 36px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 50%;
+    text-align: center;
+    line-height: 36px;      /* metni dikeyde ortalar */
+    margin-right: 8px;
+    color: #fff;
+    transition: background 0.25s;
+}
+
+footer .social-links a:hover { background: var(--accent); }
+
+
+/* ==============================
+   YARDIMCI SINIFLAR (Utilities)
+
+   Sık kullandığım renk/buton kombinasyonları için kısayol sınıflar.
+   Bunları HTML'de class olarak ekleyince ilgili stil uygulanıyor.
+   ============================== */
+.bg-primary-gradient {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+}
+
+.text-accent { color: var(--accent); }
+
+.btn-accent {
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    font-weight: 600;
+}
+
+.btn-accent:hover { background: #d4900f; color: #fff; }
+
+
+/* ==============================
+   RESPONSIVE TASARIM – MEDYA SORGULARI
+
+   @media ile ekran genişliğine göre farklı stiller uyguluyorum.
+   max-width: 992px → 992px ve daha küçük ekranlar (tablet)
+   max-width: 768px → 768px ve daha küçük ekranlar (küçük tablet/telefon)
+   max-width: 576px → 576px ve daha küçük ekranlar (telefon)
+
+   Bootstrap breakpoint'leri de bunları kullanıyor, biz sadece
+   özelleştirdiğimiz elemanlara ek kurallar yazıyoruz.
+   ============================== */
+
+/* Tablet boyutu */
+@media (max-width: 992px) {
+    .hero-section h1 { font-size: 2.2rem; }
+    .carousel-item img { height: 350px; }
+}
+
+/* Küçük tablet / büyük telefon */
+@media (max-width: 768px) {
+    .hero-section { padding: 80px 0 60px; }
+    .hero-section h1 { font-size: 1.9rem; }
+    .carousel-item img { height: 260px; }
+    .section-title { font-size: 1.6rem; }
+    .profile-photo { width: 150px; height: 150px; }
+}
+
+/* Küçük telefon */
+@media (max-width: 576px) {
+    .hero-section h1 { font-size: 1.6rem; }
+    .carousel-item img { height: 200px; }
+    .login-card { padding: 30px 20px; }  /* küçük telefonda daha az iç boşluk */
+}

@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Şehrim: Tokat – Abdurrahman Turan Özcan</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- ===================== NAVBAR ===================== -->
+<nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="index.html"><i class="bi bi-person-badge-fill me-2"></i>A.T. Özcan</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navMenu">
+            <ul class="navbar-nav ms-auto align-items-lg-center gap-1">
+                <li class="nav-item"><a class="nav-link" href="index.html">Hakkımda</a></li>
+                <li class="nav-item"><a class="nav-link" href="cv.html">Özgeçmiş</a></li>
+                <li class="nav-item"><a class="nav-link active" href="sehrim.html">Şehrim</a></li>
+                <li class="nav-item"><a class="nav-link" href="takimimiz.html">Takımımız</a></li>
+                <li class="nav-item"><a class="nav-link" href="ilgi-alanlari.html">İlgi Alanlarım</a></li>
+                <li class="nav-item"><a class="nav-link" href="iletisim.html">İletişim</a></li>
+                <li class="nav-item"><a class="nav-link btn-login-nav" href="login.html">Giriş Yap</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Navbar fixed olduğu için içerik arkasına girmemesi için boşluk bırakıyorum -->
+<div style="margin-top:56px;"></div>
+
+<!-- ===================== HERO =====================
+     hero-section sınıfı style.css'te tanımlı — mavi gradient arka plan.
+     text-center → tüm içerik ortada. -->
+<section class="hero-section text-center">
+    <div class="container">
+        <p style="color:var(--accent); font-weight:600; letter-spacing:2px;">MEMLEKETİM</p>
+        <h1 class="fw-bold display-4">Tokat</h1>
+        <p class="lead mt-3 opacity-85">18 yıl orada yaşadım. Tokat deyip geçmeyin.</p>
+    </div>
+</section>
+
+<!-- ===================== SLIDER (CAROUSEL) =====================
+     Bootstrap Carousel bileşeni — JavaScript gerektiriyor.
+     bootstrap.bundle.min.js yüklendiğinde otomatik çalışıyor.
+
+     data-bs-ride="carousel" → sayfa açılınca otomatik kaydırmaya başlar.
+     data-bs-interval="4000" → her 4 saniyede bir geçiş yapar (ms cinsinden).
+     carousel-fade → geçişlerde kayma yerine solma efekti kullanıyorum.
+
+     Ödev gereksinimi: en az 4 resim — burada 5 tane var.
+     Resimler Wikimedia Commons'tan doğrudan link (upload.wikimedia.org).
+     ============================================================ -->
+<section class="py-0">
+    <div id="tokatCarousel" class="carousel slide carousel-fade"
+         data-bs-ride="carousel" data-bs-interval="4000">
+
+        <!-- Nokta göstergeleri — hangi slayttayız gösteren küçük çizgiler/noktalar.
+             data-bs-slide-to ile tıklanınca hangi slayda gidileceğini belirtiyorum.
+             İlk buton active sınıfıyla işaretli (başlangıç slaydı). -->
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#tokatCarousel" data-bs-slide-to="0" class="active" aria-label="Ballıca Mağarası"></button>
+            <button type="button" data-bs-target="#tokatCarousel" data-bs-slide-to="1" aria-label="Tokat Kalesi"></button>
+            <button type="button" data-bs-target="#tokatCarousel" data-bs-slide-to="2" aria-label="Komana"></button>
+            <button type="button" data-bs-target="#tokatCarousel" data-bs-slide-to="3" aria-label="Niksar"></button>
+            <button type="button" data-bs-target="#tokatCarousel" data-bs-slide-to="4" aria-label="Almus Gölü"></button>
+        </div>
+
+        <!-- Slayt içerikleri — carousel-inner zorunlu kapsayıcı.
+             İlk slayta active sınıfı eklemek şart, yoksa hiçbir şey görünmüyor. -->
+        <div class="carousel-inner">
+
+            <!-- SLAYT 1: Ballıca Mağarası -->
+            <!-- d-block w-100 → resim tam genişlikte blok element.
+                 Resim doğrudan Wikimedia upload sunucusundan yükleniyor.
+                 Bu URL daha kararlı — Special:FilePath yönlendirme yaparken bu doğrudan. -->
+            <div class="carousel-item active">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/7/77/Ballica-magarasi_109064.jpg"
+                     class="d-block w-100"
+                     alt="Ballıca Mağarası">
+                <!-- carousel-caption → resmin üstünde yarı saydam başlık kutusu.
+                     Stili style.css'te tanımlı. -->
+                <div class="carousel-caption">
+                    <h5><i class="bi bi-gem me-2"></i>Ballıca Mağarası</h5>
+                    <p>Türkiye'nin en büyük ikinci mağarası; sarkıt ve dikitleriyle büyüleyici bir doğa harikası.</p>
+                </div>
+            </div>
+
+            <!-- SLAYT 2: Tokat Kalesi -->
+            <div class="carousel-item">
+                <!-- Bu URL upload.wikimedia.org'dan doğrudan — boyutlandırılmış thumb versiyonu -->
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Tokat_Kale.jpg/1400px-Tokat_Kale.jpg"
+                     class="d-block w-100"
+                     alt="Tokat Kalesi">
+                <div class="carousel-caption">
+                    <h5><i class="bi bi-shield-fill me-2"></i>Tokat Kalesi</h5>
+                    <p>Şehre hâkim, asırlık surlarıyla Tokat'ın simgesi olan tarihi kale.</p>
+                </div>
+            </div>
+
+            <!-- SLAYT 3: Tokat Şehir Panoraması -->
+            <div class="carousel-item">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/Tokat_panorama_2012.JPG"
+                     class="d-block w-100"
+                     alt="Tokat Şehir Panoraması">
+                <div class="carousel-caption">
+                    <h5><i class="bi bi-building me-2"></i>Tokat Şehir Panoraması</h5>
+                    <p>Tarihin derinliklerinden günümüze uzanan güzellikleriyle Tokat'ın muhteşem silüeti.</p>
+                </div>
+            </div>
+
+            <!-- SLAYT 4: Niksar -->
+            <div class="carousel-item">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/7/75/Niksar%2CKaleSW.jpg"
+                     class="d-block w-100"
+                     alt="Niksar">
+                <div class="carousel-caption">
+                    <h5><i class="bi bi-geo-alt-fill me-2"></i>Niksar</h5>
+                    <p>Türkiye'nin ilk üniversitesinin kurulduğu, köklü tarihe sahip tarihi ilçe.</p>
+                </div>
+            </div>
+
+            <!-- SLAYT 5: Almus Baraj Gölü -->
+            <div class="carousel-item">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/9/96/Almus_baraj_g%C3%B6l%C3%BC.JPG"
+                     class="d-block w-100"
+                     alt="Almus Baraj Gölü">
+                <div class="carousel-caption">
+                    <h5><i class="bi bi-water me-2"></i>Almus Baraj Gölü</h5>
+                    <p>Yeşil tepeler arasında sakin bir doğa ortamı sunan, balıkçılık ve piknik cenneti.</p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Önceki/Sonraki okları — data-bs-slide ile Bootstrap yönetiyor.
+             visually-hidden → görsel olarak gizli ama ekran okuyucular görür (erişilebilirlik). -->
+        <button class="carousel-control-prev" type="button"
+                data-bs-target="#tokatCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+            <span class="visually-hidden">Önceki</span>
+        </button>
+        <button class="carousel-control-next" type="button"
+                data-bs-target="#tokatCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+            <span class="visually-hidden">Sonraki</span>
+        </button>
+
+    </div>
+</section>
+
+<!-- ===================== TOKAT İSTATİSTİKLERİ =====================
+     Şehir hakkında kısa rakamsal bilgiler.
+     city-stat ve stat-number sınıfları style.css'te tanımlı.
+     col-6 col-md-3 → mobilde 2'li, tablette ve üstünde 4'lü grid. -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row gy-4">
+            <div class="col-6 col-md-3">
+                <div class="city-stat">
+                    <div class="stat-number">~600K</div>
+                    <div>Nüfus</div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="city-stat">
+                    <div class="stat-number">12</div>
+                    <div>İlçe</div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="city-stat">
+                    <div class="stat-number">9.958</div>
+                    <div>km² Yüzölçüm</div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="city-stat">
+                    <div class="stat-number">60</div>
+                    <div>Plaka Kodu</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== TOKAT HAKKINDA GENEL BİLGİ =====================
+     Sol metin, sağ fotoğraf — iki sütunlu layout.
+     align-items-center → her iki kolon dikeyde ortada. -->
+<section class="py-5">
+    <div class="container">
+        <div class="row align-items-center gy-4">
+
+            <!-- Sol: Metin bilgisi ve etiketler -->
+            <div class="col-lg-6">
+                <h2 class="section-title">Tokat Hakkında</h2>
+                <p>
+                    Tokat benim memleketim. Doğduğum, büyüdüğüm şehir. İlkokul ve ortaokulu
+                    orada bitirdim. Sakarya'ya geleli bir yıl oldu ama her tatilde mutlaka dönüyorum.
+                </p>
+                <p>
+                    Tokat kebabını başka yerde bulamazsınız, inanın. Ballıca Mağarası'na o kadar
+                    çok gittim ki içini ezberledim neredeyse. Tokat Kalesi'nden şehre bakış da
+                    başka bir şey; özellikle akşamüzeri çok güzel oluyor.
+                </p>
+                <p>
+                    Tarihi çok zengin bir şehir — Pontus'tan Osmanlı'ya kadar her dönemden
+                    iz var. <strong>Niksar</strong>'da Türkiye'nin ilk üniversitesinin kurulduğunu
+                    biliyorum ama bunu çoğu kişi bilmez.
+                </p>
+                <!-- Kategori etiketleri — d-flex flex-wrap ile alt alta dökülmeden sığarlar -->
+                <div class="mt-4 d-flex flex-wrap gap-2">
+                    <span class="badge bg-danger px-3 py-2">Tarihi Şehir</span>
+                    <span class="badge bg-success px-3 py-2">Doğa Cenneti</span>
+                    <span class="badge bg-warning text-dark px-3 py-2">El Sanatları</span>
+                    <span class="badge bg-primary px-3 py-2">Karadeniz Bölgesi</span>
+                </div>
+            </div>
+
+            <!-- Sağ: Şehir fotoğrafı — placeholder kullanıyorum -->
+            <div class="col-lg-6">
+                <!-- img-fluid → resmi responsive yap (container genişliğine göre ölçekle) -->
+                <img src="https://picsum.photos/700/450?random=206"
+                     alt="Tokat"
+                     class="img-fluid rounded-4 shadow">
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ===================== GEZİLECEK YERLER =====================
+     6 adet yer kartı — her biri resim, başlık, açıklama ve etiket içeriyor.
+     col-md-6 col-lg-4 → tablette 2'li, büyük ekranda 3'lü grid.
+     h-100 → kartların eşit yükseklikte olması için. -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <h2 class="section-title text-center">Gezilecek Yerler</h2>
+        <div class="row gy-4">
+
+            <!-- Yer Kartı 1: Ballıca Mağarası -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100">
+                    <!-- card-img-top → resim kartın en üstünde, köşe yuvarlama uyumlu.
+                         height:200px + object-fit:cover → tüm kartlarda eşit resim yüksekliği. -->
+                    <img src="https://picsum.photos/500/280?random=211"
+                         class="card-img-top"
+                         alt="Ballıca Mağarası"
+                         style="height:200px; object-fit:cover;">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold">
+                            <i class="bi bi-gem text-warning me-2"></i>Ballıca Mağarası
+                        </h5>
+                        <p class="card-text text-muted">
+                            Çocukken aileyle o kadar çok gittik ki. Türkiye'nin en büyük mağaralarından biri.
+                            İçi gerçekten etkileyici, görmenizi tavsiye ederim.
+                        </p>
+                        <!-- Kart alt etiketleri — bg-light text-dark border → açık gri, yazılı kenarlıklı -->
+                        <div class="d-flex gap-2 mt-2 flex-wrap">
+                            <span class="badge bg-light text-dark border">Doğa</span>
+                            <span class="badge bg-light text-dark border">Mağara</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Yer Kartı 2: Tokat Kalesi -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100">
+                    <img src="https://picsum.photos/500/280?random=212"
+                         class="card-img-top"
+                         alt="Tokat Kalesi"
+                         style="height:200px; object-fit:cover;">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold">
+                            <i class="bi bi-shield-fill text-primary me-2"></i>Tokat Kalesi
+                        </h5>
+                        <p class="card-text text-muted">
+                            Şehre hâkim konumuyla asırlardır ayakta duran tarihi kale.
+                            Pontus döneminden beri varlığını sürdüren bu kale, panoramik manzarasıyla da ünlüdür.
+                        </p>
+                        <div class="d-flex gap-2 mt-2 flex-wrap">
+                            <span class="badge bg-light text-dark border">Tarih</span>
+                            <span class="badge bg-light text-dark border">Kale</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Yer Kartı 3: Komana Antik Kenti -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100">
+                    <img src="https://picsum.photos/500/280?random=213"
+                         class="card-img-top"
+                         alt="Komana"
+                         style="height:200px; object-fit:cover;">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold">
+                            <i class="bi bi-building text-danger me-2"></i>Komana Antik Kenti
+                        </h5>
+                        <p class="card-text text-muted">
+                            Pontus Krallığı'nın önemli dini merkezlerinden biri olan Komana, 2.400 yıllık
+                            tarihiyle arkeoloji meraklılarının gözdesidir.
+                        </p>
+                        <div class="d-flex gap-2 mt-2 flex-wrap">
+                            <span class="badge bg-light text-dark border">Arkeoloji</span>
+                            <span class="badge bg-light text-dark border">Antik Kent</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Yer Kartı 4: Niksar -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100">
+                    <img src="https://picsum.photos/500/280?random=214"
+                         class="card-img-top"
+                         alt="Niksar"
+                         style="height:200px; object-fit:cover;">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold">
+                            <i class="bi bi-geo-alt-fill text-success me-2"></i>Niksar
+                        </h5>
+                        <p class="card-text text-muted">
+                            Türkiye'nin ilk üniversitesinin kurulduğu Niksar, tarihi camii ve kalesiyle
+                            Anadolu'nun köklü ilçelerinden biridir.
+                        </p>
+                        <div class="d-flex gap-2 mt-2 flex-wrap">
+                            <span class="badge bg-light text-dark border">Tarih</span>
+                            <span class="badge bg-light text-dark border">İlçe</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Yer Kartı 5: Almus Baraj Gölü -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100">
+                    <img src="https://picsum.photos/500/280?random=215"
+                         class="card-img-top"
+                         alt="Almus Gölü"
+                         style="height:200px; object-fit:cover;">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold">
+                            <i class="bi bi-water text-info me-2"></i>Almus Baraj Gölü
+                        </h5>
+                        <p class="card-text text-muted">
+                            Yeşil tepeler arasında sakin bir atmosfer sunan Almus Gölü, balıkçılık,
+                            doğa yürüyüşü ve piknik için ideal bir destinasyondur.
+                        </p>
+                        <div class="d-flex gap-2 mt-2 flex-wrap">
+                            <span class="badge bg-light text-dark border">Doğa</span>
+                            <span class="badge bg-light text-dark border">Göl</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Yer Kartı 6: Tokat Müzesi -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100">
+                    <img src="https://picsum.photos/500/280?random=216"
+                         class="card-img-top"
+                         alt="Tokat Müzesi"
+                         style="height:200px; object-fit:cover;">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold">
+                            <i class="bi bi-bank text-secondary me-2"></i>Tokat Müzesi
+                        </h5>
+                        <p class="card-text text-muted">
+                            Pontus, Roma ve Osmanlı dönemine ait eserlerin sergilendiği müze; şehrin
+                            binlerce yıllık tarihini gözler önüne serer.
+                        </p>
+                        <div class="d-flex gap-2 mt-2 flex-wrap">
+                            <span class="badge bg-light text-dark border">Kültür</span>
+                            <span class="badge bg-light text-dark border">Müze</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+    <div class="container">
+        <div class="row gy-4">
+            <div class="col-md-4">
+                <h5><i class="bi bi-person-badge-fill me-2"></i>A.T. Özcan</h5>
+                <p>Sakarya Üniversitesi<br>Bilgisayar Mühendisliği Bölümü</p>
+            </div>
+            <div class="col-md-4">
+                <h5>Sayfalar</h5>
+                <a href="index.html">Hakkımda</a>
+                <a href="cv.html">Özgeçmiş</a>
+                <a href="sehrim.html">Şehrim</a>
+                <a href="takimimiz.html">Takımımız</a>
+                <a href="ilgi-alanlari.html">İlgi Alanlarım</a>
+                <a href="iletisim.html">İletişim</a>
+            </div>
+            <div class="col-md-4">
+                <h5>İletişim</h5>
+                <p><i class="bi bi-envelope me-2"></i>abdurrahmanturanozcan9191@gmail.com</p>
+                <p><i class="bi bi-geo-alt me-2"></i>Tokat, Türkiye</p>
+            </div>
+        </div>
+        <hr>
+        <p class="copyright">© 2025 Abdurrahman Turan Özcan · Web Teknolojileri Dersi Projesi</p>
+    </div>
+</footer>
+
+<!-- Bootstrap JS — Carousel için şart! JS olmadan slider çalışmıyor.
+     bundle.min.js içinde Popper.js de var, dropdown gibi bileşenler için gerekli. -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

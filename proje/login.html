@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giriş Yap – Abdurrahman Turan Özcan</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- ===================== GİRİŞ SAYFASI =====================
+     Bu sayfada navbar yok — tam ekran giriş kartı tasarımı.
+     login-page sınıfı style.css'te tanımlı:
+       - min-height:100vh → ekranı tam kaplar
+       - display:flex + align/justify center → kart tam ortada
+       - gradient arka plan
+     login-card → beyaz, köşeleri yuvarlak giriş kutusu. -->
+
+<div class="login-page">
+    <div class="login-card">
+
+        <!-- Üstteki ikon ve başlık -->
+        <div class="login-logo">
+            <!-- Kilid ikonu — giriş sayfasına uygun -->
+            <div class="logo-icon">
+                <i class="bi bi-person-lock"></i>
+            </div>
+            <h3 class="fw-bold text-dark">Giriş Yap</h3>
+            <p class="text-muted small">Öğrenci numaranız ile giriş yapın</p>
+        </div>
+
+        <!-- PHP'den Gelen Hata Mesajı
+             PHP login.php başarısız girişte ?hata=... parametresiyle bu sayfaya yönlendiriyor.
+             JavaScript aşağıda bu parametreyi okuyup mesajı gösteriyor.
+             Sayfa ilk yüklendiğinde bu kutu gizli (display:none). -->
+        <div id="loginAlert" class="alert alert-danger mb-3" style="display:none;">
+            <i class="bi bi-exclamation-triangle-fill me-2"></i>
+            <span id="loginAlertMsg"></span>
+        </div>
+
+        <!-- GİRİŞ FORMU
+             action="php/login.php" → form gönderilince bu PHP dosyası çalışır.
+             method="POST" → veriler URL'de görünmez, güvenli.
+             novalidate → tarayıcının kendi doğrulamasını kapatıyorum,
+             çünkü doğrulamayı JavaScript ile kendim yapacağım. -->
+        <form action="php/login.php" method="POST" id="loginForm" novalidate>
+
+            <!-- E-POSTA ALANI
+                 type="email" → tarayıcı e-posta formatı için klavye gösterebilir.
+                 autocomplete="email" → tarayıcı kayıtlı e-postayı önerebilir.
+                 Placeholder ile beklenen format gösteriliyor. -->
+            <div class="mb-4">
+                <label for="loginEmail" class="form-label fw-semibold">
+                    <i class="bi bi-envelope me-2 text-primary"></i>E-Posta (Öğrenci No)
+                </label>
+                <input
+                    type="email"
+                    class="form-control form-control-lg"
+                    id="loginEmail"
+                    name="email"
+                    placeholder="b251210043@sakarya.edu.tr"
+                    autocomplete="email"
+                    required>
+                <!-- Hata mesajı div'i — başta gizli, JS ile gösteriliyor -->
+                <div id="emailError" class="text-danger small mt-1" style="display:none;"></div>
+                <!-- form-text → küçük gri açıklama yazısı (Bootstrap) -->
+                <div class="form-text">Format: <code>b251210043@sakarya.edu.tr</code></div>
+            </div>
+
+            <!-- ŞİFRE ALANI
+                 type="password" → karakterler nokta olarak görünür.
+                 input-group → input ve buton yan yana Bootstrap bileşeni.
+                 Şifre göster/gizle butonu JavaScript ile yönetiliyor. -->
+            <div class="mb-4">
+                <label for="loginPass" class="form-label fw-semibold">
+                    <i class="bi bi-lock me-2 text-primary"></i>Şifre (Öğrenci No)
+                </label>
+                <div class="input-group">
+                    <input
+                        type="password"
+                        class="form-control form-control-lg"
+                        id="loginPass"
+                        name="password"
+                        placeholder="Öğrenci numaranız"
+                        autocomplete="current-password"
+                        required>
+                    <!-- Göz ikonu butonu — tıklayınca şifre görünür/gizli -->
+                    <button class="btn btn-outline-secondary" type="button"
+                            id="togglePass" title="Şifreyi göster/gizle">
+                        <i class="bi bi-eye" id="eyeIcon"></i>
+                    </button>
+                </div>
+                <div id="passError" class="text-danger small mt-1" style="display:none;"></div>
+                <div class="form-text">Format: <code>B251210043</code></div>
+            </div>
+
+            <!-- BENİ HATIRLA checkbox'ı
+                 form-check Bootstrap sınıfı — checkbox ve etiket hizalama.
+                 Bu değer PHP'de kontrol edilmiyor, sadece UI için var. -->
+            <div class="mb-4">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="rememberMe" name="remember">
+                    <label class="form-check-label" for="rememberMe">Beni hatırla</label>
+                </div>
+            </div>
+
+            <!-- GİRİŞ YAP BUTONU
+                 onclick="return validateLogin()" → form submit öncesi JS doğrulaması çalışır.
+                 validateLogin() false döndürürse form gönderilmez (return false = submit iptal).
+                 validateLogin() main.js dosyasında tanımlı. -->
+            <button type="submit" class="btn btn-primary btn-lg w-100 fw-semibold"
+                    onclick="return validateLogin()">
+                <i class="bi bi-box-arrow-in-right me-2"></i>Giriş Yap
+            </button>
+
+        </form>
+
+        <hr class="my-4">
+
+        <!-- Demo Kimlik Bilgileri
+             Sunum sırasında hızlıca test edebilmek için gösteriyorum.
+             Gerçek projede bu bilgiler gösterilmez tabii ki. -->
+        <div class="alert alert-info small mb-0">
+            <i class="bi bi-info-circle me-2"></i>
+            <strong>Demo Bilgileri:</strong><br>
+            E-posta: <code>b251210043@sakarya.edu.tr</code><br>
+            Şifre: <code>B251210043</code>
+        </div>
+
+        <!-- Ana sayfaya dön linki -->
+        <div class="text-center mt-4">
+            <a href="index.html" class="text-muted text-decoration-none">
+                <i class="bi bi-arrow-left me-1"></i>Ana Sayfaya Dön
+            </a>
+        </div>
+
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- main.js'deki validateLogin() fonksiyonu için yükleniyorur -->
+<script src="js/main.js"></script>
+
+<script>
+    // ============================================================
+    // PHP'DEN GELEN HATA PARAMETRESİNİ OKU
+    // login.php başarısız girişlerde URL'ye ?hata=... ekleyerek geri dönüyor.
+    // URLSearchParams ile sorgu dizesini kolay okuyabiliyorum.
+    // IIFE (Immediately Invoked Function Expression) kullanıyorum:
+    //   (function() { ... })() → tanımlanır tanımlanmaz çalışır.
+    //   Değişkenlerin global scope'a sızmasını engeller.
+    // ============================================================
+    (function () {
+        // window.location.search → URL'nin ? kısmı, örn: "?hata=yanlis"
+        const params = new URLSearchParams(window.location.search);
+        const hata   = params.get('hata');  // "hata" parametresini al
+
+        if (hata) {
+            // Hangi hata tipi olduğuna göre mesaj seçiyorum
+            const msg = hata === 'bos'
+                ? 'E-posta veya şifre boş bırakılamaz.'
+                : hata === 'yanlis'
+                ? 'E-posta veya şifre hatalı. Lütfen tekrar deneyin.'
+                : hata === 'yetkisiz'
+                ? 'Bu sayfaya erişmek için giriş yapmanız gerekmektedir.'
+                : 'Bir hata oluştu. Lütfen tekrar deneyin.';
+
+            // Hata kutusunu görünür yap ve mesajı yaz
+            const box = document.getElementById('loginAlert');
+            document.getElementById('loginAlertMsg').textContent = msg;
+            if (box) box.style.display = 'block';
+        }
+    })();
+
+    // ============================================================
+    // ŞİFRE GÖSTER / GİZLE BUTONU
+    // Göz ikonuna tıklayınca şifre alanının type'ını değiştiriyorum:
+    //   type="password" → karakterler gizli (•••)
+    //   type="text"     → karakterler görünür
+    // Bootstrap Icons sınıfları ile ikonubu değiştiriyorum.
+    // classList.replace(eski, yeni) → sınıf adını değiştiriyor.
+    // ============================================================
+    document.getElementById('togglePass').addEventListener('click', function () {
+        const input = document.getElementById('loginPass');
+        const icon  = document.getElementById('eyeIcon');
+
+        if (input.type === 'password') {
+            input.type = 'text';                                    // şifreyi göster
+            icon.classList.replace('bi-eye', 'bi-eye-slash');       // ikonu değiştir
+        } else {
+            input.type = 'password';                                // şifreyi gizle
+            icon.classList.replace('bi-eye-slash', 'bi-eye');       // ikonu geri al
+        }
+    });
+</script>
+</body>
+</html>
