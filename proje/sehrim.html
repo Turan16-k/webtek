@@ -14,7 +14,8 @@
 <nav class="navbar navbar-expand-lg fixed-top">
     <div class="container">
         <a class="navbar-brand" href="index.html"><i class="bi bi-person-badge-fill me-2"></i>A.T. Özcan</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu"
+                aria-controls="navMenu" aria-expanded="false" aria-label="Menüyü aç/kapat">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navMenu">
@@ -31,12 +32,12 @@
     </div>
 </nav>
 
-<!-- Navbar fixed olduğu için içerik arkasına girmemesi için boşluk bırakıyorum -->
+<!-- navbar fixed olduğu için içerik arkasına girmesin diye boşluk bıraktım -->
 <div style="margin-top:56px;"></div>
 
 <!-- ===================== HERO =====================
-     hero-section sınıfı style.css'te tanımlı — mavi gradient arka plan.
-     text-center → tüm içerik ortada. -->
+     hero-section style.css'te mavi gradient olarak tanımlı.
+     text-center ile her şey ortada. -->
 <section class="hero-section text-center">
     <div class="container">
         <p style="color:var(--accent); font-weight:600; letter-spacing:2px;">MEMLEKETİM</p>
@@ -46,23 +47,15 @@
 </section>
 
 <!-- ===================== SLIDER (CAROUSEL) =====================
-     Bootstrap Carousel bileşeni — JavaScript gerektiriyor.
-     bootstrap.bundle.min.js yüklendiğinde otomatik çalışıyor.
-
-     data-bs-ride="carousel" → sayfa açılınca otomatik kaydırmaya başlar.
-     data-bs-interval="4000" → her 4 saniyede bir geçiş yapar (ms cinsinden).
-     carousel-fade → geçişlerde kayma yerine solma efekti kullanıyorum.
-
-     Ödev gereksinimi: en az 4 resim — burada 5 tane var.
-     Resimler Wikimedia Commons'tan doğrudan link (upload.wikimedia.org).
-     ============================================================ -->
+     data-bs-ride ile açılışta otomatik başlıyor, interval=4000 yani 4 saniyede bir geçiyor.
+     carousel-fade kayma değil solma efekti yapıyor — daha şık durdu bence.
+     Ödev şartı en az 4 resim, ben 5 koydum. -->
 <section class="py-0">
     <div id="tokatCarousel" class="carousel slide carousel-fade"
          data-bs-ride="carousel" data-bs-interval="4000">
 
-        <!-- Nokta göstergeleri — hangi slayttayız gösteren küçük çizgiler/noktalar.
-             data-bs-slide-to ile tıklanınca hangi slayda gidileceğini belirtiyorum.
-             İlk buton active sınıfıyla işaretli (başlangıç slaydı). -->
+        <!-- Nokta göstergeler — data-bs-slide-to ile tıklayınca o slayda atlıyor.
+             İlk buton active, çünkü başlangıçta 1. slayt açık. -->
         <div class="carousel-indicators">
             <button type="button" data-bs-target="#tokatCarousel" data-bs-slide-to="0" class="active" aria-label="Ballıca Mağarası"></button>
             <button type="button" data-bs-target="#tokatCarousel" data-bs-slide-to="1" aria-label="Tokat Kalesi"></button>
@@ -71,20 +64,16 @@
             <button type="button" data-bs-target="#tokatCarousel" data-bs-slide-to="4" aria-label="Almus Gölü"></button>
         </div>
 
-        <!-- Slayt içerikleri — carousel-inner zorunlu kapsayıcı.
-             İlk slayta active sınıfı eklemek şart, yoksa hiçbir şey görünmüyor. -->
+        <!-- carousel-inner zorunlu kapsayıcı — ilk slaytta active olmazsa hiçbir şey görünmüyordu, öğrendim -->
         <div class="carousel-inner">
 
             <!-- SLAYT 1: Ballıca Mağarası -->
-            <!-- d-block w-100 → resim tam genişlikte blok element.
-                 Resim doğrudan Wikimedia upload sunucusundan yükleniyor.
-                 Bu URL daha kararlı — Special:FilePath yönlendirme yaparken bu doğrudan. -->
+            <!-- d-block w-100 → resim tam genişlikte blok element olsun diye -->
             <div class="carousel-item active">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/7/77/Ballica-magarasi_109064.jpg"
                      class="d-block w-100"
                      alt="Ballıca Mağarası">
-                <!-- carousel-caption → resmin üstünde yarı saydam başlık kutusu.
-                     Stili style.css'te tanımlı. -->
+                <!-- carousel-caption → resmin üstünde yarı saydam başlık kutusu, stili style.css'te -->
                 <div class="carousel-caption">
                     <h5><i class="bi bi-gem me-2"></i>Ballıca Mağarası</h5>
                     <p>Türkiye'nin en büyük ikinci mağarası; sarkıt ve dikitleriyle büyüleyici bir doğa harikası.</p>
@@ -93,7 +82,7 @@
 
             <!-- SLAYT 2: Tokat Kalesi -->
             <div class="carousel-item">
-                <!-- Bu URL upload.wikimedia.org'dan doğrudan — boyutlandırılmış thumb versiyonu -->
+                <!-- Wikimedia'nın thumb URL'si — boyutlandırılmış versiyon -->
                 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Tokat_Kale.jpg/1400px-Tokat_Kale.jpg"
                      class="d-block w-100"
                      alt="Tokat Kalesi">
@@ -138,8 +127,8 @@
 
         </div>
 
-        <!-- Önceki/Sonraki okları — data-bs-slide ile Bootstrap yönetiyor.
-             visually-hidden → görsel olarak gizli ama ekran okuyucular görür (erişilebilirlik). -->
+        <!-- Önceki/Sonraki okları — data-bs-slide Bootstrap tarafından yönetiliyor.
+             visually-hidden görsel olarak gizli ama ekran okuyucular görüyor. -->
         <button class="carousel-control-prev" type="button"
                 data-bs-target="#tokatCarousel" data-bs-slide="prev">
             <span class="carousel-control-prev-icon"></span>
@@ -155,9 +144,8 @@
 </section>
 
 <!-- ===================== TOKAT İSTATİSTİKLERİ =====================
-     Şehir hakkında kısa rakamsal bilgiler.
      city-stat ve stat-number sınıfları style.css'te tanımlı.
-     col-6 col-md-3 → mobilde 2'li, tablette ve üstünde 4'lü grid. -->
+     col-6 col-md-3 → mobilde 2'li, büyük ekranda 4'lü grid. -->
 <section class="py-5 bg-light">
     <div class="container">
         <div class="row gy-4">
@@ -190,8 +178,7 @@
 </section>
 
 <!-- ===================== TOKAT HAKKINDA GENEL BİLGİ =====================
-     Sol metin, sağ fotoğraf — iki sütunlu layout.
-     align-items-center → her iki kolon dikeyde ortada. -->
+     Sol metin sağ fotoğraf — iki sütunlu layout, align-items-center ile dikeyde ortada. -->
 <section class="py-5">
     <div class="container">
         <div class="row align-items-center gy-4">
@@ -213,7 +200,7 @@
                     iz var. <strong>Niksar</strong>'da Türkiye'nin ilk üniversitesinin kurulduğunu
                     biliyorum ama bunu çoğu kişi bilmez.
                 </p>
-                <!-- Kategori etiketleri — d-flex flex-wrap ile alt alta dökülmeden sığarlar -->
+                <!-- d-flex flex-wrap ile badge'lar taşınca alt satıra geçiyor -->
                 <div class="mt-4 d-flex flex-wrap gap-2">
                     <span class="badge bg-danger px-3 py-2">Tarihi Şehir</span>
                     <span class="badge bg-success px-3 py-2">Doğa Cenneti</span>
@@ -222,9 +209,9 @@
                 </div>
             </div>
 
-            <!-- Sağ: Şehir fotoğrafı — placeholder kullanıyorum -->
+            <!-- Sağ: Şehir fotoğrafı -->
             <div class="col-lg-6">
-                <!-- img-fluid → resmi responsive yap (container genişliğine göre ölçekle) -->
+                <!-- img-fluid → responsive, container'dan taşmıyor -->
                 <img src="https://picsum.photos/700/450?random=206"
                      alt="Tokat"
                      class="img-fluid rounded-4 shadow">
@@ -235,9 +222,8 @@
 </section>
 
 <!-- ===================== GEZİLECEK YERLER =====================
-     6 adet yer kartı — her biri resim, başlık, açıklama ve etiket içeriyor.
      col-md-6 col-lg-4 → tablette 2'li, büyük ekranda 3'lü grid.
-     h-100 → kartların eşit yükseklikte olması için. -->
+     h-100 ile kartlar eşit yükseklikte kalıyor. -->
 <section class="py-5 bg-light">
     <div class="container">
         <h2 class="section-title text-center">Gezilecek Yerler</h2>
@@ -246,8 +232,7 @@
             <!-- Yer Kartı 1: Ballıca Mağarası -->
             <div class="col-md-6 col-lg-4">
                 <div class="card h-100">
-                    <!-- card-img-top → resim kartın en üstünde, köşe yuvarlama uyumlu.
-                         height:200px + object-fit:cover → tüm kartlarda eşit resim yüksekliği. -->
+                    <!-- height:200px + object-fit:cover → tüm kartlarda eşit resim yüksekliği -->
                     <img src="https://picsum.photos/500/280?random=211"
                          class="card-img-top"
                          alt="Ballıca Mağarası"
@@ -260,7 +245,7 @@
                             Çocukken aileyle o kadar çok gittik ki. Türkiye'nin en büyük mağaralarından biri.
                             İçi gerçekten etkileyici, görmenizi tavsiye ederim.
                         </p>
-                        <!-- Kart alt etiketleri — bg-light text-dark border → açık gri, yazılı kenarlıklı -->
+                        <!-- bg-light text-dark border → açık gri, kenarlıklı badge -->
                         <div class="d-flex gap-2 mt-2 flex-wrap">
                             <span class="badge bg-light text-dark border">Doğa</span>
                             <span class="badge bg-light text-dark border">Mağara</span>
@@ -416,8 +401,7 @@
     </div>
 </footer>
 
-<!-- Bootstrap JS — Carousel için şart! JS olmadan slider çalışmıyor.
-     bundle.min.js içinde Popper.js de var, dropdown gibi bileşenler için gerekli. -->
+<!-- Bootstrap JS carousel için şart — bu olmadan slider hiç çalışmıyordu, başta anlamıştım. -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

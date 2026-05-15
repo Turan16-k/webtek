@@ -4,34 +4,24 @@
 // Öğrenci: Abdurrahman Turan Özcan | B251210043
 // Ders: Web Teknolojileri – 2025/2026 Bahar Dönemi
 //
-// Bu sayfa iletisim.html'deki formun action hedefi.
-// Form POST metoduyla veri gönderince bu dosya çalışıyor.
-// PHP sunucu tarafında çalışır — yani tarayıcıda değil,
-// sunucu bilgisayarda işlenir, sonuç HTML olarak tarayıcıya gelir.
+// iletisim.html formu üzerinden gelen POST verilerini işler.
+// Sunucu tarafı form doğrulaması (validation) ve veri işleme işlemleri gerçekleştirilir.
 // ============================================================
 
 // ============================================================
 // YALNIZCA POST İSTEKLERİNİ KABUL ET
-// $_SERVER['REQUEST_METHOD'] → o anki HTTP istek metodunu veriyor.
-// Birisi direkt URL'yi tarayıcıya yazarsa GET isteği olur,
-// biz sadece form gönderimlerini (POST) işlemek istiyoruz.
 // ============================================================
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    // GET isteği gelirse kullanıcıyı forma geri gönder
+    // İzinsiz GET isteklerinde veya doğrudan erişimde formu yeniden yükle
     header('Location: ../iletisim.html');
-    exit; // header'dan sonra exit zorunlu, yoksa kod çalışmaya devam eder
+    exit;
 }
 
 // ============================================================
 // VERİ TEMİZLEME FONKSİYONU
-// Kullanıcıdan gelen veriler güvenilir değil — temizlemek lazım.
-// Neden?
-//   - htmlspecialchars() → HTML karakterlerini (< > " &) zararsız hale getirir.
-//     Örnek: <script>alert()</script> gibi XSS saldırılarını engeller.
-//   - strip_tags() → HTML etiketlerini tamamen kaldırır.
-//   - trim() → baştaki ve sondaki boşlukları kaldırır.
-// ENT_QUOTES → hem " hem ' karakterini dönüştürür.
-// UTF-8 → Türkçe karakterlerin bozulmaması için karakter seti.
+// Çapraz Site Betik Çalıştırma (XSS) saldırılarını engellemek ve verileri
+// güvenli hale getirmek amacıyla tasarlanmıştır.
+// HTML etiketleri kaldırılır ve özel karakterler zararsız hale dönüştürülür.
 // ============================================================
 function clean($value) {
     return htmlspecialchars(strip_tags(trim($value)), ENT_QUOTES, 'UTF-8');
@@ -39,9 +29,7 @@ function clean($value) {
 
 // ============================================================
 // FORM VERİLERİNİ AL VE TEMİZLE
-// $_POST dizisi form alanlarından gelen verileri tutuyor.
-// Alan isimleri HTML'deki name="..." ile eşleşiyor.
-// ?? '' → null birleştirme operatörü: alan gelmemişse boş string kullan.
+// POST dizisinden veriler çekilir ve temizleme fonksiyonundan geçirilir.
 // ============================================================
 $name       = clean($_POST['name']       ?? '');
 $email      = clean($_POST['email']      ?? '');
@@ -52,18 +40,14 @@ $gender     = clean($_POST['gender']     ?? '');
 $education  = clean($_POST['education']  ?? '');
 $birthdate  = clean($_POST['birthdate']  ?? '');
 
-// isset() → değişken tanımlı mı ve null değil mi kontrol eder.
-// Checkbox işaretlenmemişse $_POST'ta hiç gelmez, isset false döner.
+// Onay kutuları (checkbox) işaretlenmediğinde POST verisinde bulunmayacağından, isset() ile kontrol edilmektedir.
 $kvkk       = isset($_POST['kvkk'])       ? 'Evet' : 'Hayır';
 $newsletter = isset($_POST['newsletter']) ? 'Evet' : 'Hayır';
 
 // ============================================================
-// İLGİ ALANLARI — DİZİ VERİSİ
-// HTML'de name="interests[]" kullandım — [] sonunda olunca
-// PHP birden fazla checkbox değerini otomatik dizi olarak alıyor.
-// is_array() ile gerçekten dizi mi diye kontrol ediyorum.
-// Her elemanı temizleyip $interests dizisine atıyorum.
-// implode() ile diziyi virgülle ayrılmış string'e çeviriyorum.
+// İLGİ ALANLARI KONTROLÜ
+// Birden çok seçenekli (dizi formatındaki) ilgi alanı girdileri
+// tek tek temizlenerek yeniden dizilip metin formatına çevrilir.
 // ============================================================
 $interests = [];
 if (isset($_POST['interests']) && is_array($_POST['interests'])) {
@@ -71,28 +55,119 @@ if (isset($_POST['interests']) && is_array($_POST['interests'])) {
         $interests[] = clean($interest);
     }
 }
-// Hiç seçilmemişse "Seçilmedi" yazsın
+// İlgi alanı seçimi yapılmadığı takdirde varsayılan metin atanır.
 $interestsStr = !empty($interests) ? implode(', ', $interests) : 'Seçilmedi';
 
 // ============================================================
+// SUNUCU TARAFI VERİ DOĞRULAMASI
+// İstemci tarafındaki (JS) kontroller atlatılabileceğinden dolayı,
+// güvenlik ve veri bütünlüğü adına sunucu tarafında ek doğrulama uygulanır.
+// ============================================================
+$validationErrors = [];
+
+if (empty($name)) {
+    $validationErrors[] = 'Ad Soyad boş bırakılamaz.';
+} elseif (mb_strlen($name, 'UTF-8') < 3) {
+    $validationErrors[] = 'Ad Soyad en az 3 karakter olmalıdır.';
+}
+
+if (empty($email)) {
+    $validationErrors[] = 'E-posta adresi boş bırakılamaz.';
+} elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    $validationErrors[] = 'Geçerli bir e-posta adresi giriniz.';
+}
+
+if (empty($phone)) {
+    $validationErrors[] = 'Telefon numarası boş bırakılamaz.';
+}
+
+if (empty($subject)) {
+    $validationErrors[] = 'Konu boş bırakılamaz.';
+}
+
+if (empty($message)) {
+    $validationErrors[] = 'Mesaj boş bırakılamaz.';
+} elseif (mb_strlen($message, 'UTF-8') < 20) {
+    $validationErrors[] = 'Mesaj en az 20 karakter olmalıdır.';
+}
+
+if (empty($gender)) {
+    $validationErrors[] = 'Cinsiyet seçilmedi.';
+}
+
+if (empty($education)) {
+    $validationErrors[] = 'Eğitim düzeyi seçilmedi.';
+}
+
+if (empty($birthdate)) {
+    $validationErrors[] = 'Doğum tarihi girilmedi.';
+}
+
+if ($kvkk !== 'Evet') {
+    $validationErrors[] = 'KVKK onayı zorunludur.';
+}
+
+if (empty($interests)) {
+    $validationErrors[] = 'En az bir ilgi alanı seçilmelidir.';
+}
+
+// ============================================================
+// DOSYA YÜKLEME KONTROLÜ
+// Yüklenen dosyanın varlığı, tip uygunluğu ve boyut sınırları denetlenir.
+// ============================================================
+if (isset($_FILES['file_upload']) && $_FILES['file_upload']['error'] === 0) {
+    $allowedTypes = [
+        'image/jpeg', 'image/png', 'image/gif',
+        'application/pdf',
+        'application/msword',
+        'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+    ];
+    $maxSize = 5 * 1024 * 1024; // 5MB
+
+    if ($_FILES['file_upload']['size'] > $maxSize) {
+        $validationErrors[] = 'Dosya boyutu 5MB sınırını aşıyor.';
+    } elseif (!in_array($_FILES['file_upload']['type'], $allowedTypes)) {
+        $validationErrors[] = 'Sadece PDF, Word veya görsel (JPG, PNG) dosyası yüklenebilir.';
+    }
+}
+
+// Validasyon hatası bulunması durumunda kullanıcıya hata sayfası gösterilir ve işlem sonlandırılır.
+if (!empty($validationErrors)) {
+    // Uyarı: İlerleyen geliştirmelerde bu hata akışı session üzerinden yönlendirilebilir.
+    echo '<!DOCTYPE html><html lang="tr"><head><meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>Form Hatası</title>
+          <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+          <link href="../css/style.css" rel="stylesheet"></head><body>
+          <div style="margin-top:80px;" class="container py-5">
+          <div class="alert alert-danger">
+          <h5><i class="bi bi-exclamation-triangle me-2"></i>Form gönderilemedi</h5>
+          <ul class="mb-0">';
+    foreach ($validationErrors as $err) {
+        echo '<li>' . htmlspecialchars($err, ENT_QUOTES, 'UTF-8') . '</li>';
+    }
+    echo '</ul></div>
+          <a href="../iletisim.html" class="btn btn-primary">
+          <i class="bi bi-arrow-left me-2"></i>Forma Geri Dön</a>
+          </div>
+          <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+          </body></html>';
+    exit;
+}
+
+// ============================================================
 // DOSYA YÜKLEME BİLGİSİ
-// $_FILES — dosya yükleme verileri buraya geliyor.
-// enctype="multipart/form-data" form özelliği olmadan
-// bu dizi boş gelirdi! (iletisim.html'de eklendi)
-// error === 0 → yükleme başarılı demek (0 = UPLOAD_ERR_OK)
-// filesize → byte cinsinden, round() ile KB'a çeviriyorum.
+// Dosya başarıyla yüklenmişse dosya boyutu (KB) ve dosya adı bilgileri hazırlanır.
 // ============================================================
 $fileInfo = 'Dosya yüklenmedi';
 if (isset($_FILES['file_upload']) && $_FILES['file_upload']['error'] === 0) {
-    // Dosya adını temizleyip boyutuyla birlikte gösteriyorum
     $fileInfo = clean($_FILES['file_upload']['name'])
               . ' (' . round($_FILES['file_upload']['size'] / 1024, 2) . ' KB)';
 }
 
 // ============================================================
-// GÖNDERIM ZAMANI
-// date() → belirtilen formatta güncel tarihi verir.
-// 'd.m.Y H:i:s' → 15.01.2025 14:32:05 gibi
+// GÖNDERİM ZAMANI
+// İşlem tarihi güncel sunucu zamanından elde edilir.
 // ============================================================
 $submitTime = date('d.m.Y H:i:s');
 ?>
@@ -109,7 +184,7 @@ $submitTime = date('d.m.Y H:i:s');
 </head>
 <body>
 
-<!-- Basit navbar — sadece geri dön butonu var -->
+<!-- Üst Navigasyon Çubuğu -->
 <nav class="navbar navbar-expand-lg fixed-top">
     <div class="container">
         <a class="navbar-brand" href="../index.html">
@@ -123,14 +198,13 @@ $submitTime = date('d.m.Y H:i:s');
     </div>
 </nav>
 
-<!-- margin-top ile fixed navbar'ın altına içeriği yerleştiriyorum -->
+<!-- İçerik Alanı -->
 <div style="margin-top:70px;" class="py-5">
     <div class="container">
 
         <!-- BAŞARI MESAJI -->
         <div class="text-center mb-5">
-            <!-- Yeşil yuvarlak içinde tik işareti — inline style kullandım,
-                 tek seferlik stil olduğundan ayrı CSS sınıfı yazmadım -->
+            <!-- Başarı İkonu -->
             <div style="width:90px; height:90px; background:#198754; border-radius:50%;
                         display:flex; align-items:center; justify-content:center;
                         margin:0 auto 20px; font-size:2.5rem; color:#fff;">
@@ -138,29 +212,26 @@ $submitTime = date('d.m.Y H:i:s');
             </div>
             <h2 class="fw-bold text-success">Form Başarıyla Gönderildi!</h2>
             <p class="text-muted">Aşağıda gönderilen tüm form verileri listelenmektedir.</p>
-            <!-- PHP ile hesaplanan zamanı ekrana yazdırıyorum -->
+            <!-- Gönderim Zamanı -->
             <small class="text-muted">
                 <i class="bi bi-clock me-1"></i>Gönderim Zamanı: <?php echo $submitTime; ?>
             </small>
         </div>
 
         <!-- VERİ TABLOSU
-             PHP'den gelen değişkenleri tablo içinde gösteriyorum.
-             echo → PHP'yi HTML içine yazdırmak için.
-             ?: operatörü → değer varsa yazdır, yoksa "Boş" yaz.
-             Boş gelme ihtimaline karşı her satırda kontrol var. -->
+             İşlenen ve doğrulanan verilerin tablo halinde listelenmesi -->
         <div class="card border-0 shadow-sm">
             <div class="card-header bg-primary text-white">
                 <h5 class="mb-0"><i class="bi bi-table me-2"></i>Gönderilen Form Verileri</h5>
             </div>
             <div class="card-body p-0">
                 <div class="table-responsive">
-                    <!-- result-table sınıfı style.css'te tanımlı — th ve td'ye özel stiller var -->
+                    <!-- Tablo Stilleri -->
                     <table class="table table-bordered mb-0 result-table">
                         <tbody>
                             <tr>
                                 <th><i class="bi bi-person me-2"></i>Ad Soyad</th>
-                                <!-- em etiketi italik ve anlamsal vurgu — içerik yoksa "Boş" göster -->
+                                <!-- Veri Yoksa Varsayılan İfade -->
                                 <td><?php echo $name ?: '<em class="text-muted">Boş</em>'; ?></td>
                             </tr>
                             <tr>
@@ -189,7 +260,7 @@ $submitTime = date('d.m.Y H:i:s');
                             </tr>
                             <tr>
                                 <th><i class="bi bi-tags me-2"></i>İlgi Alanları</th>
-                                <!-- implode ile birleştirilen string burada geliyor -->
+                                <!-- Seçilen İlgi Alanları -->
                                 <td><?php echo $interestsStr; ?></td>
                             </tr>
                             <tr>
@@ -199,7 +270,7 @@ $submitTime = date('d.m.Y H:i:s');
                             <tr>
                                 <th><i class="bi bi-shield-check me-2"></i>KVKK Onayı</th>
                                 <td>
-                                    <!-- PHP if-else ile rozet rengini dinamik seçiyorum -->
+                                    <!-- Duruma Göre Dinamik Rozet -->
                                     <?php if ($kvkk === 'Evet'): ?>
                                         <span class="badge bg-success px-3 py-2">Evet – Onaylandı</span>
                                     <?php else: ?>
@@ -219,7 +290,7 @@ $submitTime = date('d.m.Y H:i:s');
                             </tr>
                             <tr>
                                 <th><i class="bi bi-chat-dots me-2"></i>Mesaj</th>
-                                <!-- white-space:pre-wrap → kullanıcının satır atlamalarını korur -->
+                                <!-- Kullanıcı girdisindeki satır atlamalarının korunması sağlanır -->
                                 <td style="white-space:pre-wrap;">
                                     <?php echo $message ?: '<em class="text-muted">Boş</em>'; ?>
                                 </td>

@@ -3,22 +3,19 @@
    Öğrenci: Abdurrahman Turan Özcan | B251210043
    Ders: Web Teknolojileri – 2025/2026 Bahar Dönemi
 
-   Tüm stil kuralları bu tek dosyada toplanıyor.
-   Derste öğrendik ki stiller ayrı .css dosyasında tutulmalı,
-   HTML içine yazılmamalı — hem okunabilirlik hem de bakım kolaylığı için.
-   Bootstrap 5 zaten bir çok şeyi hazır veriyor ama kendi özelleştirmelerimiz
-   burada tanımlanıyor.
+   Tüm stilleri tek dosyada topladım, HTML içine yazmadım.
+   Derste söylendi, ayrı .css dosyası tutmak hem okunurluğu
+   hem de sonradan düzenlemeyi çok kolaylaştırıyor — haklılar.
+   Bootstrap 5 çok şeyi hallediyor ama bazı şeyleri kendim yazmak zorunda kaldım.
    ============================================================ */
 
 
 /* ==============================
    CSS DEĞİŞKENLERİ (:root)
 
-   CSS'te değişken tanımlamak için :root seçicisi kullanılıyor.
-   :root → tüm HTML belgesinin en üst elemanı anlamına gelir.
-   -- ile başlayan isimler CSS custom property (özel özellik) oluyor.
-   Kullanırken var(--değişken-adı) yazıyoruz.
-   Avantajı: rengi bir yerde değiştirince her yerde güncelleniyor.
+   Renk değişkenlerini burada tanımlıyorum, sonra var() ile kullanıyorum.
+   Böylece rengi bir yerden değiştirince her yere yansıyor — bunu öğrenince
+   hayatım kolaylaştı, her yerde tekrar tekrar aynı kodu yazmak zorunda kalmıyorum.
    ============================== */
 :root {
     --primary:     #0d3b6e;   /* koyu lacivert — ana renk */
@@ -31,28 +28,27 @@
     --card-shadow: 0 4px 20px rgba(0,0,0,0.10);  /* kart gölgesi: x y blur renk(opaklık) */
 }
 
-/* Tüm elementlerin box-sizing'ini border-box yapıyorum.
-   border-box: padding ve border, element genişliğine dahil edilir.
-   content-box (varsayılan): padding eklenince element büyür — hesap karışır.
-   *::before ve *::after → pseudo-elementlere de uygulanıyor. */
+/* box-sizing'i border-box yapıyorum ki padding ekleyince element büyümesin.
+   Bunu yapmadan önce epey kafa karışıklığı yaşadım, sonunda mantığını çak ettim.
+   *::before ve *::after'a da uygulamak gerekiyor, atlamamak lazım. */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* Tüm sayfa için genel font ve renk ayarları */
+/* Sayfanın genel font ve renk ayarları — siyah yerine koyu gri seçtim, daha yumuşak duruyor */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    /* font-family'de virgülle sıralama var: tarayıcı ilkini bulamazsa sıradakini dener */
+    /* tarayıcı ilk fontu bulamazsa sıradakini deniyor, bu yüzden birkaç tane yazdım */
     color: #333;         /* koyu gri — siyahtan daha yumuşak görünüyor */
     background: #fff;
-    line-height: 1.6;    /* satır yüksekliği — okunabilirlik için önemli */
+    line-height: 1.6;    /* satır aralığını biraz açtım, metin daha rahat okunuyor */
 }
 
 
 /* ==============================
    NAVBAR (Üst Gezinti Çubuğu)
 
-   fixed-top sınıfı Bootstrap'tan geliyor ve position:fixed yapıyor.
-   Bu sayede sayfa kaydırıldığında navbar hep üstte kalıyor.
-   !important → Bootstrap'ın kendi kurallarını ezmek için zorunlu oldu.
+   Bootstrap'ın fixed-top sınıfı zaten navbar'ı üstte sabit tutuyor.
+   !important yazmak zorunda kaldım çünkü Bootstrap kendi stilini eziyor,
+   başka türlü rengi değiştiremiyordum — biraz çirkin ama çalışıyor.
    ============================== */
 .navbar {
     background: var(--primary) !important;
@@ -65,7 +61,7 @@ body {
     color: #fff !important;
 }
 
-/* Navbar link stilleri — rgba ile opaklık ayarlıyorum */
+/* Linkleri rgba ile biraz saydam beyaz yaptım, tam beyazdan daha şık duruyor */
 .navbar-nav .nav-link {
     color: rgba(255,255,255,0.85) !important;  /* %85 beyaz */
     font-weight: 500;
@@ -79,7 +75,7 @@ body {
     color: var(--accent) !important;
 }
 
-/* "Giriş Yap" butonu diğer linklerden farklı görünüyor — kenarlıklı tasarım */
+/* "Giriş Yap" butonunu diğerlerinden ayırt etmek için kenarlıklı yaptım */
 .btn-login-nav {
     border: 1.5px solid rgba(255,255,255,0.6);
     border-radius: 20px;        /* oval görünüm için */
@@ -99,9 +95,9 @@ body {
 /* ==============================
    BÖLÜM BAŞLIKLARI (.section-title)
 
-   ::after pseudo-element ile altına dekoratif bir çizgi ekliyorum.
-   position: relative → parent, position: absolute → child ilişkisi.
-   Bunu öğrenmek biraz zaman aldı ama CSS'in güçlü özelliklerinden biri.
+   Başlığın altına küçük bir sarı çizgi ekledim, daha canlı duruyor.
+   ::after ile yapıyorum — bunu anlamak biraz zaman aldı, position: absolute
+   ile parent-child ilişkisini kafaya oturtmak gerekiyordu.
    ============================== */
 .section-title {
     font-size: 2rem;
@@ -124,7 +120,7 @@ body {
     border-radius: 2px;
 }
 
-/* text-center ile kullanıldığında çizgiyi de ortalıyorum */
+/* başlık ortalanınca çizgiyi de ortalaması gerekiyor, translateX ile halletim */
 .section-title.text-center::after {
     left: 50%;
     transform: translateX(-50%);   /* kendi genişliğinin yarısı kadar sola kaydır */
@@ -134,9 +130,9 @@ body {
 /* ==============================
    HERO BÖLÜMÜ (Ana Sayfa Üst Kısmı)
 
-   linear-gradient ile iki renk arasında geçiş yapıyorum.
-   135deg → 135 derece açıyla köşeden köşeye geçiş.
-   margin-top: 56px → fixed navbar'ın arkasına girmemesi için.
+   İki renkli gradient arka plan koydum, tek renkten çok daha iyi göründü.
+   margin-top: 56px yazmak zorunda kaldım çünkü fixed navbar içeriğin üstüne
+   biniyordu — bunu fark etmek biraz zaman aldı.
    ============================== */
 .hero-section {
     background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
@@ -148,7 +144,7 @@ body {
 .hero-section h1 { font-size: 2.8rem; font-weight: 700; }
 .hero-section .lead { font-size: 1.2rem; opacity: 0.9; }
 
-/* Profil fotoğrafı — yuvarlak, kenarlıklı */
+/* Profil fotoğrafını yuvarlak yaptım, border-radius: 50% ile tam çember oluyor */
 .profile-photo {
     width: 200px;
     height: 200px;
@@ -162,9 +158,9 @@ body {
 /* ==============================
    KARTLAR (.card)
 
-   Bootstrap'ın .card sınıfı var ama üzerine eklemeler yapıyorum.
-   transition ile hover animasyonu ekliyorum.
-   overflow: hidden → köşe yuvarlama için taşan içeriği kesiyor.
+   Bootstrap'ın kartlarına hover animasyonu ekledim.
+   Üzerine gelince hafifçe yukarı kalkıyor — küçük bir dokunuş ama fark yaratıyor.
+   overflow: hidden olmadan köşe yuvarlama제대로 çalışmıyordu, eklince düzeldi.
    ============================== */
 .card {
     border: none;
@@ -184,10 +180,9 @@ body {
 /* ==============================
    ÖZGEÇMİŞ SAYFASI – ZAMAN ÇİZELGESİ (Timeline)
 
-   Sol kenarda dikey bir çizgi ve her madde için nokta koyuyorum.
-   ::before ile iki ayrı dekoratif element ekledim:
-     .timeline::before      → dikey çizgi
-     .timeline-item::before → her maddenin noktası
+   Sol kenarda dikey çizgi ve her madde için nokta koyuyorum.
+   İkisini de ::before ile yaptım — epey uğraştım burası,
+   hangi ::before neyin için olduğunu karıştırdım birkaç kez.
    ============================== */
 .timeline {
     position: relative;
@@ -211,7 +206,7 @@ body {
     margin-bottom: 35px;
 }
 
-/* Her timeline maddesinin başındaki yuvarlak nokta */
+/* Her timeline maddesinin başındaki yuvarlak nokta — çizgi üzerine tam oturuyor */
 .timeline-item::before {
     content: '';
     position: absolute;
@@ -228,8 +223,8 @@ body {
 
 
 /* --- BECERİ ÇUBUKLARI ---
-   İki div üst üste: dış div arka plan, iç div doldurulan kısım.
-   İç div'in genişliği HTML'de style ile yüzde olarak veriliyor. */
+   İki div üst üste koydum: dış gri arka plan, iç renkli dolgu.
+   İç div'in genişliğini HTML'de style ile yüzde olarak veriyorum. */
 .skill-label {
     display: flex;
     justify-content: space-between;   /* isim solda, yüzde sağda */
@@ -257,10 +252,9 @@ body {
 /* ==============================
    ŞEHRİM SAYFASI – CAROUSEL (Resim Slider)
 
-   Bootstrap Carousel zaten JavaScript ile çalışıyor,
-   burada sadece görsel stilleri ayarlıyorum.
-   object-fit: cover → resimlerin boyutu farklı olsa da eşit yükseklikte görünüyor.
-   filter: brightness → resmi biraz kararttım ki altyazı daha okunaklı olsun.
+   Bootstrap Carousel'ı JavaScript ile zaten çalışıyor, ben sadece
+   görsel tarafını hallettim. Resimleri biraz karartmak için brightness
+   filtresini kullandım, yoksa altyazı neredeyse okunmuyordu.
    ============================== */
 .carousel-item img {
     height: 480px;
@@ -278,7 +272,7 @@ body {
 
 .carousel-caption h5 { font-size: 1.4rem; font-weight: 700; }
 
-/* Slider'ın ileri/geri ok ikonları için arka plan */
+/* Ok ikonlarına arka plan ekledim, böylece açık renkli resimlerde de görünüyorlar */
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
     background-color: var(--primary);
@@ -305,8 +299,9 @@ body {
 /* ==============================
    TAKIMIMIZ SAYFASI
 
-   .team-hero hero bölümünün bu sayfaya özel versiyonu.
-   (Galatasaray renkleri takimimiz.html içinde inline yazıldı)
+   Bu sayfanın hero kısmı diğerlerinden farklı renk kullanıyor.
+   Galatasaray renkleri takimimiz.html içinde ayrıca var, burada sadece
+   genel yapıyı hallettim.
    ============================== */
 .team-hero {
     background: linear-gradient(135deg, #1a237e, #0d47a1);
@@ -336,9 +331,9 @@ body {
 /* ==============================
    İLGİ ALANLARI SAYFASI (API SAYFASI)
 
-   TVMaze API'sinden gelen dizi kartları için stiller.
-   .show-card → dizi resim kartı
-   .no-image  → API'den resim gelmediğinde gösterilen yer tutucu
+   TVMaze API'sinden dizi verisi çekiyorum, bu kartlar onun için.
+   Bazen resim gelmiyor, o durumda .no-image ile yer tutucu gösteriyorum.
+   API'yi ilk bağladığımda resim gelmeyince panikledim, sonra hallettim.
    ============================== */
 .api-hero {
     background: linear-gradient(135deg, #1b0033, #4a0080);
@@ -356,7 +351,7 @@ body {
     width: 100%;
 }
 
-/* Resim yoksa gösterilen gradient kutu */
+/* Resim yoksa gradient bir kutu koyuyorum, boş görünmesinden iyisi */
 .show-card .no-image {
     height: 280px;
     background: linear-gradient(135deg, #2c2c54, #474787);
@@ -397,9 +392,8 @@ body {
 /* ==============================
    İLETİŞİM SAYFASI
 
-   Form elemanlarına odaklanıldığında (click) çerçeve rengi değişiyor.
-   :focus → elemana tıklandığında / tab ile gelindiğinde uygulanan stil.
-   box-shadow ile hafif mavi parıltı ekliyorum.
+   Form alanlarına tıklanınca çerçeve rengi değişiyor, bir de hafif mavi parıltı
+   ekledim. :focus seçicisini öğrenince bunu hemen uygulamak istedim, güzel oldu.
    ============================== */
 .contact-hero {
     background: linear-gradient(135deg, var(--primary), var(--secondary));
@@ -429,10 +423,9 @@ body {
 /* ==============================
    GİRİŞ SAYFASI (Login)
 
-   Tam ekran ortalanmış kart tasarımı.
-   min-height: 100vh → görüntü alanının tüm yüksekliği
-   vh = viewport height (ekran yüksekliği birimi)
-   display: flex + align-items + justify-content ile hem dikey hem yatay ortalama.
+   Sayfanın tam ortasına kart yerleştirmek istedim.
+   min-height: 100vh ve flexbox ile hem yatay hem dikey ortalamayı
+   hallettim — deneme yanılmayla buldum ama çalışınca çok sevindim.
    ============================== */
 .login-page {
     min-height: 100vh;
@@ -459,7 +452,7 @@ body {
     margin-bottom: 30px;
 }
 
-/* İkon çemberi */
+/* İkon çemberi — 0 auto ile yatay ortalıyorum */
 .login-logo .logo-icon {
     width: 80px;
     height: 80px;
@@ -477,9 +470,9 @@ body {
 /* ==============================
    PHP SONUÇ SAYFASI TABLOSU
 
-   contact.php ve success.php'deki tablo için stil.
-   th (başlık hücresi) koyu, td (veri hücresi) açık gri.
-   word-break: break-all → uzun URL veya metin taşmasını engeller.
+   contact.php ve success.php için tablo stili yazdım.
+   word-break: break-all olmadan uzun URL'ler tabloyu bozuyordu,
+   bunu ekleyince düzeldi — küçük ama kritik bir detaydı.
    ============================== */
 .result-table th {
     background: var(--primary);
@@ -497,8 +490,8 @@ body {
 /* ==============================
    ALT BİLGİ (Footer)
 
-   Koyu arka plan, açık gri metin.
-   hover'da link rengi accent (altın sarısı) oluyor.
+   Koyu arka plan seçtim, sayfanın alt kısmı böyle daha toplu duruyor.
+   Linklerin hover rengi accent oluyor, küçük bir detay ama fark ettiriyor.
    ============================== */
 footer {
     background: var(--dark);
@@ -522,7 +515,7 @@ footer hr { border-color: #444; margin: 30px 0 20px; }
 
 footer .copyright { text-align: center; font-size: 0.9rem; }
 
-/* Sosyal medya ikonları — küçük daire şeklinde */
+/* Sosyal medya ikonları — daire şeklinde, hover'da sarıya dönüyor */
 footer .social-links a {
     display: inline-block;
     width: 36px;
@@ -542,8 +535,9 @@ footer .social-links a:hover { background: var(--accent); }
 /* ==============================
    YARDIMCI SINIFLAR (Utilities)
 
-   Sık kullandığım renk/buton kombinasyonları için kısayol sınıflar.
-   Bunları HTML'de class olarak ekleyince ilgili stil uygulanıyor.
+   Sık kullandığım renk ve buton kombinasyonlarını buraya topladım.
+   HTML'de sadece class adını yazınca stil geliyor, tekrar tekrar
+   aynı şeyi yazmaktan kurtuluyorum — çok işime yaradı.
    ============================== */
 .bg-primary-gradient {
     background: linear-gradient(135deg, var(--primary), var(--secondary));
@@ -564,13 +558,9 @@ footer .social-links a:hover { background: var(--accent); }
 /* ==============================
    RESPONSIVE TASARIM – MEDYA SORGULARI
 
-   @media ile ekran genişliğine göre farklı stiller uyguluyorum.
-   max-width: 992px → 992px ve daha küçük ekranlar (tablet)
-   max-width: 768px → 768px ve daha küçük ekranlar (küçük tablet/telefon)
-   max-width: 576px → 576px ve daha küçük ekranlar (telefon)
-
-   Bootstrap breakpoint'leri de bunları kullanıyor, biz sadece
-   özelleştirdiğimiz elemanlara ek kurallar yazıyoruz.
+   Farklı ekran boyutlarına göre font ve yükseklikleri küçültüyorum.
+   Bootstrap çoğu şeyi hallediyor ama bazı elemanları elle ayarlamak
+   gerekti — telefonda baktığımda bozuk görününce fark ettim.
    ============================== */
 
 /* Tablet boyutu */

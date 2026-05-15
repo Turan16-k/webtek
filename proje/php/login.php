@@ -1,26 +1,22 @@
 <?php
 // ============================================================
-// login.php – Kullanıcı Giriş Doğrulaması
+// login.php – Giriş Formu İşleyicisi
 // Öğrenci: Abdurrahman Turan Özcan | B251210043
 // Ders: Web Teknolojileri – 2025/2026 Bahar Dönemi
 //
-// Bu dosya login.html'deki formun action hedefi.
-// Kullanıcının girdiği e-posta ve şifreyi,
-// sabit tanımlı değişkenlerle karşılaştırıyor.
-// Gerçek bir projede şifreler veritabanında şifreli saklanır
-// ama bu ödevde öğrenci numarasını sabit tutmak yeterli.
+// login.html üzerinden gelen POST isteklerini karşılar.
+// Proje gereksinimleri doğrultusunda veritabanı yerine sabit değişkenler ile kimlik doğrulaması yapılmaktadır.
 // ============================================================
 
-// Sadece POST isteği kabul et — direkt URL erişimini engelle
+// Sadece POST isteklerine izin verilir. Harici erişimlerde giriş sayfasına yönlendirilir.
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header('Location: ../login.html');
     exit;
 }
 
 // ============================================================
-// ÖĞRENCI GİRİŞ BİLGİLERİ
-// Ödev gereksinimi: kullanıcı adı öğrenci no'lu mail,
-// şifre ise öğrenci numarasının kendisi.
+// ÖĞRENCİ GİRİŞ BİLGİLERİ
+// Sabit e-posta ve şifre tanımlamaları.
 // ============================================================
 $validEmail    = 'b251210043@sakarya.edu.tr';   // e-posta formatı: bXXXXXXXXX@sakarya.edu.tr
 $validPassword = 'B251210043';                   // şifre: büyük B ile başlıyor
@@ -28,18 +24,15 @@ $ogrenciNo     = 'B251210043';                   // başarı sayfasında göster
 
 // ============================================================
 // FORM VERİLERİNİ AL
-// trim() — boşluk karakterlerini temizler.
-// Kullanıcı yanlışlıkla başına/sonuna boşluk girmiş olabilir.
-// ?? '' — alan POST'ta yoksa boş string kullan (PHP 7+ null birleştirme).
+// Girdi verilerindeki olası gereksiz boşluklar trim() ile temizlenir.
 // ============================================================
 $email    = trim($_POST['email']    ?? '');
 $password = trim($_POST['password'] ?? '');
 
 // ============================================================
 // BOŞ ALAN KONTROLÜ
-// empty() → değişken boş mu? (boş string, null, 0, false için true döner)
-// E-posta veya şifre boşsa 'hata=bos' parametresiyle login'e geri dön.
-// Bu parametre login.html'deki JavaScript tarafından okunup mesaj gösterilir.
+// Gerekli alanların doldurulup doldurulmadığı denetlenir.
+// Eksik bilgi varsa URL üzerinden hata parametresi ile geri dönüş yapılır.
 // ============================================================
 if (empty($email) || empty($password)) {
     header('Location: ../login.html?hata=bos');
@@ -48,28 +41,24 @@ if (empty($email) || empty($password)) {
 
 // ============================================================
 // KİMLİK DOĞRULAMA
-// === (üç eşittir) → tip ve değer karşılaştırması yapıyor.
-// == (iki eşittir) kullanmak tip dönüşümüne yol açabilir — === daha güvenli.
+// Katı eşitlik (===) kullanılarak tip uyumu dahil kontrol edilir.
 // ============================================================
 if ($email === $validEmail && $password === $validPassword) {
 
     // ✅ GİRİŞ BAŞARILI
-    // session_start() → PHP oturum sistemini başlatır.
-    // Oturum bilgileri sunucuda saklanır, tarayıcıda sadece oturum kimliği (session ID) tutulur.
-    // $_SESSION[] → oturum boyunca saklanacak veriler buraya yazılır.
-    // Bu veriler farklı PHP sayfaları arasında paylaşılabilir (success.php okuyacak).
+    // Başarılı giriş sonrasında oturum (session) başlatılır ve veriler saklanır.
     session_start();
     $_SESSION['ogrenci_no'] = $ogrenciNo;
     $_SESSION['logged_in']  = true;
 
-    // Başarı sayfasına yönlendir — header() HTTP yönlendirmesi gönderir
+    // Başarı sayfasına yönlendirme yapılır.
     header('Location: success.php');
     exit;
 
 } else {
 
-    // ❌ GİRİŞ HATALI — yanlış e-posta veya şifre
-    // Kullanıcıyı tekrar login sayfasına gönder, hata tipi bilgisi URL'de
+    // ❌ BAŞARISIZ GİRİŞ
+    // Yanlış kimlik bilgileri durumunda hata parametresiyle giriş sayfasına geri dönülür.
     header('Location: ../login.html?hata=yanlis');
     exit;
 }

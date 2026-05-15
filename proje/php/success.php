@@ -4,30 +4,24 @@
 // Öğrenci: Abdurrahman Turan Özcan | B251210043
 // Ders: Web Teknolojileri – 2025/2026 Bahar Dönemi
 //
-// Bu sayfa sadece login.php'nin yönlendirmesiyle açılmalı.
-// Direkt URL yazarak bu sayfaya gelinirse oturum yoktur,
-// login.html'e geri yönlendiriyorum.
+// Yalnızca geçerli bir oturum (session) ile erişilebilen korumalı sayfadır.
+// Oturumu olmayan kullanıcılar doğrudan giriş sayfasına yönlendirilir.
 // ============================================================
 
-// session_start() sayfanın en başında olmalı — başka bir şey yazdırılmadan önce.
-// Aksi halde "headers already sent" hatası alınır.
+// HTTP başlık gönderim hatalarını önlemek adına sayfa başlangıcında oturum başlatılır.
 session_start();
 
 // ============================================================
 // OTURUM KONTROLÜ
-// $_SESSION['logged_in'] değişkeni login.php tarafından true yapılmıştı.
-// isset() → değişken tanımlı ve null değil mi kontrol eder.
-// !== → katı eşitsizlik — hem tip hem değer karşılaştırır.
-// Bu kontrol olmazsa doğrudan success.php URL'sine giren herkes sayfayı görebilir.
+// Oturum geçerliliğini denetleyerek yetkisiz doğrudan erişimleri (URL üzerinden) engeller.
 // ============================================================
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
-    // Yetkisiz erişim — login sayfasına hata mesajıyla gönder
+    // Yetkisiz erişim denemesinde giriş sayfasına yönlendirme yapılır.
     header('Location: ../login.html?hata=yetkisiz');
     exit;
 }
 
-// Oturum doğrulandı — öğrenci numarasını güvenli şekilde al
-// htmlspecialchars() → SESSION'dan gelen veriyi de XSS'e karşı temizliyorum
+// Geçerli oturumdaki kullanıcı kimlik bilgisi (Öğrenci No) güvenlik amacıyla temizlenerek alınır (XSS koruması).
 $ogrenciNo = htmlspecialchars($_SESSION['ogrenci_no'] ?? 'Öğrenci');
 
 // Giriş zamanını anlık olarak hesaplıyorum
@@ -62,8 +56,8 @@ $loginTime = date('d.m.Y H:i:s');
     </div>
 </nav>
 
-<!-- login-page sınıfı tam ekran, ortalanmış yapı — style.css'te tanımlı.
-     İnline style ile arka planı yeşilimsi gradient yapıyorum (başarı teması). -->
+<!-- login-page sınıfı tam ekran ortalanmış yapı (style.css).
+     Başarı durumuna uygun yeşil renkli özel arka plan uygulanmıştır. -->
 <div class="login-page" style="background: linear-gradient(135deg, #0d3b6e, #198754);">
     <div class="login-card" style="max-width:520px;">
 
@@ -81,8 +75,7 @@ $loginTime = date('d.m.Y H:i:s');
         </div>
 
         <!-- HOŞGELDİNİZ MESAJI
-             Ödev gereksinimi: "Hoşgeldiniz [Öğrenci No]" mesajı gösterilmeli.
-             $ogrenciNo SESSION'dan geliyor — login.php'de set edilmişti. -->
+             Oturumda kayıtlı olan Öğrenci Numarası ile birlikte karşılama mesajı gösterilir. -->
         <div class="alert alert-success text-center py-4 mb-4"
              style="border-radius:14px; font-size:1.3rem;">
             <i class="bi bi-person-check-fill me-2"></i>
@@ -109,8 +102,8 @@ $loginTime = date('d.m.Y H:i:s');
         </div>
 
         <!-- ANA SAYFA / ÇIKIŞ BUTONLARI
-             d-flex gap-3 → butonlar yan yana, aralarında boşluk.
-             flex-fill → her buton eşit genişlik kaplıyor. -->
+             d-flex gap-3 — yan yana, aralarında boşluk.
+             flex-fill — her buton eşit genişlikte. -->
         <div class="d-flex gap-3">
             <a href="../index.html" class="btn btn-primary flex-fill">
                 <i class="bi bi-house me-2"></i>Ana Sayfa

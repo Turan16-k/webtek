@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
@@ -14,7 +14,8 @@
 <nav class="navbar navbar-expand-lg fixed-top">
     <div class="container">
         <a class="navbar-brand" href="index.html"><i class="bi bi-person-badge-fill me-2"></i>A.T. Özcan</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu"
+                aria-controls="navMenu" aria-expanded="false" aria-label="Menüyü aç/kapat">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navMenu">
@@ -74,7 +75,7 @@
                             <span class="fs-3 text-primary"><i class="bi bi-github"></i></span>
                             <div>
                                 <h6 class="fw-bold mb-1">GitHub</h6>
-                                <a href="https://github.com" target="_blank" class="text-muted text-decoration-none">
+                                <a href="https://github.com/Turan16-k" target="_blank" rel="noopener noreferrer" class="text-muted text-decoration-none">
                                     github.com/Turan16-k
                                 </a>
                             </div>
@@ -88,17 +89,12 @@
                 <h3 class="section-title">İletişim Formu</h3>
 
                 <!-- Vue.js App Wrapper
-                     id="contactApp" → Vue uygulamasının mount ettiği nokta.
-                     Bu div içindeki her şey Vue tarafından yönetiliyor:
-                       v-model → iki yönlü veri bağlama
-                       v-if    → koşullu gösterme
-                       @click  → olay dinleyici (@click = v-on:click'in kısası) -->
+                     id="contactApp" → Vue'nun mount ettiği nokta.
+                     v-model, v-if, @click gibi Vue direktifleri bu div içinde çalışıyor. -->
                 <div id="contactApp">
 
-                    <!-- enctype="multipart/form-data" → dosya yükleme için ZORUNLU!
-                         Bu özellik olmadan $_FILES PHP'ye boş gelir, dosya işlenemez.
-                         novalidate → tarayıcının kendi HTML5 doğrulamasını devre dışı bırakır,
-                         çünkü doğrulamayı JS ve Vue ile kendim yapıyorum. -->
+                    <!-- enctype="multipart/form-data" dosya yükleme için şart — olmadan $_FILES boş geliyor.
+                         novalidate → tarayıcı doğrulamasını kapattım, kendim JS+Vue ile yapıyorum. -->
                     <form method="POST" action="php/contact.php" id="contactForm"
                           enctype="multipart/form-data" novalidate>
 
@@ -347,62 +343,47 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-<!-- Vue 3 CDN — production build (vue.global.prod.js) kullanıyorum.
-     prod versiyonu daha küçük, uyarıları kapalı.
-     Geliştirme sırasında vue.global.js kullanmak daha iyi (hata mesajları var). -->
+<!-- Vue 3 CDN — prod build kullanıyorum, daha küçük ve uyarısız.
+     Geliştirirken vue.global.js daha iyi çünkü hata mesajları var. -->
 <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.prod.js"></script>
 
-<!-- Vanilla JS doğrulama fonksiyonları (validateWithJS) buradan yükleniyor -->
+<!-- Vanilla JS doğrulama buradan yükleniyor -->
 <script src="js/main.js"></script>
 
-<!-- Vue.js İletişim Formu Doğrulaması
-     ============================================================
-     Vue 3 Composition-benzeri Options API ile bir uygulama oluşturuyorum.
-     createApp() → Vue uygulaması başlatır.
-     data() → reaktif veri nesnesi döndürür — değerler değişince DOM otomatik güncellenir.
-     methods → kullanıcı etkileşimlerinde çağrılacak fonksiyonlar.
-     .mount('#contactApp') → bu Vue uygulamasını #contactApp div'ine bağlıyorum.
-
-     v-model → HTML inputları ile Vue data arasında çift yönlü bağlama.
-       Kullanıcı inputa yazınca this.form.name güncellenir,
-       this.form.name değişince input alanı da güncellenir.
-
-     v-if → koşul doğruysa elementi göster, yanlışsa DOM'dan çıkar.
-     v-for → dizi üzerinde döngü, her eleman için element oluşturur.
-     ============================================================ -->
+<!-- Vue.js İletişim Formu Doğrulaması -->
 <script>
-const { createApp } = Vue;  // Vue 3'te createApp global nesnesinden çıkarılıyor
+const { createApp } = Vue;  // Vue 3'te createApp bu şekilde alınıyor
 
 createApp({
     data() {
         return {
-            // Form reaktif veri nesnesi — başlangıç değerleri boş/false
+            // Form reaktif verisi — değerler değişince DOM otomatik güncelleniyor
             form: {
                 name:        '',      // text input
                 email:       '',      // email input
                 phone:       '',      // tel input
                 subject:     '',      // text input
                 message:     '',      // textarea
-                gender:      '',      // radio buton — seçili değer string olarak gelir
-                education:   '',      // select/dropdown — seçili option'ın value'su
-                interests:   [],      // checkbox grubu — seçili değerler dizi içinde birikir
-                birthdate:   '',      // date input — YYYY-MM-DD formatında string
+                gender:      '',      // radio — seçilen değer string olarak geliyor
+                education:   '',      // select — seçili option'ın value'su
+                interests:   [],      // checkbox grubu — seçilenler diziye ekleniyor
+                birthdate:   '',      // date input — YYYY-MM-DD formatında
                 kvkk:        false,   // tek checkbox — true/false
                 newsletter:  false    // tek checkbox — true/false
             },
-            vueErrors:  [],    // hata mesajları dizisi — doluysa hata kutusu göster
+            vueErrors:  [],    // hata listesi doluysa hata kutusu görünür
             vueSuccess: false  // tüm kontroller geçince true olur
         };
     },
     methods: {
-        // Vue.js Doğrulama Fonksiyonu — "Vue.js ile Kontrol Et" butonuna bağlı
+        // "Vue.js ile Kontrol Et" butonuna bağlı doğrulama fonksiyonu
         validateVue() {
-            // Her çağrıda sıfırla — önceki hata/başarı durumunu temizle
+            // Her çağrıda önceki hata/başarı durumunu sıfırlıyorum
             this.vueErrors  = [];
             this.vueSuccess = false;
 
             // --- AD SOYAD ---
-            // this.form.name → Vue reaktif verisi, v-model ile input'la senkronize
+            // this.form.name v-model sayesinde input ile senkronize
             if (!this.form.name.trim()) {
                 this.vueErrors.push('Ad Soyad boş bırakılamaz.');
             } else if (this.form.name.trim().length < 3) {
@@ -418,7 +399,7 @@ createApp({
             }
 
             // --- TELEFON ---
-            // Boşluk, tire, parantez varsa temizle, sadece rakamları kontrol et
+            // Boşluk, tire, parantez varsa temizleyip sadece rakamları kontrol ediyorum
             const phoneClean = this.form.phone.replace(/[\s\-\(\)]/g, '');
             if (!phoneClean) {
                 this.vueErrors.push('Telefon numarası boş bırakılamaz.');
@@ -439,13 +420,13 @@ createApp({
             }
 
             // --- CİNSİYET (Radio) ---
-            // v-model ile radio'da seçilen değer this.form.gender'a yazılıyor
+            // v-model ile seçilen radio değeri this.form.gender'a yazılıyor
             if (!this.form.gender) {
                 this.vueErrors.push('Cinsiyet seçiniz.');
             }
 
             // --- EĞİTİM (Select) ---
-            // Select'te hiçbir şey seçilmemişse değer "" (boş) kalıyor
+            // Seçilmemişse değer "" (boş string) kalıyor
             if (!this.form.education) {
                 this.vueErrors.push('Eğitim düzeyi seçiniz.');
             }
@@ -456,24 +437,24 @@ createApp({
             }
 
             // --- İLGİ ALANLARI (Checkbox Grubu) ---
-            // v-model ile dizi'ye bağlı checkbox'lar — seçilince değer diziye ekleniyor
+            // v-model ile diziye bağlı — seçilince değer diziye ekleniyor
             if (this.form.interests.length === 0) {
                 this.vueErrors.push('En az bir ilgi alanı seçiniz.');
             }
 
             // --- KVKK ZORUNLU ONAY ---
-            // Boolean checkbox — false ise işaretlenmemiş
+            // false ise işaretlenmemiş demek
             if (!this.form.kvkk) {
                 this.vueErrors.push('KVKK onay kutusunu işaretlemeniz zorunludur.');
             }
 
-            // Hata yoksa başarı mesajını göster
+            // Hata yoksa başarı mesajı göster
             if (this.vueErrors.length === 0) {
                 this.vueSuccess = true;
             }
         }
     }
-}).mount('#contactApp');  // Vue uygulamasını #contactApp div'ine bağla
+}).mount('#contactApp');  // Vue uygulamasını #contactApp'e bağladım
 </script>
 </body>
 </html>

@@ -8,9 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
 
-    <!-- Sayfaya özgü stiller — sadece bu sayfada geçerli olduğu için
-         burada tanımladım, style.css'e eklemek zorunda kalmadım.
-         Genel stilleri harici dosyada, sayfa özeline özel stilleri burada tutmak mantıklı. -->
+    <!-- Sadece bu sayfaya özel stiller — genel style.css'e koymak yerine burada tutmak daha mantıklı geldi -->
     <style>
         /* Galatasaray renkleri: kırmızı #c8102e, sarı #fcd116 */
         .team-hero   { background: linear-gradient(135deg, #c8102e 0%, #fcd116 100%); }
@@ -45,7 +43,8 @@
 <nav class="navbar navbar-expand-lg fixed-top">
     <div class="container">
         <a class="navbar-brand" href="index.html"><i class="bi bi-person-badge-fill me-2"></i>A.T. Özcan</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu"
+                aria-controls="navMenu" aria-expanded="false" aria-label="Menüyü aç/kapat">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navMenu">
@@ -63,21 +62,20 @@
 </nav>
 
 <!-- ===================== HERO (Galatasaray Renkleriyle) =====================
-     Bu sayfanın hero bölümü kırmızı-sarı Galatasaray gradientli.
-     margin-top:56px → fixed navbar'ın arkasına girmesin. -->
+     team-hero kırmızı-sarı gradient, margin-top navbar'ın arkasına girmesin diye. -->
 <section class="team-hero" style="padding:100px 0 70px; margin-top:56px; text-align:center;">
     <div class="container">
 
-        <!-- Takım logosu — şimdilik placeholder resim kullanıyorum -->
-        <img src="https://picsum.photos/140/140?random=300"
-             alt="Galatasaray Logosu"
+        <!-- Takım logosu — şimdilik placeholder kullanıyorum -->
+        <img src="images/Ekran görüntüsü 2026-05-15 160106.png"
+             alt="Galatasaray Aslan"
              class="team-logo"
-             style="border: 5px solid #fcd116;">
+             style="border: 5px solid #fcd116; border-radius: 12px;">
 
         <h1 class="fw-bold display-5 text-white">Galatasaray</h1>
         <p class="lead mt-2" style="color:rgba(255,255,255,0.9);">Süper Lig · İstanbul · Est. 1905</p>
 
-        <!-- Şampiyonluk rozetleri — d-flex justify-content-center ile ortada -->
+        <!-- Şampiyonluk rozetleri — d-flex justify-content-center ile ortada hizalandı -->
         <div class="d-flex justify-content-center gap-3 flex-wrap mt-4">
             <span class="badge fs-6 px-4 py-2" style="background:#fcd116; color:#c8102e;">
                 <i class="bi bi-trophy-fill me-2"></i>25 Süper Lig Şampiyonu
@@ -90,8 +88,7 @@
 </section>
 
 <!-- ===================== TAKIM HAKKINDA =====================
-     Sol taraf metin ve istatistik kartları, sağ taraf stadyum fotoğrafı.
-     align-items-center → her iki sütun dikey ortada hizalı. -->
+     Sol metin ve bilgi kartları, sağ stadyum fotoğrafı — align-items-center ile dikeyde ortada. -->
 <section class="py-5">
     <div class="container">
         <div class="row gy-4 align-items-center">
@@ -112,8 +109,7 @@
                     Stadı tribünden görmek istiyorum en azından bir kez.
                 </p>
 
-                <!-- 4 bilgi kutusu: 2x2 grid
-                     g-3 → hem yatay hem dikey boşluk Bootstrap utility -->
+                <!-- 4 bilgi kutusu 2x2 grid — g-3 hem yatay hem dikey boşluk veriyor -->
                 <div class="row g-3 mt-3">
                     <div class="col-6">
                         <div class="card p-3 text-center bg-light border-0">
@@ -140,7 +136,7 @@
                         <div class="card p-3 text-center bg-light border-0">
                             <i class="bi bi-palette fs-3" style="color:#c8102e;"></i>
                             <div class="fw-bold mt-2">Renkler</div>
-                            <!-- Küçük renkli dairelerle takım renklerini görsel gösteriyorum -->
+                            <!-- Küçük dairelerle takım renklerini görsel olarak gösterdim -->
                             <div class="d-flex justify-content-center gap-2 mt-1">
                                 <span style="width:22px; height:22px; background:#c8102e; border-radius:50%; display:inline-block;"></span>
                                 <span style="width:22px; height:22px; background:#fcd116; border-radius:50%; display:inline-block; border:1px solid #ccc;"></span>
@@ -152,8 +148,7 @@
 
             <!-- Sağ: Stadyum fotoğrafı -->
             <div class="col-lg-5">
-                <!-- img-fluid → resim container'dan taşmasın, responsive.
-                     rounded-4 → köşeler Bootstrap 5'te rounded-4 = daha fazla yuvarlak. -->
+                <!-- img-fluid responsive, rounded-4 Bootstrap 5'te daha fazla yuvarlatıyor -->
                 <img src="https://picsum.photos/600/420?random=301"
                      alt="Galatasaray Stadyum"
                      class="img-fluid rounded-4 shadow">
@@ -164,8 +159,7 @@
 </section>
 
 <!-- ===================== KUPA İSTATİSTİKLERİ =====================
-     Koyu arka plan üstünde altın sarısı büyük sayılar.
-     col-6 col-md-3 → mobilde 2'li, tablette 4'lü grid. -->
+     Koyu arka plan üstünde sarı büyük sayılar — col-6 col-md-3 ile 2'li ve 4'lü grid. -->
 <section class="py-5" style="background:#1a1a2e; color:#fff;">
     <div class="container">
         <h2 class="section-title text-center" style="color:#fcd116;">Kazanılan Kupalar</h2>
@@ -201,28 +195,29 @@
 </section>
 
 <!-- ===================== EFSANE OYUNCULAR =====================
-     8 oyuncu kartı — 4'lü grid (büyük ekran), 2'li (tablet), 2'li (telefon).
-     Yuvarlak fotoğraf, isim ve pozisyon rozeti. -->
+     Yuvarlak fotoğraf, isim ve pozisyon rozeti — 4'lü grid büyük ekranda.
+     İki gruba ayırdım: gerçek efsaneler ve favori oyuncularım. -->
 <section class="py-5 bg-light">
     <div class="container">
-        <h2 class="section-title text-center">Efsane İsimler</h2>
+        <h2 class="section-title text-center">Efsaneler & Favorilerim</h2>
         <div class="row gy-4">
 
-            <!-- Oyuncu kartları için tekrar eden yapı.
-                 col-6 col-md-4 col-lg-3 → mobil:2, tablet:3, masaüstü:4 sütun -->
+            <!-- GERÇEK EFSANELER — tarihte iz bırakmış oyuncular -->
+            <div class="col-12 mb-2">
+                <h6 class="text-muted fw-semibold text-uppercase" style="letter-spacing:1px; font-size:0.8rem;">
+                    <i class="bi bi-trophy-fill me-1" style="color:#fcd116;"></i>Kulübün Efsaneleri
+                </h6>
+            </div>
 
             <div class="col-6 col-md-4 col-lg-3">
                 <div class="card player-card text-center p-3">
-                    <!-- rounded-circle → yuvarlak resim.
-                         mx-auto → yatay ortalama (margin: auto).
-                         object-fit:cover → resim yuvarlak alanı dolduruyor. -->
                     <img src="https://picsum.photos/150/150?random=310"
                          alt="Hakan Şükür"
                          class="rounded-circle mx-auto mb-3"
                          style="width:90px; height:90px; object-fit:cover; border:3px solid #c8102e;">
                     <h6 class="fw-bold mb-1">Hakan Şükür</h6>
                     <span class="badge px-3 py-1" style="background:#c8102e;">Forvet</span>
-                    <p class="text-muted small mt-2 mb-0">228 gol · Efsane Forvet</p>
+                    <p class="text-muted small mt-2 mb-0">228 gol · Kulübün en büyük golcüsü</p>
                 </div>
             </div>
 
@@ -234,7 +229,7 @@
                          style="width:90px; height:90px; object-fit:cover; border:3px solid #c8102e;">
                     <h6 class="fw-bold mb-1">Arda Turan</h6>
                     <span class="badge px-3 py-1" style="background:#c8102e;">Orta Saha</span>
-                    <p class="text-muted small mt-2 mb-0">Efsane Kaptan</p>
+                    <p class="text-muted small mt-2 mb-0">En sevdiğim kaptan</p>
                 </div>
             </div>
 
@@ -246,68 +241,74 @@
                          style="width:90px; height:90px; object-fit:cover; border:3px solid #c8102e;">
                     <h6 class="fw-bold mb-1">Didier Drogba</h6>
                     <span class="badge px-3 py-1" style="background:#c8102e;">Forvet</span>
-                    <p class="text-muted small mt-2 mb-0">Fildişi Sahili efsanesi</p>
+                    <p class="text-muted small mt-2 mb-0">Dünya yıldızı, GS'ye renk kattı</p>
                 </div>
             </div>
 
             <div class="col-6 col-md-4 col-lg-3">
                 <div class="card player-card text-center p-3">
                     <img src="https://picsum.photos/150/150?random=313"
-                         alt="Muslera"
+                         alt="Fernando Muslera"
                          class="rounded-circle mx-auto mb-3"
                          style="width:90px; height:90px; object-fit:cover; border:3px solid #c8102e;">
                     <h6 class="fw-bold mb-1">Fernando Muslera</h6>
                     <span class="badge px-3 py-1" style="background:#c8102e;">Kaleci</span>
-                    <p class="text-muted small mt-2 mb-0">Uruguay'ın efsane kalecisi</p>
+                    <p class="text-muted small mt-2 mb-0">10 yılı aşkın sadakat</p>
                 </div>
             </div>
 
-            <!-- Sarı rozet — farklı rozet rengi ile görsel çeşitlilik -->
+            <!-- FAVORİLERİM — benim tuttuğum yıllarda oynayanllar -->
+            <div class="col-12 mt-2 mb-2">
+                <h6 class="text-muted fw-semibold text-uppercase" style="letter-spacing:1px; font-size:0.8rem;">
+                    <i class="bi bi-heart-fill me-1" style="color:#c8102e;"></i>Benim Favorilerim (Son Dönem)
+                </h6>
+            </div>
+
             <div class="col-6 col-md-4 col-lg-3">
                 <div class="card player-card text-center p-3">
                     <img src="https://picsum.photos/150/150?random=314"
                          alt="Mauro Icardi"
                          class="rounded-circle mx-auto mb-3"
-                         style="width:90px; height:90px; object-fit:cover; border:3px solid #c8102e;">
+                         style="width:90px; height:90px; object-fit:cover; border:3px solid #fcd116;">
                     <h6 class="fw-bold mb-1">Mauro Icardi</h6>
                     <span class="badge px-3 py-1" style="background:#fcd116; color:#c8102e;">Forvet</span>
-                    <p class="text-muted small mt-2 mb-0">Arjantin'li golcü</p>
+                    <p class="text-muted small mt-2 mb-0">Kritik maçlarda golünü atardı</p>
                 </div>
             </div>
 
             <div class="col-6 col-md-4 col-lg-3">
                 <div class="card player-card text-center p-3">
                     <img src="https://picsum.photos/150/150?random=315"
-                         alt="Osimhen"
+                         alt="Victor Osimhen"
                          class="rounded-circle mx-auto mb-3"
-                         style="width:90px; height:90px; object-fit:cover; border:3px solid #c8102e;">
+                         style="width:90px; height:90px; object-fit:cover; border:3px solid #fcd116;">
                     <h6 class="fw-bold mb-1">Victor Osimhen</h6>
                     <span class="badge px-3 py-1" style="background:#fcd116; color:#c8102e;">Forvet</span>
-                    <p class="text-muted small mt-2 mb-0">Nijeryalı yıldız</p>
+                    <p class="text-muted small mt-2 mb-0">Nijeryalı yıldız — enerji bambaşka</p>
                 </div>
             </div>
 
             <div class="col-6 col-md-4 col-lg-3">
                 <div class="card player-card text-center p-3">
                     <img src="https://picsum.photos/150/150?random=316"
-                         alt="Mertens"
+                         alt="Dries Mertens"
                          class="rounded-circle mx-auto mb-3"
-                         style="width:90px; height:90px; object-fit:cover; border:3px solid #c8102e;">
+                         style="width:90px; height:90px; object-fit:cover; border:3px solid #fcd116;">
                     <h6 class="fw-bold mb-1">Dries Mertens</h6>
                     <span class="badge px-3 py-1" style="background:#fcd116; color:#c8102e;">Forvet</span>
-                    <p class="text-muted small mt-2 mb-0">Belçikalı hücum oyuncusu</p>
+                    <p class="text-muted small mt-2 mb-0">Küçük adam büyük gol</p>
                 </div>
             </div>
 
             <div class="col-6 col-md-4 col-lg-3">
                 <div class="card player-card text-center p-3">
                     <img src="https://picsum.photos/150/150?random=317"
-                         alt="Davinson"
+                         alt="Davinson Sánchez"
                          class="rounded-circle mx-auto mb-3"
                          style="width:90px; height:90px; object-fit:cover; border:3px solid #c8102e;">
                     <h6 class="fw-bold mb-1">Davinson Sánchez</h6>
                     <span class="badge px-3 py-1" style="background:#c8102e;">Defans</span>
-                    <p class="text-muted small mt-2 mb-0">Kolombiyalı stoper</p>
+                    <p class="text-muted small mt-2 mb-0">Savunmanın kalesi</p>
                 </div>
             </div>
 
@@ -335,7 +336,7 @@
             <div class="col-md-4">
                 <h5>İletişim</h5>
                 <p><i class="bi bi-envelope me-2"></i>abdurrahmanturanozcan9191@gmail.com</p>
-                <p><i class="bi bi-geo-alt me-2"></i>Tokat, Türkiye</p>
+                <p><i class="bi bi-geo-alt me-2"></i>Sakarya, Türkiye</p>
             </div>
         </div>
         <hr>
